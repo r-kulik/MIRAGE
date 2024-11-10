@@ -35,7 +35,7 @@ class ChunkStorage:
     def __getitem__(self, index: str) -> str:
         raise NotImplementedError("Subclasses must implement this functionality")
     
-    def add_chunk(self, text: str, raw_index_of_document: str) -> None:
+    def add_chunk(self, text: str, raw_index_of_document: str) -> str:
         raise NotImplementedError("Subclasses must implement this functionality")
     
     def clear(self) -> None:

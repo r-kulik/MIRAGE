@@ -24,5 +24,5 @@ class WordCountingChunkingAlgorithm(ChunkingAlgorithm):
             chunk_text = ' '.join(
                 words[i * 100 : min(len(words), (i + 1) * 100)]
             )
-            self.chunk_storage.addChunk(chunk_text, raw_document_index)
+            self.chunk_storage.add_chunk(chunk_text, raw_document_index)
         return 1

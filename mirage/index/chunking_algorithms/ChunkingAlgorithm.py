@@ -23,7 +23,7 @@ class ChunkingAlgorithm:
         logger.info("Chunking of documents")
         raw_document_indexes = self.raw_storage.get_indexes()
         parsed_indexes = set(
-            self.chunk_storage.get_raw_index_of_document(index) for index in  self.chunk_storage.getIndexes()
+            self.chunk_storage.get_raw_index_of_document(index) for index in  self.chunk_storage.get_indexes()
         )
         return sum([
             self.chunk_a_document(raw_document_index)

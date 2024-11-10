@@ -70,6 +70,7 @@ class SQLiteChunkStorage(ChunkStorage):
         # Get the last inserted row id
         last_row_id = self.cursor.lastrowid
         super()._addToChunkIndex(str(last_row_id), last_row_id, raw_index_of_document)
+        return str(last_row_id)
     
     def __getitem__(self, index) -> str:
         if index in self._chunk_map:
