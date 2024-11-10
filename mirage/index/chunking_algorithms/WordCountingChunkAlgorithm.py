@@ -1,10 +1,28 @@
-from .ChunkingAlgorithm import ChunkingAlgorithm
+import math
+import logging
 
+from .ChunkingAlgorithm import ChunkingAlgorithm
+from ..raw_storages.RawStorage import RawStorage
+from ..chunk_storages.ChunkStorage import ChunkStorage
+
+logger = logging.getLogger(__name__)
 
 class WordCountingChunkingAlgorithm(ChunkingAlgorithm):
 
-    def __init__(self, words = 50):
-        self.words = words
+    def __init__(self, raw_storage: RawStorage, chunk_storage: ChunkStorage, words_amount = 100) -> None:
+        super().__init__(raw_storage, chunk_storage)
+        self.words_amount = words_amount
 
-    def __call__(self) -> dict[int, tuple[str, str]]:
-        pass
+    
+        
+    def chunk_a_document(self, raw_document_index: str) -> None:
+        raw_text = self.raw_storage[raw_document_index]
+        words = raw_text.split(' ')
+        logger.info(f"{len(words)} words are parsed from the document")
+        for i in range(0, math.floor(len(words) / self.words_amount) - 1):
+
+            chunk_text = ' '.join(
+                words[i * 100 : min(len(words), (i + 1) * 100)]
+            )
+            self.chunk_storage.addChunk(chunk_text, raw_document_index)
+        return 1

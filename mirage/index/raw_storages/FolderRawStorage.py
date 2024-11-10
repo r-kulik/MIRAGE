@@ -18,31 +18,29 @@ class FolderRawStorage(RawStorage):
             custom_text_extractor: typing.Callable[[str], str] = None
         ) -> None:
 
+        super().__init__()
         self.__folder_path: str = folder_path
         self.__extensions_of_text_files = extensions_of_text_files
-        self.__storage: dict[str, str] = {}
+        
         self.__custom_text_extructor = custom_text_extractor
 
         if not create_manually:
             self.__createStorage()
-    
-    def addToStorage(self, index: str, link: str) -> None:
-        if index not in self.__storage:
-            self.__storage[index] = link
-        else:
-            raise RawStorage.IndexIsAlreadyInStorageException
         
     def __createStorage(self):
         file_list: list[str] = os.listdir(self.__folder_path)
         for file in file_list:
             if file.endswith(self.__extensions_of_text_files):
-                self.addToStorage(file, os.path.join(self.__folder_path, file))
+                self.add_to_storage(file, os.path.join(self.__folder_path, file))
 
-    def get_indexes(self) -> list[str]:
-        return list(self.__storage.keys())
+    
     
     def __getitem__(self, index: str) -> str:
-        file_name: str = self.__storage[index]
+        """
+        :param: index in the storage
+        :returns: text of the document
+        """
+        file_name: str = self._storage[index]
         if file_name.endswith('.pdf'):
             return FolderRawStorage.__read_pdf(file_name)
         if file_name.endswith(('.doc', '.docx')):
