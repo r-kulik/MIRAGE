@@ -1,6 +1,6 @@
 
 
-class BaseRawStorage:
+class RawStorage:
     """
     Every Raw Storage can be represented to the MIRAGE as a dictionary that maps index of the file to its raw text content.
     Keys can be anything: database indexes, urls, file_paths.

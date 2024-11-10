@@ -3,10 +3,10 @@ import pdfplumber
 import docx
 import typing
 
-from .BaseRawStorage import BaseRawStorage
+from .RawStorage import RawStorage
 
 
-class FolderStorage(BaseRawStorage):
+class FolderRawStorage(RawStorage):
     """
     Basic Raw Storage that stores content of all text files in the folder 
     """
@@ -30,7 +30,7 @@ class FolderStorage(BaseRawStorage):
         if index not in self.__storage:
             self.__storage[index] = link
         else:
-            raise BaseRawStorage.IndexIsAlreadyInStorageException
+            raise RawStorage.IndexIsAlreadyInStorageException
         
     def __createStorage(self):
         file_list: list[str] = os.listdir(self.__folder_path)
@@ -44,11 +44,11 @@ class FolderStorage(BaseRawStorage):
     def __getitem__(self, index: str) -> str:
         file_name: str = self.__storage[index]
         if file_name.endswith('.pdf'):
-            return FolderStorage.__read_pdf(file_name)
+            return FolderRawStorage.__read_pdf(file_name)
         if file_name.endswith(('.doc', '.docx')):
-            return FolderStorage.__read_doc(file_name)
+            return FolderRawStorage.__read_doc(file_name)
         if file_name.endswith('.txt'):
-            return FolderStorage.__read_txt(file_name)
+            return FolderRawStorage.__read_txt(file_name)
         return self.__custom_text_extructor(file_name)
 
     def __read_txt(file_name) -> str:
