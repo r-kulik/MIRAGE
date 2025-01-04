@@ -40,3 +40,6 @@ class ChunkStorage:
     
     def clear(self) -> None:
         raise NotImplementedError("Subclasses must implement this functionality")
+    
+    def __iter__(self) -> None:     
+        raise NotImplementedError("Subclasses must implement this functionality")

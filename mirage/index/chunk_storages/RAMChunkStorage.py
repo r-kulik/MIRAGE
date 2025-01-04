@@ -3,7 +3,8 @@ from .ChunkStorage import ChunkStorage
 
 class RAMChunkStorage(ChunkStorage):
     def __init__(self):
-        super().__init__()
+        super().__init__()   
+        
     def __getitem__(self, index) -> str:
         return self._chunk_map[index].link_to_chunk
     
@@ -16,3 +17,7 @@ class RAMChunkStorage(ChunkStorage):
     def clear(self) -> None:
         self._chunk_map = {}
         
+    def __iter__(self):
+        # Возвращаем итератор, который проходит по self._chunk_map
+        # и возвращает пары (индекс, текст)
+        return ((index, self._chunk_map[index].link_to_chunk) for index in self._chunk_map.keys())
