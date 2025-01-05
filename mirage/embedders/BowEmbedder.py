@@ -1,12 +1,12 @@
-from collections import defaultdict
 import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
-from .AbsEmbedder import AbsEmbedder
+from .Embedder import Embedder
 from ..index.chunk_storages.ChunkStorage import ChunkStorage
 from .TextNormallizer import TextNormallizer
 from typing import Dict, Optional
+import logging
 
-class BowEmbedder(AbsEmbedder):
+class BowEmbedder(Embedder):
     def __init__(self, normalizer: Optional[TextNormallizer] = None):
         """
         Инициализация BowEmbedder.
@@ -65,11 +65,14 @@ class BowEmbedder(AbsEmbedder):
             Dict[int, np.ndarray]: Словарь, где ключ — идентификатор чанка, а значение — векторное представление чанка.
         """
         if not self.is_fitted:
-            print("Модель не обучена. Выполняется обучение на переданных чанках...")
+
+            # FIX: Avoid using the print instructions in the source code of MIRAGE. Instea use logging package
+
+            logging.info("Модель не обучена. Выполняется обучение на переданных чанках...")
             self.fit(chunks)  # Обучаем модель на переданных чанках
 
         vectors = {}
-        for chunk_id, chunk in chunks:  # Предполагаем, что ChunkStorage поддерживает метод items()
+        for chunk_id, chunk in chunks:  # Предполагаем, что ChunkStorage поддерживает метод __items__()
             vector = self.embed(chunk)  # Преобразуем каждый чанк в вектор
             vectors[chunk_id] = vector
         return vectors

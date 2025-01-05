@@ -1,16 +1,20 @@
 from abc import ABC, abstractmethod
-from typing import Optional, Dict
+from typing import Optional, Dict, Callable
 import numpy as np
 from .TextNormallizer import TextNormallizer
 from ..index.chunk_storages import ChunkStorage
 
-class AbsEmbedder(ABC):
-    def __init__(self, normalizer: Optional[TextNormallizer] = None):
+class Embedder(ABC):
+    def __init__(self, normalizer: Optional[TextNormallizer] | Callable[[str], str] | bool = None):
         """
         Инициализация Embedder.
 
         Args:
-            normalizer (TextNormallizer | None): Нормализатор текста. Если None, нормализация не применяется.
+            normalizer (TextNormallizer | bool | Callable | None) Text normalizer. 
+                If None or False, no normalization for text is needed. If Callable
+                If True standard mirage.embedders.TextNormalizer is applied
+                Any TextNormalizer inherited object is allowed
+                Any function: str -> str that normalize text is allowed
         """
         self.normalizer = normalizer
 
@@ -26,6 +30,8 @@ class AbsEmbedder(ABC):
         """
         if self.normalizer is None:
             return text
+        if type(self.normalizer) == callable:
+            return self.normalizer(text)
         else:
             return self.normalizer.normalize(text)
 
@@ -40,7 +46,7 @@ class AbsEmbedder(ABC):
         Returns:
             np.ndarray: Векторное представление текста в виде массива numpy.
         """
-        pass
+        raise NotImplementedError
     
     @abstractmethod
     def process_chunks(self, chunks: ChunkStorage) -> Dict[int, np.ndarray]:
@@ -53,4 +59,4 @@ class AbsEmbedder(ABC):
         Returns:
             Dict[int, np.ndarray]: Словарь, где ключ — идентификатор чанка, а значение — векторное представление чанка.
         """
-        pass
+        raise NotImplementedError  

@@ -16,6 +16,16 @@ class WordCountingChunkingAlgorithm(ChunkingAlgorithm):
     
         
     def chunk_a_document(self, raw_document_index: str) -> None:
+        """
+        Function that chunks a document and add it to the chunk storage
+
+        Args:
+            raw_document_index: str, link to the document in the RawStorage
+
+        Returns:
+            None, adds all chunk obtained from the document to the ChunkStorage
+        """
+
         raw_text = self.raw_storage[raw_document_index]
         words = raw_text.split(' ')
         logger.info(f"{len(words)} words are parsed from the document")
