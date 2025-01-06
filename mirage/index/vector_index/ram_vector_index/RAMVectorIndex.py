@@ -32,6 +32,11 @@ class RAMVectorIndex(VectorIndex, ABC):
 
     @final
     def save(self, filename: str) -> None:
+        """Saves the given RAM Index to the physical memory with the possibility to restore
+
+        Args:
+            filename (str): filename of the .json file with the index to be stored
+        """
         json_to_save = []
         for vector, chunk_storage_key in self:
             json_to_save.append(
@@ -46,6 +51,21 @@ class RAMVectorIndex(VectorIndex, ABC):
     
     @final
     def load(self, filename: str) -> None:
+        """Loads Vector index from the file (.json formatted)
+
+        Parameters
+        ----------
+        filename : str
+            Name of the file to load the index from
+
+        Examples
+        ----------
+
+        >>> index1.save('a.json')
+        >>> index2 = RAMVectorIndex()
+        >>> index2.load('a.json') # index1 and index2 behave the same
+        
+        """
         with open(filename, encoding='utf-8') as file:
             json_to_load = json.loads(
                 file.read()

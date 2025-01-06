@@ -16,7 +16,16 @@ class MirageIndex(ABC):
         self.visualize = visualize
 
     @final
-    def create_index(self, *args, **kwargs):
+    def create_index(self):
+        """
+        Calling this function creates index of MIRAGE using the parts of it specified in the initializer
+        ```py
+        >>> index = MirageIndex()
+        >>> index.create_index() # After this operation index.query(query_string) is allowed
+        >>> index.query(query_string)
+        ```
+        
+        """
         if self.visualize: print('Performing chunking algorithm')
         doduments_processed = self.chunking_algorithm.execute(visualize=self.visualize)
         if self.visualize: print(f"Processed {doduments_processed} documents")
@@ -30,6 +39,16 @@ class MirageIndex(ABC):
         if self.visualize: print("Creation of index has been done")          
     
     @final
-    def query(self, query: str, top_k: int) -> list[str]:
+    def query(self, query: str, top_k: int) -> list[QueryResult]:
+        """
+        Call this function to obtain top_k chunks of documents sematically closest to the query
+        
+        Args:
+            query: string with query
+            top_k: integer amount of chunks to be returned from the function
+
+        Returns:
+            list of QueryResult object
+        """
         embedded_query = self.embedder.embed(query)
         return self.vector_index.query(embedded_query, top_k=top_k)

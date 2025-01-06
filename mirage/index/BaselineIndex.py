@@ -30,7 +30,7 @@ class BaselineIndex(MirageIndex):
                 ):
         """
         This function creates a basline index
-        Args:
+        Params:
             data_folder:    path to the folder with original documents. Note that every file in the folder would be consider as a source file. To prevent this provide 
                             custom RawSrotage or custom FolderRawStorage object to the initializer. In this case data_folder argument will be ignored.
 
