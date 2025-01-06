@@ -1,4 +1,5 @@
 import typing
+from typing import Generator
 
 class ChunkStorage:
 
@@ -26,7 +27,7 @@ class ChunkStorage:
         self._chunk_map[index] = ChunkStorage._ChunkNote(link_to_chunk, raw_index_of_document)
 
     def get_indexes(self) -> list[str]:
-        return self._chunk_map.keys()
+        return list(self._chunk_map.keys())
 
     def get_raw_index_of_document(self, index: str) -> str:
         return self._chunk_map[index].raw_index_of_document
@@ -41,5 +42,13 @@ class ChunkStorage:
     def clear(self) -> None:
         raise NotImplementedError("Subclasses must implement this functionality")
     
-    def __iter__(self) -> None:     
+    def __iter__(self) -> Generator[tuple[str], None, None]:
+        """
+        Returns generator of the following:
+        ```py
+        >>> for chunk_index, chunk_text in ChunkStorageObject:
+                type(chunk_index) == str # True
+                type(chunk_text) == str # True
+        ```
+        """     
         raise NotImplementedError("Subclasses must implement this functionality")

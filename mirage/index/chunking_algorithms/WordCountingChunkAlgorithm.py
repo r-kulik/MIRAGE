@@ -28,11 +28,11 @@ class WordCountingChunkingAlgorithm(ChunkingAlgorithm):
 
         raw_text = self.raw_storage[raw_document_index]
         words = raw_text.split(' ')
-        logger.info(f"{len(words)} words are parsed from the document")
-        for i in range(0, math.floor(len(words) / self.words_amount) - 1):
+        logger.info(f" {len(words)} words are parsed from the document")
 
+        for i in range(0, math.floor(len(words) / self.words_amount) - 1):
             chunk_text = ' '.join(
-                words[i * 100 : min(len(words), (i + 1) * 100)]
+                words[i * self.words_amount : min(len(words), (i + 1) * self.words_amount)]
             )
             self.chunk_storage.add_chunk(chunk_text, raw_document_index)
         return 1
