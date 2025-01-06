@@ -9,8 +9,16 @@ logger = logging.getLogger(__name__)
 
 class WordCountingChunkingAlgorithm(ChunkingAlgorithm):
 
-    def __init__(self, raw_storage: RawStorage, chunk_storage: ChunkStorage, words_amount = 100) -> None:
+    def __init__(self, raw_storage: RawStorage, chunk_storage: ChunkStorage, words_amount: int = 100) -> None:
+        """
+        Args:
+            raw_storage: RawStorage object to pick documents from
+            chunk_storage: ChunkStorage object to put in it chunks
+            words_amount: number of words in each chunk
+        """
         super().__init__(raw_storage, chunk_storage)
+        if type(words_amount) != int or words_amount <= 0:
+            raise ValueError(f"Incorrect words_amount = {words_amount} was passed in the initialization of the WorldCountingChunkingAlgorithm")
         self.words_amount = words_amount
 
     

@@ -10,7 +10,7 @@ class RAMChunkStorage(ChunkStorage):
     
     def add_chunk(self, text: str, raw_index_of_document: str) -> None:
         index = str(hash(text))
-        print(index, text)
+        # print(index, text)
         self._addToChunkIndex(index, text, raw_index_of_document)
         return index
 

@@ -23,12 +23,20 @@ class Embedder(ABC):
             normalizer = TextNormallizer(stop_word_remove=True, word_generalization="stem")
         self.normalizer = normalizer
         self._dim: int = -1   # This field MUST be ovverided by all realizations of Embedder
+        self.is_fitted = True # False for all realizations that must be retrained
 
     def get_dimensionality(self) -> int:
         """
         Returns the dimensionality of the vectors that will be obtained by the embedder
         """
         return self._dim
+    
+    @abstractmethod
+    def fit(chunks: ChunkStorage) -> None:
+        """
+        This function must be overriden for all embedding algorithms that need additional training before embedding
+        """
+        raise NotImplementedError
 
     def _normalize(self, text: str) -> str:
         """

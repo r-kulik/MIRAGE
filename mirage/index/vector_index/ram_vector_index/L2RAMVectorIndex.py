@@ -71,7 +71,10 @@ class L2RAMVectorIndex(RAMVectorIndex):
             vector: ndarray - value of vector to store
             chunk_storage_key: str - index of chunk belonging to this vector in the ChunkStorage
         """
-        
+        if vector.shape[0] != self.dim:
+            raise ValueError(
+                f"Vector shape = {vector.shape} does not equal to the dimensionality of VectorIndex {self.dim}"
+            )
         self.vector_pairs.append(
             VectorKeyPair(
                 vector=vector,
@@ -103,6 +106,7 @@ class L2RAMVectorIndex(RAMVectorIndex):
             [
                 QueryResult(
                     distance = np.sqrt(np.sum((query_vector - vkp.vector) ** 2)),
+                    # distance = np.dot(query_vector, vkp.vector) / (np.linalg.norm(query_vector) * np.linalg.norm(vkp.vector)),
                     vector=vkp.vector,
                     chunk_storage_key=vkp.chunk_storage_key
                 )

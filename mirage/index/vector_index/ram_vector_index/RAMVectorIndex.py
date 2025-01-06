@@ -6,7 +6,7 @@ import json
 from typing import final
 
 
-class RAMVectorIndex(VectorIndex):
+class RAMVectorIndex(VectorIndex, ABC):
 
     """
     Base class for all VectorIndexes that are stored in Random Access Memory and were designed by us.
@@ -16,7 +16,7 @@ class RAMVectorIndex(VectorIndex):
     """
 
 
-    def __init__(self, dimensionality):
+    def __init__(self, dimensionality: int):
         super().__init__(dimensionality)
     
     @abstractmethod

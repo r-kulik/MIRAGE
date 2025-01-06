@@ -1,4 +1,4 @@
-from .index.BaseIndex import BaseIndex
+from .index.MirageIndex import BaseIndex
 
 
 class BaseMirage:
