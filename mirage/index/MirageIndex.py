@@ -39,7 +39,7 @@ class MirageIndex(ABC):
         if self.visualize: print("Creation of index has been done")          
     
     @final
-    def query(self, query: str, top_k: int) -> list[QueryResult]:
+    def query(self, query: str, top_k: int, return_text = False) -> list[QueryResult]:
         """
         Call this function to obtain top_k chunks of documents sematically closest to the query
         
@@ -51,7 +51,12 @@ class MirageIndex(ABC):
             list of QueryResult object
         """
         embedded_query = self.embedder.embed(query)
-        return self.vector_index.query(embedded_query, top_k=top_k)
+        results = self.vector_index.query(embedded_query, top_k=top_k)
+        if not return_text:
+            return results
+        for result in results:
+            result.text = self.chunk_storage[result.chunk_storage_key]
+        return results
     
 
 
@@ -85,12 +90,21 @@ class MirageIndex(ABC):
         TypeError
             If `object_passed` type is not a subclass of `abstract_class_to_check_instance`
         """  
-        print(f"object_passed = {object_passed}, its type = {type(object_passed)}abstract = {abstract_class_to_check_instance}, default = {default_value_to_return}")
-        if isinstance(object_passed, abstract_class_to_check_instance):
-            return object_passed
+        print(f"object_passed = {object_passed}, its type = {type(object_passed)}\n\
+              abstract = {abstract_class_to_check_instance}, default = {default_value_to_return}")
         if object_passed is None:
             if not isinstance(default_value_to_return, abstract_class_to_check_instance):
                 raise TypeError(
-f"The default value you specified to return has type {type(default_value_to_return)}, which is not a subclass of the {abstract_class_to_check_instance}"
+                    f"The default value you specified to return has type {type(default_value_to_return)}, \
+                        which is not a subclass of the {abstract_class_to_check_instance}"
                 )
             return default_value_to_return
+        if isinstance(object_passed, abstract_class_to_check_instance):
+            return object_passed
+        else:
+            raise TypeError(
+                f"The value you specified has a type {type(object_passed)} and should be a subclass of {abstract_class_to_check_instance}"
+            )
+        
+        
+        

@@ -40,9 +40,9 @@ class RAMVectorIndex(VectorIndex, ABC):
         json_to_save = []
         for vector, chunk_storage_key in self:
             json_to_save.append(
-                vector.tolist(), chunk_storage_key
+                [vector.tolist(), chunk_storage_key]
             )
-        with open(filename, encoding='utf-8') as file:
+        with open(filename, 'w', encoding='utf-8') as file:
             file.write(
                 json.dumps(
                     json_to_save
@@ -70,7 +70,7 @@ class RAMVectorIndex(VectorIndex, ABC):
             json_to_load = json.loads(
                 file.read()
             )
-        self.__recreate_index(
+        self._recreate_index(
             [
                 array(vector) for vector, chunk_storage_key in json_to_load
             ]

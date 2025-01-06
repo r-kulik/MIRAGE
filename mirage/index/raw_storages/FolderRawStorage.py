@@ -20,17 +20,12 @@ class FolderRawStorage(RawStorage):
 
         super().__init__()
 
-        if folder_path is None:
-            raise ValueError(
-                "You are trying to create a FolderRawStorage object without specifying a folder"
-            )
-
-        self.__folder_path: str = folder_path
+        self.__folder_path: str | None = folder_path
         self.__extensions_of_text_files = extensions_of_text_files
         
         self.__custom_text_extructor = custom_text_extractor
 
-        if not create_manually:
+        if not create_manually and self.__folder_path is not None:
             self.__createStorage()
         
     def __createStorage(self):
@@ -46,6 +41,11 @@ class FolderRawStorage(RawStorage):
         :param: index in the storage
         :returns: text of the document
         """
+        if self.__folder_path is None:
+            raise RuntimeError(
+                "You are trying to obtain data from FolderRawStorage without specified folder"
+            )
+
         file_name: str = self._storage[index]
         if file_name.endswith('.pdf'):
             return FolderRawStorage.__read_pdf(file_name)

@@ -87,7 +87,7 @@ class Embedder(ABC):
     
 
     @final
-    def process_chunks(self, chunks: ChunkStorage) -> Dict[int, np.ndarray]:
+    def process_chunks(self, chunks: ChunkStorage) -> Dict[str, np.ndarray]:
         """
         Обработка чанков и преобразование их в словарь векторов.
         Если модель не обучена, вызывается метод fit для обучения на переданных чанках.

@@ -1,10 +1,10 @@
 from ..embedders.TextNormalizer import TextNormalizer
-from . import *
+from ..index import *
+from ..embedders import *
 from typing import Callable
 from ..embedders import *
 from .MirageIndex import MirageIndex
 from .chunking_algorithms import ChunkingAlgorithm
-
 
 class BaselineIndex(MirageIndex):
 
@@ -19,7 +19,7 @@ class BaselineIndex(MirageIndex):
     """
 
     def __init__(self,
-                data_folder: str | None= None,
+                data_folder: str | None = None,
                 words_amount_in_chunk: int | None = 100,
                 normalizer: bool | Callable | TextNormalizer | None = None,
                 vector_index_dim: int | None = None,
@@ -81,6 +81,7 @@ class BaselineIndex(MirageIndex):
         visualize : bool, optional
             True to print stages of index creation, by default False
         """
+        
         raw_storage = MirageIndex._moduleInstanceRedefining(
                 raw_storage, 
                 RawStorage, 

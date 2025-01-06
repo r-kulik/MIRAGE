@@ -46,7 +46,7 @@ class L2RAMVectorIndex(RAMVectorIndex):
             True if there is a vector in index, False overwise
         """
         for vector_key_pair in self.vector_pairs:
-            if vector_key_pair.vector == vector:
+            if all(vector_key_pair.vector == vector):
                 return True
         return False
     
@@ -92,7 +92,7 @@ class L2RAMVectorIndex(RAMVectorIndex):
     
     def attach_chunk_storage_key_to_vector(self, vector: np.ndarray, chunk_storage_key: str) -> None:
         for vkp in self.vector_pairs:
-            if vkp.vector == vector:
+            if all(vkp.vector ==  vector):
                 vkp.chunk_storage_key = chunk_storage_key
                 break
         else:
@@ -101,7 +101,7 @@ class L2RAMVectorIndex(RAMVectorIndex):
     
     def remove(self, vector: np.ndarray):
         for i in range(len(self.vector_pairs)):
-            if self.vector_pairs[i].vector == vector:
+            if all(self.vector_pairs[i].vector == vector):
                 self.vector_pairs.pop(i)
                 break
         else:

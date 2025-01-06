@@ -4,10 +4,12 @@ from typing import Generator, Self
 
 
 class QueryResult:
-    def __init__(self, distance: float, vector: np.ndarray, chunk_storage_key: str) -> Self:
+    def __init__(self, distance: float, vector: np.ndarray, chunk_storage_key: str, text: str = None) -> Self:
         self.distance = distance
         self.vector = vector
         self.chunk_storage_key = chunk_storage_key
+        self.text = text
+
     def __repr__(self) -> str: return f"QueryResult(distance={self.distance}; vector={self.vector}; chunk_storage_key={self.chunk_storage_key})"
 
     
