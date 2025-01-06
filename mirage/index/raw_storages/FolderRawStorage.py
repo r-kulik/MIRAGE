@@ -19,6 +19,12 @@ class FolderRawStorage(RawStorage):
         ) -> None:
 
         super().__init__()
+
+        if folder_path is None:
+            raise ValueError(
+                "You are trying to create a FolderRawStorage object without specifying a folder"
+            )
+
         self.__folder_path: str = folder_path
         self.__extensions_of_text_files = extensions_of_text_files
         

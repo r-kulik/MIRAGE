@@ -1,7 +1,7 @@
 from mirage.index import RawStorage, ChunkStorage, ChunkingAlgorithm, VectorIndex, QueryResult
 from mirage.embedders import Embedder
 from abc import abstractmethod, ABC
-from typing import final
+from typing import Any, final
 
 
 class MirageIndex(ABC):
@@ -52,3 +52,45 @@ class MirageIndex(ABC):
         """
         embedded_query = self.embedder.embed(query)
         return self.vector_index.query(embedded_query, top_k=top_k)
+    
+
+
+    @staticmethod
+    def _moduleInstanceRedefining(object_passed: None | Any, 
+                                  abstract_class_to_check_instance: type,
+                                  default_value_to_return: Any) -> Any:
+        """This function is checking the correctess of the arguments that were passed in the initializer of the `MirageIndex` subclasses' instances
+        It also subctitute the default values if the were no objects passed in the initalizer or creates an instance with default arguments if there is a type \
+        provided as an argument
+
+        Parameters
+        ----------
+        object_passed : None | type | Any
+            The value of the object that was passed as an argument for the initializer
+        abstract_class_to_check_instance : type
+            Abstract class the module must be inherited from
+        default_value_to_return : Any
+            A default value that will be returned if the object_passed is None
+
+        Returns
+        -------
+        abstract_class_to_check_instance
+            An object_passed that was specified if its type is a subclass of `abstract_class_to_check_instance`
+            or `default_value` if `object_passed` is `None`
+
+        Raises
+        ------
+        TypeError
+            If type of `default_value` is not a subclass of `abstract_class_to_check_instance` 
+        TypeError
+            If `object_passed` type is not a subclass of `abstract_class_to_check_instance`
+        """  
+        print(f"object_passed = {object_passed}, its type = {type(object_passed)}abstract = {abstract_class_to_check_instance}, default = {default_value_to_return}")
+        if isinstance(object_passed, abstract_class_to_check_instance):
+            return object_passed
+        if object_passed is None:
+            if not isinstance(default_value_to_return, abstract_class_to_check_instance):
+                raise TypeError(
+f"The default value you specified to return has type {type(default_value_to_return)}, which is not a subclass of the {abstract_class_to_check_instance}"
+                )
+            return default_value_to_return

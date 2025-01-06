@@ -6,7 +6,9 @@ from nltk.stem import WordNetLemmatizer  # Лемматизатор для ан�
 from natasha import MorphVocab  # Лемматизатор для русского
 from typing import Literal
 
-class TextNormallizer:
+class TextNormalizer:
+    """Model to define the algorithm of text normalization. Any derived class can use its inherited functionality
+    """
     def __init__(self,
                  stop_word_remove: bool = False,
                  word_generalization: Literal["stem", "lemmatize"] | None = None):

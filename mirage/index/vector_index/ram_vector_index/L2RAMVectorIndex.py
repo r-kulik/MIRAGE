@@ -9,6 +9,13 @@ import numpy as np
 
 
 class L2RAMVectorIndex(RAMVectorIndex):
+    """Index based on a euclidian distance between vectors with no hierarchy presented. Can ne used as a general truth for performance measuring of other distances
+
+    Parameters
+    ----------
+    RAMVectorIndex 
+        Parent class
+    """
 
     def __init__(self, dimensionality) -> Self:
         super().__init__(dimensionality)
