@@ -1,8 +1,9 @@
-from mirage.embedders.TextNormallizer import TextNormalizer
+from ..embedders.TextNormalizer import TextNormalizer
 from . import *
 from typing import Callable
 from ..embedders import *
-from mirage import MirageIndex, WordCountingChunkingAlgorithm, L2RAMVectorIndex
+from . import MirageIndex
+from ..index.chunking_algorithms import ChunkingAlgorithm
 
 class BaselineIndex(MirageIndex):
 

@@ -14,7 +14,7 @@ class FolderRawStorage(RawStorage):
     def __init__(
             self, folder_path, 
             create_manually: bool = False, 
-            extensions_of_text_files: tuple[str] = ('.txt', '.pdf', '.doc'),
+            extensions_of_text_files: tuple[str] = ('.txt', '.pdf', '.doc', '.docx'),
             custom_text_extractor: typing.Callable[[str], str] = None
         ) -> None:
 
