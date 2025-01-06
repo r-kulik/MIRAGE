@@ -2,8 +2,9 @@ from ..embedders.TextNormalizer import TextNormalizer
 from . import *
 from typing import Callable
 from ..embedders import *
-from . import MirageIndex
-from ..index.chunking_algorithms import ChunkingAlgorithm
+from .MirageIndex import MirageIndex
+from .chunking_algorithms import ChunkingAlgorithm
+
 
 class BaselineIndex(MirageIndex):
 

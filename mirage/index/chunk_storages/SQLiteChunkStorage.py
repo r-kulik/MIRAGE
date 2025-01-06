@@ -80,6 +80,17 @@ class SQLiteChunkStorage(ChunkStorage):
         else:
             raise KeyError(f"Index {index} not found in the storage.")
         
+    def __iter__(self):
+        return (
+            (   
+                index,
+                self.cursor.execute(
+                    f"SELECT text FROM {self.table_name} WHERE id={self._chunk_map[index].link_to_chunk}"
+                ).fetchall()[0][0]
+            ) 
+            for index in self._chunk_map
+        )
+        
     def clear(self) -> None:
         self.cursor.execute(f"DELETE FROM {self.table_name}")
         self._chunk_map = {}

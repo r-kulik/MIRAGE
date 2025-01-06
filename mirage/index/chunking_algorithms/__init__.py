@@ -1,2 +1,2 @@
-from .WordCountingChunkAlgorithm import WordCountingChunkingAlgorithm
+from .WordCountingChunkingAlgorithm import WordCountingChunkingAlgorithm
 from .ChunkingAlgorithm import ChunkingAlgorithm

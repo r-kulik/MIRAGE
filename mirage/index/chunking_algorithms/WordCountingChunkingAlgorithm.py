@@ -23,24 +23,35 @@ class WordCountingChunkingAlgorithm(ChunkingAlgorithm):
 
     
         
-    def chunk_a_document(self, raw_document_index: str) -> None:
+    def chunk_a_document(self, raw_document_index: str) -> int:
         """
-        Function that chunks a document and add it to the chunk storage
+        Function that chunks a document and adds it to the chunk storage.
 
         Args:
             raw_document_index: str, link to the document in the RawStorage
 
         Returns:
-            None, adds all chunk obtained from the document to the ChunkStorage
+            int: Number of chunks added to the storage
         """
-
         raw_text = self.raw_storage[raw_document_index]
-        words = raw_text.split(' ')
-        logger.info(f" {len(words)} words are parsed from the document")
 
-        for i in range(0, math.floor(len(words) / self.words_amount) - 1):
+        # Handle empty documents
+        if not raw_text.strip():
+            logger.warning(f"Document {raw_document_index} is empty.")
+            return 0
+
+        words = raw_text.split(' ')
+        logger.info(f"{len(words)} words are parsed from the document")
+
+        # Handle small documents
+        if len(words) <= self.words_amount:
+            self.chunk_storage.add_chunk(raw_text, raw_document_index)
+            return 1
+
+        for i in range(0, math.ceil(len(words) / self.words_amount)):
             chunk_text = ' '.join(
                 words[i * self.words_amount : min(len(words), (i + 1) * self.words_amount)]
             )
             self.chunk_storage.add_chunk(chunk_text, raw_document_index)
+
         return 1

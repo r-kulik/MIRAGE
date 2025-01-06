@@ -1,5 +1,5 @@
-from mirage.index import RawStorage, ChunkStorage, ChunkingAlgorithm, VectorIndex, QueryResult
-from mirage.embedders import Embedder
+from . import RawStorage, ChunkStorage, ChunkingAlgorithm, VectorIndex, QueryResult
+from ..embedders import Embedder
 from abc import abstractmethod, ABC
 from typing import Any, final
 
