@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional, Dict, Callable, final
 import numpy as np
-from .TextNormallizer import TextNormallizer
+from .TextNormalizer import TextNormalizer
 from ..index.chunk_storages import ChunkStorage
 from ..index.vector_index.VectorIndex import VectorIndex
 import logging
@@ -20,7 +20,7 @@ You are trying to infere an embedder that has not been trained on a corpora. Try
 
 
 class Embedder(ABC):
-    def __init__(self, normalizer: Optional[TextNormallizer] | Callable[[str], str] | bool = None):
+    def __init__(self, normalizer: Optional[TextNormalizer] | Callable[[str], str] | bool = None):
         """
         Инициализация Embedder.
 
@@ -32,7 +32,7 @@ class Embedder(ABC):
                 Any function: str -> str that normalize text is allowed
         """
         if type(normalizer) == bool and normalizer:
-            normalizer = TextNormallizer(stop_word_remove=True, word_generalization="stem")
+            normalizer = TextNormalizer(stop_word_remove=True, word_generalization="stem")
         self.normalizer = normalizer
         self._dim: int = -1   # This field MUST be ovverided by all realizations of Embedder
         self.is_fitted = True # False for all realizations that must be retrained
@@ -67,7 +67,7 @@ class Embedder(ABC):
             return text
         if type(self.normalizer) == callable:
             return self.normalizer(text)
-        elif type(self.normalizer) == TextNormallizer:
+        elif type(self.normalizer) == TextNormalizer:
             return self.normalizer.normalize(text)
 
     

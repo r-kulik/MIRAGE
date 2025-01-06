@@ -4,7 +4,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from mirage.index.vector_index import VectorIndex
 from .Embedder import Embedder, EmbedderIsNotTrainedException
 from ..index.chunk_storages.ChunkStorage import ChunkStorage
-from .TextNormallizer import TextNormallizer
+from .TextNormalizer import TextNormalizer
 from typing import Dict, Optional
 import logging
 
@@ -16,7 +16,7 @@ class BowEmbedder(Embedder):
     
     """
 
-    def __init__(self, normalizer: Optional[TextNormallizer] = None):
+    def __init__(self, normalizer: Optional[TextNormalizer] = None):
         """
         Инициализация BowEmbedder.
 
