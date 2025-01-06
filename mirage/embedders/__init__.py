@@ -1,2 +1,3 @@
-from .Embedder import *
-from .BowEmbedder import *
+from .Embedder import Embedder, EmbedderIsNotTrainedException
+from .BowEmbedder import BowEmbedder
+from .TfIdfEmbedder import TfIdfEmbedder

@@ -1,6 +1,8 @@
+from mirage.embedders.TextNormallizer import TextNormalizer
 from . import *
 from typing import Callable
 from ..embedders import *
+from mirage import MirageIndex, WordCountingChunkingAlgorithm, L2RAMVectorIndex
 
 class BaselineIndex(MirageIndex):
 
@@ -16,102 +18,98 @@ class BaselineIndex(MirageIndex):
 
     def __init__(self,
                 data_folder: str | None= None,
-                words_amount_in_chunk: int | None = None,
-                normalizer: bool | Callable | TextNormallizer | None = None,
+                words_amount_in_chunk: int | None = 100,
+                normalizer: bool | Callable | TextNormalizer | None = None,
                 vector_index_dim: int | None = None,
 
                 raw_storage: RawStorage | None  = None,
-                chunk_storage: ChunkStorage | type | None = None,
-                chunking_algorithm: ChunkingAlgorithm | type | None = None,
+                chunk_storage: ChunkStorage |  None = None,
+                chunking_algorithm: ChunkingAlgorithm |  None = None,
                 embedder: Embedder | None = None,
-                vector_index: VectorIndex | type |  None = None,
+                vector_index: VectorIndex |  None = None,
 
                 visualize: bool = False
                 ):
+        """Creates a baseline index based on following suggestions:
+
+            1) documents are stored in a specified folder
+
+            2) Chunks of documents are stored in RAM
+
+            3) chunking algorithm is a word counting algorithm
+
+            4) embedding is done via Bag of Words algorithm 
+
+            5) vector index is stored in RAM and it is L2 simple index
+
+            To change suggestions redefine the modules in the arguments
+
+        Parameters
+        ----------
+        data_folder : str | None, optional
+            folder wgere documents are stored, by default None
+
+        words_amount_in_chunk : int | None, optional
+            amount of words presented in the chunk, size of chunk, by default None
+
+        normalizer : bool | Callable | TextNormalizer | None, optional
+            True if text normalization is needed, False and None otherwise
+            Any str -> str function is allowed
+            Any TextMormalizer subclass is allowed
+            by default None
+
+        vector_index_dim : int | None, optional
+            dimensionality of vector index (redundant), by default None
+
+        raw_storage : RawStorage | None, optional
+            Custom RawStorage, by default None
+
+        chunk_storage : ChunkStorage | type | None, optional
+            Custom ChunkStorage, by default None
+
+        chunking_algorithm : ChunkingAlgorithm | type | None, optional
+            Custom chunking algorithm, by default None
+
+        embedder : Embedder | None, optional
+            Custom embedder, by default None
+
+        vector_index : VectorIndex | type | None, optional
+            Custom vector index, by default None
+
+        visualize : bool, optional
+            True to print stages of index creation, by default False
         """
-        This function creates a basline index
-        Params:
-            data_folder:    path to the folder with original documents. Note that every file in the folder would be consider as a source file. To prevent this provide 
-                            custom RawSrotage or custom FolderRawStorage object to the initializer. In this case data_folder argument will be ignored.
-
-            words_amount_in_chunk: integer value representing how many words each chunk will contain
-
-            normalizer:     Text notmalizer function, object, or flag of necessiry of normalization
-                            If None or False, no normalization for text is needed
-                            If True standard mirage.embedders.TextNormalizer is applied
-                            Any TextNormalizer inherited object is allowed
-                            Any function: str -> str that normalize text is allowed
-
-            vector_index_dim: preferably to None, cause it nust be equal to the dimensionality of the embedder
-            
-            chunk_storage:      ChunkStorage object to store chunks in. By default, RAMChunkStorage will be created
-
-            raw_storage:        RawStorage object to create index from. By default, FolderRawStorage will be created
-
-            chunking_algorithm: ChunkingAlgorithm object or its type to create chunks from RawStorage, or type (will be created with the default parameters of superclass)
-
-            embedder: Embedder object or its type; vectorization algorithm to convert chunks of a text into a vector
-
-            vector_index: Vector index or its type to create from sratch
-
-        """
-
-
-        # creating a raw storage 
-        if raw_storage is None and data_folder is None:
-            raise ValueError(
-                "You have not provided neither folder with documents nor RawStorage object to create an index"
-            )
-        
-        # from the scratch, having only the folder name
-        if raw_storage is None and data_folder is not None:
-            raw_storage = FolderRawStorage(folder_path=data_folder, create_manually=False)
-        
-        # !-----------------------------------------------------------------------
-        # creating chunk storage from the scratch if there is no chunkstorage provided
-        if chunk_storage is None:
-            chunk_storage = RAMChunkStorage()
-        # creating a chunk_storage of a specified type
-        elif issubclass(chunk_storage, ChunkStorage): 
-            chunk_storage = chunk_storage()
-
-        # !-----------------------------------------------------------------------
-        if chunking_algorithm is None and words_amount_in_chunk is None:
-            raise ValueError(
-                "You have not provided neither amount of words in chunk neither ChunkingAlgorithm type or object to create it"
-            )
-        # creating chunk alforithm from the scratch if there is a words_amount_in_chunk specified
-        elif chunking_algorithm is None and type(words_amount_in_chunk) == int:
-            chunking_algorithm = WordCountingChunkingAlgorithm(raw_storage, chunk_storage, words_amount=words_amount_in_chunk)
-
-        # creating a chunk algorithm object if the algorithm type was specified
-        elif issubclass(chunking_algorithm, ChunkingAlgorithm):
-            chunking_algorithm = chunking_algorithm(raw_storage, chunk_storage)
-
-        # !-----------------------------------------------------------------------
-        
-        if embedder is None:
-            embedder = BowEmbedder(normalizer=normalizer)
-        elif issubclass(embedder, Embedder):
-            embedder = embedder()
-
-        # !-----------------------------------------------------------------------
-
-        if vector_index is None:
-            if embedder.is_fitted:
-                vector_index = L2RAMVectorIndex(dimensionality=embedder.get_dimensionality())
-            else:
-                # We can not obtain dimensionality of the embedders that should be trained
-                vector_index = L2RAMVectorIndex(dimensionality= -1 if vector_index_dim is None else vector_index_dim)
-        
-        elif issubclass(vector_index, VectorIndex):
-            vector_index = vector_index(dimensionality= -1 if not embedder.is_fitted else embedder.get_dimensionality())
+        raw_storage = MirageIndex._moduleInstanceRedefining(
+                raw_storage, 
+                RawStorage, 
+                FolderRawStorage(data_folder)
+        )
+        chunk_storage = MirageIndex._moduleInstanceRedefining(
+                chunk_storage, 
+                ChunkStorage, 
+                RAMChunkStorage()
+        )
+        chunking_algorithm = MirageIndex._moduleInstanceRedefining(
+            chunking_algorithm, 
+            ChunkingAlgorithm, 
+            WordCountingChunkingAlgorithm(raw_storage, chunk_storage, words_amount=words_amount_in_chunk)
+        )
+        embedder = MirageIndex._moduleInstanceRedefining(
+            embedder, 
+            Embedder, 
+            BowEmbedder(normalizer=normalizer)
+        )
+        vector_index = MirageIndex._moduleInstanceRedefining(
+            vector_index, 
+            VectorIndex, 
+            L2RAMVectorIndex(dimensionality=embedder.get_dimensionality)
+        )
         
         super().__init__(
-            raw_storage,
-            chunk_storage,
-            chunking_algorithm,
-            embedder,
-            vector_index,
-            visualize
+            raw_storage=raw_storage,
+            chunk_storage=chunk_storage,
+            chunking_algorithm=chunking_algorithm,
+            embedder=embedder,
+            vector_index=vector_index,
+            visualize=visualize
         )

@@ -1,11 +1,23 @@
 from abc import ABC, abstractmethod
-from typing import Optional, Dict, Callable
+from typing import Optional, Dict, Callable, final
 import numpy as np
 from .TextNormallizer import TextNormallizer
 from ..index.chunk_storages import ChunkStorage
 from ..index.vector_index.VectorIndex import VectorIndex
 import logging
 import tqdm
+
+
+class EmbedderIsNotTrainedException(Exception):
+    """This exception must be raised when embed(), process_chunks() or convert_chunks_to_vector_index() is called without training on corpora
+    on all vectorizers that need to be trained
+    """
+    def __init__(self, additional_message = None):
+        super().__init__(f"""
+You are trying to infere an embedder that has not been trained on a corpora. Try fit(chunk: ChunkSotrage) method to solve this problem 
+{'Additional Info: ' if additional_message is not None else ''} {additional_message}
+""")
+
 
 class Embedder(ABC):
     def __init__(self, normalizer: Optional[TextNormallizer] | Callable[[str], str] | bool = None):
@@ -33,8 +45,11 @@ class Embedder(ABC):
     
     @abstractmethod
     def fit(chunks: ChunkStorage) -> None:
-        """
-        This function must be overriden for all embedding algorithms that need additional training before embedding
+        """Train a embedder to operate on your corpora. For td-idf and BoW embedders is necessary to start operating
+        Parameters
+        ----------
+        chunks : ChunkStorage
+            Object of Chunk storage to take the chunks for training from
         """
         raise NotImplementedError
 
@@ -48,7 +63,7 @@ class Embedder(ABC):
         Returns:
             str: Нормализованный текст.
         """
-        if self.normalizer is None:
+        if self.normalizer is None or self.normalizer == False:
             return text
         if type(self.normalizer) == callable:
             return self.normalizer(text)
@@ -70,32 +85,43 @@ class Embedder(ABC):
         """
         raise NotImplementedError
     
+
+    @final
     def process_chunks(self, chunks: ChunkStorage) -> Dict[int, np.ndarray]:
         """
         Обработка чанков и преобразование их в словарь векторов.
         Если модель не обучена, вызывается метод fit для обучения на переданных чанках.
 
-        Args:
-            chunks (ChunkStorage): Хранилище чанков.
+        Params
+        ------------
+            chunks: ChunkStorage 
+                Хранилище чанков.
 
-        Returns:
-            Dict[int, np.ndarray]: Словарь, где ключ — идентификатор чанка, а значение — векторное представление чанка.
+        Returns
+        ------------
+            vectors: Dict[int, np.ndarray]
+                Словарь, где ключ — идентификатор чанка, а значение — векторное представление чанка.
+
+        Raises
+        -----------
+            EmbedderIsNotTrainedException
+                an exception you see if the fit() method on a vectorizer that needs fitting was never called
         """
-        # print("PROCESS CHUNKS FUNCTION HAS BEEN REACHED")
+        if not self.is_fitted:
+            raise EmbedderIsNotTrainedException(additional_message="while process_chunks() method was called")
         vectors = {}
         for chunk_key, chunk in chunks:  # Предполагаем, что ChunkStorage поддерживает метод __items__()
-            # print(chunk_key)
             vector = self.embed(chunk)  # Преобразуем каждый чанк в вектор
             vectors[chunk_key] = vector
         return vectors
     
-
+    @final
     def convert_chunks_to_vector_index(
             self,
             chunk_storage: ChunkStorage,
             vector_index: VectorIndex,
             visualize = False
-    ) -> VectorIndex:
+    ) -> None:
         '''
         This function automatically "populate" a VectorIndex object with the vectors obtained from the chunks from ChunkStorage object
         Args:
@@ -109,6 +135,9 @@ class Embedder(ABC):
         >>> emb.convert_chunks_to_vector_index(chunks, vidx)
         ```        
         '''
+
+        if not self.is_fitted:
+            raise EmbedderIsNotTrainedException
 
         if visualize:
             print("Converting ChunkStorage to VectorIndex")

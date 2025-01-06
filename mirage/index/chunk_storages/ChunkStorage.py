@@ -1,7 +1,8 @@
+from abc import abstractmethod, ABC
 import typing
 from typing import Generator
 
-class ChunkStorage:
+class ChunkStorage(ABC):
 
     class _ChunkNote:
 
@@ -36,6 +37,7 @@ class ChunkStorage:
     def __getitem__(self, index: str) -> str:
         raise NotImplementedError("Subclasses must implement this functionality")
     
+    @abstractmethod
     def add_chunk(self, text: str, raw_index_of_document: str) -> str:
         raise NotImplementedError("Subclasses must implement this functionality")
     
