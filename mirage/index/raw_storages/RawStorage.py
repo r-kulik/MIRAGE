@@ -1,5 +1,8 @@
 
 
+from typing import Self
+
+
 class RawStorage:
     """
     Every Raw Storage can be represented to the MIRAGE as a dictionary that maps index of the file to its raw text content.
@@ -26,5 +29,11 @@ class RawStorage:
 
     def get_link(self, index: str) -> any:
         return self._storage[index]
-
+    
+    def save(self, filename: str) -> None:
+        raise NotImplementedError("Concrete implementations of the RawStorage must handle save and load functionality")
+    
+    @staticmethod
+    def load(filename) -> Self:
+        raise NotImplementedError("Concrete implementations of the RawStorage must handle save and load functionality")
 
