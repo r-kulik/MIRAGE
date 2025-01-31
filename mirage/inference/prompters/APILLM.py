@@ -37,10 +37,10 @@ class LLM:
             num_return_sequences=num_return_sequences
         )
         
-    def do_request(self, query: str, chanks_storage: ChunkStorage, indexes:List[str], promt: str):
+    def do_request(self, query: str, chunk_storage: ChunkStorage, indexes:List[str], promt: str):
         #TODO Придумать что-то с промтом
         promt = 'Ответь на вопрос:{query}\nЗная эту информацию:{chunks}'
-        txt_chank = '\n------\n' + '\n------\n'.join([chanks_storage[i] for i in indexes]) + '\n------\n'
+        txt_chank = '\n------\n' + '\n------\n'.join([chunk_storage[i] for i in indexes]) + '\n------\n'
         final = promt.format(query=query, chunks=txt_chank)
             
         self.data.prompt = final

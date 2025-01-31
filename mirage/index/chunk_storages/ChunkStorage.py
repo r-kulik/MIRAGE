@@ -38,7 +38,7 @@ class ChunkStorage(ABC):
         raise NotImplementedError("Subclasses must implement this functionality")
     
     @abstractmethod
-    def add_chunk(self, text: str, raw_index_of_document: str) -> str:
+    def add_chunk(self, text: str, raw_document_index: str) -> str:
         raise NotImplementedError("Subclasses must implement this functionality")
     
     def clear(self) -> None:

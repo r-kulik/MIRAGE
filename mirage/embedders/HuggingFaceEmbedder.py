@@ -7,7 +7,7 @@ from sentence_transformers import SentenceTransformer
 
 
 class HuggingFaceEmbedder(Embedder):
-    def __init__(self, model_name: str = "sentence-transformers/distiluse-base-multilingual-cased-v2", normalizer: Optional[TextNormalizer] | Callable[[str], str] | bool = None):
+    def __init__(self, model_name: str = "sentence-transformers/distilbert-base-nli-stsb-quora-ranking", normalizer: Optional[TextNormalizer] | Callable[[str], str] | bool = None):
         """
         Инициализация HuggingFaceEmbedder.
 
@@ -30,8 +30,7 @@ class HuggingFaceEmbedder(Embedder):
             np.ndarray: Векторное представление текста в виде массива numpy.
         """
         # Нормализация текста, если задан нормализатор
-        normalized_text = self._normalize(text)
-        
+        normalized_text = self._normalize(text) 
         # Векторизация текста с помощью модели SentenceTransformer
         vector = self.model.encode(normalized_text)
         

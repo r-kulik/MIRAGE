@@ -119,7 +119,7 @@ class L2RAMVectorIndex(RAMVectorIndex):
                 )
                 for vkp in self.vector_pairs
             ],
-            key=lambda x: x.distance
+            key=lambda x: -1 * x.distance
         )[  :min(len(self.vector_pairs),  top_k)]
     
     

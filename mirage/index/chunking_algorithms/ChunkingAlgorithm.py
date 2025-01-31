@@ -1,7 +1,7 @@
 
 from ..raw_storages.RawStorage import RawStorage
 from ..chunk_storages.ChunkStorage import ChunkStorage
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 
 import tqdm
 import logging
@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 
-class ChunkingAlgorithm:
+class ChunkingAlgorithm(ABC):
     """
     A chunking algorithm is a procedure that creates a storage of chunks from the text documents in the RawStorage
     """
@@ -22,12 +22,12 @@ class ChunkingAlgorithm:
         self.chunk_storage = chunk_storage
 
     @abstractmethod
-    def chunk_a_document(raw_docuemnt_index) -> int:
-        raise NotImplementedError
+    def chunk_a_document(raw_document_index) -> int:
+        pass
 
 
     def execute(self, visualize=False) -> None:
-        self.chunk_storage.clear()
+        # self.chunk_storage.clear() 
         logger.info("Chunking of documents")
         raw_document_indexes = self.raw_storage.get_indexes()
         parsed_indexes = set(
