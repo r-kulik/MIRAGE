@@ -46,6 +46,7 @@ class Embedder(ABC):
     @abstractmethod
     def fit(chunks: ChunkStorage) -> None:
         """Train a embedder to operate on your corpora. For td-idf and BoW embedders is necessary to start operating
+        
         Parameters
         ----------
         chunks : ChunkStorage

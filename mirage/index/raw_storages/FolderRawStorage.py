@@ -59,9 +59,18 @@ class FolderRawStorage(RawStorage):
         return self.__custom_text_extructor(file_name)
 
     def __read_txt(file_name) -> str:
-        with open(file_name, 'r', encoding='utf-8') as file:
-            content = file.read()
-        return content
+        try:
+            with open(file_name, 'r', encoding='utf-8') as file:
+                content = file.read()
+            return content
+        except UnicodeDecodeError:
+            import chardet
+            with open(file_name, 'rb') as f:
+                raw_data = f.read()
+                result = chardet.detect(raw_data[:10000])
+                encoding = result['encoding']
+                return raw_data.decode(encoding)
+            
 
     def __read_doc(file_name) -> str:
         doc = docx.Document(file_name)

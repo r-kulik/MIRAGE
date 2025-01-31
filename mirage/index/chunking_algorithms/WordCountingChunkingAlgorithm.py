@@ -33,8 +33,9 @@ class WordCountingChunkingAlgorithm(ChunkingAlgorithm):
         Returns:
             int: Number of chunks added to the storage
         """
-        raw_text = self.raw_storage[raw_document_index]
+        assert type(raw_document_index) == str
 
+        raw_text = self.raw_storage[raw_document_index]
         # Handle empty documents
         if not raw_text.strip():
             logger.warning(f"Document {raw_document_index} is empty.")
