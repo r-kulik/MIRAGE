@@ -9,8 +9,8 @@ setup(
     long_description=open('README.md').read(),  # Long description from README
     long_description_content_type='text/markdown',  # Type of long description
     url='https://github.com/r-kulik/MIRAGE',  # Project URL
-    packages=find_packages(),  # Automatically find packages in the directory
     install_requires=[         # List of dependencies
+        'numpy==1.26.4',
         'pdfplumber>=0.11.5', 
         'python-docx>=1.1.2',
         'tqdm>=4.67.1',
@@ -29,4 +29,5 @@ setup(
         'Operating System :: OS Independent',
     ],
     python_requires='>=3.11',   # Python version requirement
+    py_modules=['mirage']
 )
