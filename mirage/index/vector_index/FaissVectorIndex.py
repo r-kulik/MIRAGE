@@ -773,3 +773,460 @@ class FaissIndexPQ(VectorIndex):
         self.storage_keys[index] = chunk_storage_key
         self.vector_to_key[vector_tuple] = chunk_storage_key
 
+
+class FaissIndexIVFScalarQuantizer(VectorIndex):
+    """
+    Implementation of VectorIndex using FAISS's IndexIVFScalarQuantizer.
+    Combines Inverted File (IVF) with Scalar Quantization (SQ).
+    """
+
+    def __init__(self, dimensionality: int, nlist: int = 100, 
+                 quantizer_type: str = "QT_8bit", metric: int = faiss.METRIC_L2):
+        """
+        Args:
+            dimensionality: Dimensionality of the vector space.
+            nlist: Number of Voronoi cells (centroids) in the IVF.
+            quantizer_type: Type of scalar quantizer (e.g., "QT_8bit", "QT_4bit").
+            metric: Distance metric (faiss.METRIC_L2 or faiss.METRIC_INNER_PRODUCT).
+        """
+        super().__init__(dimensionality)
+        
+        # Convert quantizer_type to FAISS enum
+        self.qtype = self._parse_quantizer_type(quantizer_type)
+        
+        # Initialize IVF quantizer
+        self.quantizer = faiss.IndexScalarQuantizer(dimensionality, self.qtype, metric)
+        
+        # Initialize IVF + Scalar Quantization index
+        self.index = faiss.IndexIVFScalarQuantizer(
+            self.quantizer, dimensionality, nlist, self.qtype, metric
+        )
+        
+        # Training state management
+        self._buffer = []
+        self.is_trained = False
+        
+        # Local storage for vectors and keys
+        self.stored_vectors = []  # type: List[np.ndarray]
+        self.storage_keys = []    # type: List[str]
+        self.vector_to_index = {} # type: Dict[tuple, int]
+        self.vector_to_key = {}   # type: Dict[tuple, str]
+
+    def _parse_quantizer_type(self, quantizer_type: str) -> int:
+        """Convert string quantizer type to FAISS enum value"""
+        type_map = {
+            "QT_8bit": faiss.ScalarQuantizer.QT_8bit,
+            "QT_4bit": faiss.ScalarQuantizer.QT_4bit,
+            "QT_6bit": faiss.ScalarQuantizer.QT_6bit,
+            "QT_fp16": faiss.ScalarQuantizer.QT_fp16
+        }
+        return type_map.get(quantizer_type, faiss.ScalarQuantizer.QT_8bit)
+
+    def add(self, vector: np.ndarray, chunk_storage_key: str) -> None:
+        vector = vector.reshape(-1).astype(np.float32)
+        if len(vector) != self.dim:
+            raise ValueError(f"Vector dim {len(vector)} ≠ index dim {self.dim}")
+            
+        vector_tuple = tuple(vector)
+        if vector_tuple in self.vector_to_key:
+            raise ValueError(f"Vector {vector} already exists in index")
+
+        if self.is_trained:
+            # Direct addition to trained index
+            self.index.add(np.expand_dims(vector, axis=0))
+            index = len(self.stored_vectors)
+            self.stored_vectors.append(vector)
+            self.storage_keys.append(chunk_storage_key)
+            self.vector_to_index[vector_tuple] = index
+            self.vector_to_key[vector_tuple] = chunk_storage_key
+        else:
+            # Buffer vectors until training
+            self._buffer.append((vector, chunk_storage_key))
+
+    def train(self) -> None:
+        """Train the IVF + Scalar Quantization index"""
+        if not self._buffer:
+            raise RuntimeError("Need training data. Add vectors before calling train()")
+        
+        # Convert buffer to training data
+        training_data = np.array([v for v, _ in self._buffer], dtype=np.float32)
+        
+        # IVF requires at least nlist vectors for training
+        if training_data.shape[0] < self.index.nlist:
+            raise RuntimeError(
+                f"Need at least {self.index.nlist} vectors for IVF training, got {training_data.shape[0]}"
+            )
+        
+        # Train the index
+        self.index.train(training_data)
+        
+        # Add buffered vectors after training
+        for vec, key in self._buffer:
+            vec = vec.astype(np.float32)
+            self.index.add(np.expand_dims(vec, axis=0))
+            index = len(self.stored_vectors)
+            self.stored_vectors.append(vec)
+            self.storage_keys.append(key)
+            self.vector_to_index[tuple(vec)] = index
+            self.vector_to_key[tuple(vec)] = key
+        
+        self._buffer.clear()
+        self.is_trained = True
+
+    def query(self, query_vector: np.ndarray, top_k: int = 1, nprobe: int = 10) -> List[QueryResult]:
+        if not self.is_trained:
+            raise RuntimeError("Index must be trained before querying")
+            
+        query_vector = query_vector.reshape(-1).astype(np.float32)
+        if len(query_vector) != self.dim:
+            raise ValueError(f"Query vector dim {len(query_vector)} ≠ index dim {self.dim}")
+
+        # Set number of probes for IVF search
+        self.index.nprobe = nprobe
+        
+        # Perform search
+        distances, indices = self.index.search(np.expand_dims(query_vector, axis=0), top_k)
+        results = []
+        
+        for dist, idx in zip(distances[0], indices[0]):
+            if idx == -1:
+                continue
+                
+            try:
+                vector = self.stored_vectors[idx]
+                key = self.storage_keys[idx]
+                results.append(QueryResult(
+                    distance=float(dist),
+                    vector=vector,
+                    chunk_storage_key=key
+                ))
+            except IndexError:
+                raise RuntimeError(f"Invalid index {idx} in search results")
+        
+        return results
+
+    def __iter__(self) -> Generator[VectorKeyPair, None, None]:
+        """Iterate over all stored vector-key pairs"""
+        for vec, key in zip(self.stored_vectors, self.storage_keys):
+            yield VectorKeyPair(vec.copy(), key)
+
+    def __contains__(self, vector: np.ndarray) -> bool:
+        vector = vector.reshape(-1).astype(np.float32)
+        return tuple(vector) in self.vector_to_key
+
+    def attach_chunk_storage_key_to_vector(self, 
+                                         vector: np.ndarray, 
+                                         chunk_storage_key: str) -> None:
+        vector = vector.reshape(-1).astype(np.float32)
+        vector_tuple = tuple(vector)
+        
+        if vector_tuple not in self.vector_to_index:
+            raise self.VectorIsNotPresentedInTheIndexException(vector)
+            
+        index = self.vector_to_index[vector_tuple]
+        self.storage_keys[index] = chunk_storage_key
+        self.vector_to_key[vector_tuple] = chunk_storage_key
+
+
+class FaissIndexIVFPQ(VectorIndex):
+    """
+    Implementation of VectorIndex using FAISS's IndexIVFPQ.
+    Combines Inverted File (IVF) with Product Quantization (PQ).
+    """
+
+    def __init__(self, dimensionality: int, nlist: int = 100, 
+                 M: int = 1, nbits: int = 8, metric: int = faiss.METRIC_L2):
+        """
+        Args:
+            dimensionality: Dimensionality of the vector space.
+            nlist: Number of Voronoi cells (centroids) in the IVF.
+            M: Number of sub-quantizers for PQ (must divide dimensionality).
+            nbits: Number of bits per sub-quantizer index.
+            metric: Distance metric (faiss.METRIC_L2 or faiss.METRIC_INNER_PRODUCT).
+        """
+        super().__init__(dimensionality)
+        
+        # Validate parameters
+        if dimensionality % M != 0:
+            raise ValueError(f"Dimensionality {dimensionality} must be divisible by M={M}")
+        
+        # Initialize IVF quantizer
+        self.quantizer = faiss.IndexFlatL2(dimensionality)
+        
+        # Initialize IVF + PQ index
+        self.index = faiss.IndexIVFPQ(self.quantizer, dimensionality, nlist, M, nbits, metric)
+        
+        # Training state management
+        self._buffer = []
+        self.is_trained = False
+        
+        # Local storage for vectors and keys
+        self.stored_vectors = []  # type: List[np.ndarray]
+        self.storage_keys = []    # type: List[str]
+        self.vector_to_index = {} # type: Dict[tuple, int]
+        self.vector_to_key = {}   # type: Dict[tuple, str]
+
+    def add(self, vector: np.ndarray, chunk_storage_key: str) -> None:
+        vector = vector.reshape(-1).astype(np.float32)
+        if len(vector) != self.dim:
+            raise ValueError(f"Vector dim {len(vector)} ≠ index dim {self.dim}")
+            
+        vector_tuple = tuple(vector)
+        if vector_tuple in self.vector_to_key:
+            raise ValueError(f"Vector {vector} already exists in index")
+
+        if self.is_trained:
+            # Direct addition to trained index
+            self.index.add(np.expand_dims(vector, axis=0))
+            index = len(self.stored_vectors)
+            self.stored_vectors.append(vector)
+            self.storage_keys.append(chunk_storage_key)
+            self.vector_to_index[vector_tuple] = index
+            self.vector_to_key[vector_tuple] = chunk_storage_key
+        else:
+            # Buffer vectors until training
+            self._buffer.append((vector, chunk_storage_key))
+
+    def train(self) -> None:
+        """Train the IVF + PQ index"""
+        if not self._buffer:
+            raise RuntimeError("Need training data. Add vectors before calling train()")
+        
+        # Convert buffer to training data
+        training_data = np.array([v for v, _ in self._buffer], dtype=np.float32)
+        
+        # IVF requires at least nlist vectors for training
+        if training_data.shape[0] < self.index.nlist:
+            raise RuntimeError(
+                f"Need at least {self.index.nlist} vectors for IVF training, got {training_data.shape[0]}"
+            )
+        
+        # PQ requires at least 256 * M vectors for training
+        if training_data.shape[0] < 256 * self.index.pq.M:
+            raise RuntimeError(
+                f"Need at least {256 * self.index.pq.M} vectors for PQ training, got {training_data.shape[0]}"
+            )
+        
+        # Train the index
+        self.index.train(training_data)
+        
+        # Add buffered vectors after training
+        for vec, key in self._buffer:
+            vec = vec.astype(np.float32)
+            self.index.add(np.expand_dims(vec, axis=0))
+            index = len(self.stored_vectors)
+            self.stored_vectors.append(vec)
+            self.storage_keys.append(key)
+            self.vector_to_index[tuple(vec)] = index
+            self.vector_to_key[tuple(vec)] = key
+        
+        self._buffer.clear()
+        self.is_trained = True
+
+    def query(self, query_vector: np.ndarray, top_k: int = 1, nprobe: int = 10) -> List[QueryResult]:
+        if not self.is_trained:
+            raise RuntimeError("Index must be trained before querying")
+            
+        query_vector = query_vector.reshape(-1).astype(np.float32)
+        if len(query_vector) != self.dim:
+            raise ValueError(f"Query vector dim {len(query_vector)} ≠ index dim {self.dim}")
+
+        # Set number of probes for IVF search
+        self.index.nprobe = nprobe
+        
+        # Perform search
+        distances, indices = self.index.search(np.expand_dims(query_vector, axis=0), top_k)
+        results = []
+        
+        for dist, idx in zip(distances[0], indices[0]):
+            if idx == -1:
+                continue
+                
+            try:
+                vector = self.stored_vectors[idx]
+                key = self.storage_keys[idx]
+                results.append(QueryResult(
+                    distance=float(dist),
+                    vector=vector,
+                    chunk_storage_key=key
+                ))
+            except IndexError:
+                raise RuntimeError(f"Invalid index {idx} in search results")
+        
+        return results
+
+    def __iter__(self) -> Generator[VectorKeyPair, None, None]:
+        """Iterate over all stored vector-key pairs"""
+        for vec, key in zip(self.stored_vectors, self.storage_keys):
+            yield VectorKeyPair(vec.copy(), key)
+
+    def __contains__(self, vector: np.ndarray) -> bool:
+        vector = vector.reshape(-1).astype(np.float32)
+        return tuple(vector) in self.vector_to_key
+
+    def attach_chunk_storage_key_to_vector(self, 
+                                         vector: np.ndarray, 
+                                         chunk_storage_key: str) -> None:
+        vector = vector.reshape(-1).astype(np.float32)
+        vector_tuple = tuple(vector)
+        
+        if vector_tuple not in self.vector_to_index:
+            raise self.VectorIsNotPresentedInTheIndexException(vector)
+            
+        index = self.vector_to_index[vector_tuple]
+        self.storage_keys[index] = chunk_storage_key
+        self.vector_to_key[vector_tuple] = chunk_storage_key
+
+
+import numpy as np
+import faiss
+
+class FaissIndexIVFPQR(VectorIndex):
+    """
+    Implementation of VectorIndex using FAISS's IndexIVFPQR.
+    Combines Inverted File (IVF), Product Quantization (PQ), and Refinement (R).
+    """
+
+    def __init__(self, dimensionality: int, nlist: int = 100, 
+                 M: int = 1, nbits: int = 8, M_refine: int = 1, nbits_refine: int = 8,
+                 metric: int = faiss.METRIC_L2):
+        super().__init__(dimensionality)
+        
+        # Validate parameters
+        if dimensionality % M != 0:
+            raise ValueError(f"Dimensionality {dimensionality} must be divisible by M={M}")
+        if dimensionality % M_refine != 0:
+            raise ValueError(f"Dimensionality {dimensionality} must be divisible by M_refine={M_refine}")
+        
+        # Initialize IVF quantizer
+        self.quantizer = faiss.IndexFlatL2(dimensionality)
+        
+        # Initialize IVF + PQ + Refinement index
+        self.index = faiss.IndexIVFPQR(
+            self.quantizer, dimensionality, nlist, M, nbits, M_refine, nbits_refine
+        )
+        
+        # Store PQ parameters for validation
+        self.M = M
+        self.M_refine = M_refine
+        
+        # Training state management
+        self._buffer = []
+        self.is_trained = False
+        
+        # Local storage
+        self.stored_vectors = []
+        self.storage_keys = []
+        self.vector_to_index = {}
+        self.vector_to_key = {}
+
+
+    def add(self, vector: np.ndarray, chunk_storage_key: str) -> None:
+        vector = vector.reshape(-1).astype(np.float32)
+        if len(vector) != self.dim:
+            raise ValueError(f"Vector dim {len(vector)} ≠ index dim {self.dim}")
+            
+        vector_tuple = tuple(vector)
+        if vector_tuple in self.vector_to_key:
+            raise ValueError(f"Vector {vector} already exists in index")
+
+        if self.is_trained:
+            # Direct addition to trained index
+            self.index.add(np.expand_dims(vector, axis=0))
+            index = len(self.stored_vectors)
+            self.stored_vectors.append(vector)
+            self.storage_keys.append(chunk_storage_key)
+            self.vector_to_index[vector_tuple] = index
+            self.vector_to_key[vector_tuple] = chunk_storage_key
+        else:
+            # Buffer vectors until training
+            self._buffer.append((vector, chunk_storage_key))
+
+    def train(self) -> None:
+        """Train the IVF + PQ + Refinement index"""
+        if not self._buffer:
+            raise RuntimeError("Need training data. Add vectors before calling train()")
+        
+        training_data = np.array([v for v, _ in self._buffer], dtype=np.float32)
+        
+        # IVF training requirement
+        if training_data.shape[0] < self.index.nlist:
+            raise RuntimeError(
+                f"Need at least {self.index.nlist} vectors for IVF training, got {training_data.shape[0]}"
+            )
+        
+        # General PQ training requirement (for both base and refinement)
+        min_train = max(256 * self.M, 256 * self.M_refine)
+        if training_data.shape[0] < min_train:
+            raise RuntimeError(
+                f"Need at least {min_train} vectors for PQ training, got {training_data.shape[0]}"
+            )
+        
+        # FAISS handles internal training for both PQ layers
+        self.index.train(training_data)
+        
+        # Add buffered vectors
+        for vec, key in self._buffer:
+            self.index.add(np.expand_dims(vec, axis=0))
+            index = len(self.stored_vectors)
+            self.stored_vectors.append(vec)
+            self.storage_keys.append(key)
+            self.vector_to_index[tuple(vec)] = index
+            self.vector_to_key[tuple(vec)] = key
+        
+        self._buffer.clear()
+        self.is_trained = True
+
+    def query(self, query_vector: np.ndarray, top_k: int = 1, nprobe: int = 10) -> List[QueryResult]:
+        if not self.is_trained:
+            raise RuntimeError("Index must be trained before querying")
+            
+        query_vector = query_vector.reshape(-1).astype(np.float32)
+        if len(query_vector) != self.dim:
+            raise ValueError(f"Query vector dim {len(query_vector)} ≠ index dim {self.dim}")
+
+        # Set number of probes for IVF search
+        self.index.nprobe = nprobe
+        
+        # Perform search
+        distances, indices = self.index.search(np.expand_dims(query_vector, axis=0), top_k)
+        results = []
+        
+        for dist, idx in zip(distances[0], indices[0]):
+            if idx == -1:
+                continue
+                
+            try:
+                vector = self.stored_vectors[idx]
+                key = self.storage_keys[idx]
+                results.append(QueryResult(
+                    distance=float(dist),
+                    vector=vector,
+                    chunk_storage_key=key
+                ))
+            except IndexError:
+                raise RuntimeError(f"Invalid index {idx} in search results")
+        
+        return results
+
+    def __iter__(self) -> Generator[VectorKeyPair, None, None]:
+        """Iterate over all stored vector-key pairs"""
+        for vec, key in zip(self.stored_vectors, self.storage_keys):
+            yield VectorKeyPair(vec.copy(), key)
+
+    def __contains__(self, vector: np.ndarray) -> bool:
+        vector = vector.reshape(-1).astype(np.float32)
+        return tuple(vector) in self.vector_to_key
+
+    def attach_chunk_storage_key_to_vector(self, 
+                                         vector: np.ndarray, 
+                                         chunk_storage_key: str) -> None:
+        vector = vector.reshape(-1).astype(np.float32)
+        vector_tuple = tuple(vector)
+        
+        if vector_tuple not in self.vector_to_index:
+            raise self.VectorIsNotPresentedInTheIndexException(vector)
+            
+        index = self.vector_to_index[vector_tuple]
+        self.storage_keys[index] = chunk_storage_key
+        self.vector_to_key[vector_tuple] = chunk_storage_key

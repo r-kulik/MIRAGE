@@ -27,7 +27,10 @@ def vector_index(request):
         FaissIndexIVFFlat,
         FaissIndexLSH,
         FaissIndexScalarQuantizer,
-        FaissIndexPQ
+        FaissIndexPQ,
+        FaissIndexIVFScalarQuantizer,
+        FaissIndexIVFPQ,
+        FaissIndexIVFPQR
     ],
     indirect=True,
 )
