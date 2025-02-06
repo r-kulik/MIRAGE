@@ -20,6 +20,7 @@ class L2RAMVectorIndex(RAMVectorIndex):
     def __init__(self, dimensionality) -> Self:
         super().__init__(dimensionality)
         self.vector_pairs: list[VectorKeyPair] = []
+        self.is_trained = True
 
     def _recreate_index(self, vectors: list[np.ndarray]):
         self.vector_pairs = []
@@ -121,5 +122,11 @@ class L2RAMVectorIndex(RAMVectorIndex):
             ],
             key=lambda x: -1 * x.distance
         )[  :min(len(self.vector_pairs),  top_k)]
+    
+
+    def train(self):
+        """Training of and index if it is needed otherwise does nothing
+        """
+        pass
     
     

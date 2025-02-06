@@ -65,13 +65,6 @@ def test_attach_chunk_storage_key_to_vector(vector_index_class):
     results = index.query(vector, top_k=1)
     assert results[0].chunk_storage_key == "chunk2"
 
-@pytest.mark.parametrize("vector_index_class", VECTOR_INDEX_IMPLEMENTATIONS)
-def test_remove(vector_index_class):
-    index = vector_index_class(dimensionality=3)
-    vector = np.array([1, 2, 3])
-    index.add(vector, "chunk1")
-    index.remove(vector)
-    assert vector not in index
 
 @pytest.mark.parametrize("vector_index_class", VECTOR_INDEX_IMPLEMENTATIONS)
 def test_save_and_load(vector_index_class, temp_file):

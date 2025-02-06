@@ -79,4 +79,3 @@ class RAMVectorIndex(VectorIndex, ABC):
             self.attach_chunk_storage_key_to_vector(
                 array(vector), chunk_storage_key
             )
-        

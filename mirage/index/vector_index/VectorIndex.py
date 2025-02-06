@@ -43,6 +43,7 @@ class VectorIndex(ABC):
     def __init__(self, dimensionality: int):
         super().__init__()
         self.dim = dimensionality
+        self.is_trained = None
 
     @abstractmethod
     def __iter__(self) -> Generator[VectorKeyPair, None, None]:
@@ -116,11 +117,8 @@ class VectorIndex(ABC):
         raise NotImplementedError
     
     @abstractmethod
-    def remove(self, vector: np.ndarray) -> None:
-        "This function removes the note with vector and its content from the VectorIndex"
-        raise NotImplementedError
-    
-
+    def train(self) -> None:
+        pass
 
 
     

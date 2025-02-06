@@ -151,3 +151,6 @@ class Embedder(ABC):
                 chunk_storage_key=chunk_storage_key
             )
             if visualize: progress_bar.update(1)
+        
+        if not vector_index.is_trained:
+            vector_index.train()

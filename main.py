@@ -4,7 +4,7 @@ logging.basicConfig(level = logging.INFO)
 from mirage.index import WordCountingChunkingAlgorithm, FolderRawStorage, SQLiteChunkStorage, RAMChunkStorage
 
 
-documents = FolderRawStorage('data')
+documents = FolderRawStorage('data_test')
 # chunks = SQLiteChunkStorage(database_name='chunks.db', table_name="chunks")
 chunks = RAMChunkStorage()
 algorithm = WordCountingChunkingAlgorithm(documents, chunks, words_amount=100)
