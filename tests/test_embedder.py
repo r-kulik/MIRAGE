@@ -2,7 +2,7 @@ import pytest
 import numpy as np
 from mirage import ChunkStorage, RAMChunkStorage
 from mirage import L2RAMVectorIndex
-from mirage import BowEmbedder, TfIdfEmbedder, EmbedderIsNotTrainedException
+from mirage import BowEmbedder, TfIdfEmbedder, EmbedderIsNotTrainedException, HuggingFaceEmbedder
 
 # Константа для списка реализаций Embedder
 EMBEDDER_IMPLEMENTATIONS = [TfIdfEmbedder, BowEmbedder]
@@ -36,6 +36,7 @@ def vector_index():
     class FakeVectorIndex:
         def __init__(self):
             self.vectors = {}
+            self.is_trained = True
 
         def add(self, vector, chunk_storage_key):
             self.vectors[chunk_storage_key] = vector

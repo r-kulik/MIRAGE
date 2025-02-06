@@ -166,3 +166,4 @@ cython_debug/
 data/*
 *.db
 /data_test
+/.vscode
