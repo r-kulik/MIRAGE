@@ -21,7 +21,8 @@ setup(
         'sentence-transformers>=3.4.1',
         'chardet>=5.2.0',
         'pytest>=8.3.4',
-        'fpdf>=1.7.2'
+        'fpdf>=1.7.2',
+        'pydantic>=2.10.6'
     ],
     classifiers=[              # Classifiers for PyPI (optional)
         'Programming Language :: Python :: 3',

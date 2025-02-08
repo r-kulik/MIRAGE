@@ -29,6 +29,7 @@ class LLM:
         self.url = "http://192.168.31.139:49100/generate"
         
         self.data = LlmRequestParamsDTO(
+            prompt='',
             max_length=max_length, 
             temperature=temperature, 
             top_k=top_k, 
@@ -37,17 +38,19 @@ class LLM:
             num_return_sequences=num_return_sequences
         )
         
-    def do_request(self, query: str, chunk_storage: ChunkStorage, indexes:List[str], promt: str):
+    def do_request(self, query: str, chunk_storage: ChunkStorage, indexes:List[str], prompt: str):
         #TODO Придумать что-то с промтом
-        promt = 'Ответь на вопрос:{query}\nЗная эту информацию:{chunks}'
+        prompt = 'Ответь на вопрос:{query}\nЗная эту информацию:{chunks}'
         txt_chank = '\n------\n' + '\n------\n'.join([chunk_storage[i] for i in indexes]) + '\n------\n'
-        final = promt.format(query=query, chunks=txt_chank)
+        txt_chank += 'endtoken'
+        final = prompt.format(query=query, chunks=txt_chank)        
             
         self.data.prompt = final
         response = requests.post(self.url, json=self.data.dict())
 
         if response.status_code == 200:
             generated_texts = response.json().get('generated_texts', [])
+            generated_texts[0] = generated_texts[0][generated_texts[0].index('endtoken')+8::]
             #logits = response.json().get('logits', [])
             generation_time = response.json().get('generation_time', [])
             print(generated_texts[0])
