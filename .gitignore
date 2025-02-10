@@ -167,3 +167,4 @@ data/*
 *.db
 /data_test
 /.vscode
+*.pdf
