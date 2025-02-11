@@ -168,3 +168,4 @@ data/*
 /data_test
 /.vscode
 *.pdf
+*.json
