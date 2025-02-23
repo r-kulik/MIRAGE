@@ -1,56 +1,124 @@
 from abc import abstractmethod, ABC
 import typing
-from typing import Generator
+from typing import Callable, Generator, Literal
+from pydantic import BaseModel
 
 class ChunkStorage(ABC):
+    """This class defines the interface of the storing and querying with the full-text search the storage of text chunks
 
-    class _ChunkNote:
-
-        def __init__(self, link_to_chunk: str, raw_index_of_document: str) -> None:
-            self.link_to_chunk: str = link_to_chunk
-            self.raw_index_of_document: str = raw_index_of_document
-
-        def __hash__(self) -> int:
-            return (self.link_to_chunk, self.raw_index_of_document).__hash__()
-        
-        def __eq__(self, value: object) -> bool:
-            return self.link_to_chunk == value.link_to_chunk and self.raw_index_of_document == value.raw_index_of_document
+    Raises
+    ------
+    ChunkStorage.ChunkIndexIsAlreadyInStorageException
+        Raises when a text chunk which is already persented in the storage is trying to be added
+    """
         
     class ChunkIndexIsAlreadyInStorageException(Exception):
         def __str__(self): return "You are trying to add in storage a chunk which index is already presented in a storage"
 
-    def __init__(self):
-        self._chunk_map: dict[str, ChunkStorage._ChunkNote] = {}
+    def __init__(self, scoring_function: Literal["BM25", "BM25F", "TF-IDF"]):
+        """In initialization, the ChunkStorage is empty, and no assumptions about inner structure of the storage is not done.
+        But scoring function to fulltext search is defined by Literal, or by function.
+        The scoring function is redefined after the initalization.
+        """
+        super().__init__()
+        self.scoring_function_name = scoring_function
 
-    def _addToChunkIndex(self, index: str, link_to_chunk: typing.Any, raw_index_of_document: str) -> None:
-        if index in self._chunk_map:
-            raise ChunkStorage.ChunkIndexIsAlreadyInStorageException
-        self._chunk_map[index] = ChunkStorage._ChunkNote(link_to_chunk, raw_index_of_document)
-
+    @abstractmethod
     def get_indexes(self) -> list[str]:
-        return list(self._chunk_map.keys())
+        """Returns all indexes of chunks that are presented in the storage
 
+        Returns
+        -------
+        list[str]
+            List of available indexes
+        """
+        pass 
+
+    @abstractmethod
     def get_raw_index_of_document(self, index: str) -> str:
-        return self._chunk_map[index].raw_index_of_document
+        """Each chunk is attached to the document. 
+        This function allows to get the index of the source document the text chunk was created from
 
+        Parameters
+        ----------
+        index : str
+            Index of chunk in ChunkStorage
 
+        Returns
+        -------
+        str
+            Index of document in the RawStorage
+        """
+        pass
+
+    @abstractmethod
     def __getitem__(self, index: str) -> str:
-        raise NotImplementedError("Subclasses must implement this functionality")
+        """Getting a text chunk from the storage by its index
+
+        Parameters
+        ----------
+        index : str
+            index of text chunk
+
+        Returns
+        -------
+        str
+            the text from the chunk
+        """
     
     @abstractmethod
     def add_chunk(self, text: str, raw_document_index: str) -> str:
-        raise NotImplementedError("Subclasses must implement this functionality")
+        """Adding the chunk of text in the ChunkStorage with the link to the document index
+
+        Parameters
+        ----------
+        text : str
+            Text of the chunk
+        raw_document_index : str
+            Index of document in RawStorage this text was originated from
+
+        Returns
+        -------
+        str
+            Index of the text chunk that is added
+        """
+        pass
     
+    @abstractmethod
     def clear(self) -> None:
-        raise NotImplementedError("Subclasses must implement this functionality")
+        """Сlearing the whole storage, by deleting all the chunks
+        """
+        pass
     
     def __iter__(self) -> Generator[tuple[str], None, None]:
         """
         Returns generator of the following:
-        ```py
+        ```
         >>> for chunk_index, chunk_text in ChunkStorageObject:
                 type(chunk_index) == str # True
                 type(chunk_text) == str # True
         ```
         """     
-        raise NotImplementedError("Subclasses must implement this functionality")
+        pass
+
+    class ChunkNote(BaseModel):
+        text: str
+        raw_document_index: str
+
+    @abstractmethod
+    def query(self, query: str) -> list[ChunkNote]:
+        """The query of full-text search among the chunk storage
+
+        Parameters
+        ----------
+        query : str
+            User query
+
+        Returns
+        -------
+        list[ChunkNote]
+            The list objects containing fields:
+                .text - text of the chunk
+                .raw_document_index - the index of document in RawStorage this chunk was originated from
+        """
+        pass

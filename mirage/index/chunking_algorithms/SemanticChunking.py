@@ -1,3 +1,5 @@
+from tqdm import tqdm 
+from mirage.embedders import Embedder
 from mirage.index.chunk_storages import ChunkStorage
 from mirage.index.raw_storages import RawStorage
 from .ChunkingAlgorithm import ChunkingAlgorithm
@@ -10,19 +12,28 @@ class SemanticChunking(ChunkingAlgorithm):
     def __init__(self,
                  raw_storage: RawStorage,
                  chunk_storage: ChunkStorage,
+                 embedder: Embedder,
                  max_chunk_size: int = 300,
                  threshold: float = 0.8):
         super().__init__(raw_storage, chunk_storage)
         self.segmenter = Segmenter()
         self.max_chunk_size = max_chunk_size
         self.threshold = threshold
-        self.embedder = HuggingFaceEmbedder(model_name='DeepPavlov/rubert-base-cased-sentence')
+        self.embedder = embedder
     
-    def chunk_a_document(self, raw_document_index) -> int:
+    def chunk_a_document(self, raw_document_index, visualize=False) -> int:
         document_text: str = self.raw_storage[raw_document_index]
-        sentences = [s.text for s in self.segmenter.sentenize(document_text)]
+        if not visualize:
+            sentences = [s.text for s in self.segmenter.sentenize(document_text)]
+        else:
+            print("Splitting text into the sentences")
+            sentences = [s.text for s in tqdm(self.segmenter.sentenize(document_text))]
         
-        embeddings = [self.embedder.embed(text=sentence) for sentence in sentences]
+        if not visualize:
+            embeddings = [self.embedder.embed(text=sentence) for sentence in sentences]
+        else:
+            print("creating embeddings of the sentences for semantic grouping")
+            embeddings = [self.embedder.embed(text=sentence) for sentence in tqdm(sentences)]
         
         # Вычисление попарной схожести между соседними предложениями
         similarities = []
@@ -48,11 +59,19 @@ class SemanticChunking(ChunkingAlgorithm):
             chunks.append(' '.join(current_chunk))
         
         # Сохранение чанков в chunk_storage
-        for chunk in chunks:
-            self.chunk_storage.add_chunk(
-                text=chunk,
-                raw_document_index=raw_document_index
-            )
+        if not visualize:
+            for chunk in chunks:
+                self.chunk_storage.add_chunk(
+                    text=chunk,
+                    raw_document_index=raw_document_index
+                )
+        else:
+            print("Adding chunks to the storage")
+            for chunk in tqdm(chunks):
+                self.chunk_storage.add_chunk(
+                    text=chunk,
+                    raw_document_index=raw_document_index
+                )
         
         return 1
         
