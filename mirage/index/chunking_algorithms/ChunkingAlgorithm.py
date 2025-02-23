@@ -34,7 +34,7 @@ class ChunkingAlgorithm(ABC):
             self.chunk_storage.get_raw_index_of_document(index) for index in  self.chunk_storage.get_indexes()
         )
         return sum([
-            self.chunk_a_document(raw_document_index)
+            self.chunk_a_document(raw_document_index, visualize=visualize)
             for raw_document_index in 
             raw_document_indexes if not raw_document_index in parsed_indexes
         ])
