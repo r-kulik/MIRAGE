@@ -11,7 +11,7 @@ class TextNormalizer:
     """
     def __init__(self,
                  stop_word_remove: bool = False,
-                 word_generalization: Literal["stem", "lemmatize"] | None = None):
+                 word_generalization: Literal["stem", "lemmatize"] | None = "stem"):
         self.stop_word_remove = stop_word_remove
         self.word_generalization = word_generalization
         self.russian_stopwords = set(stopwords.words('russian'))
@@ -77,3 +77,6 @@ class TextNormalizer:
     def _is_english(self, word: str) -> bool:
         """Проверяет, является ли слово английским."""
         return bool(re.search('[a-zA-Z]', word))
+    
+    def __call__(self, *args, **kwds):
+        return self.normalize(*args, **kwds)
