@@ -13,7 +13,7 @@ class WordCountingChunkingAlgorithm(ChunkingAlgorithm):
         """
         Args:
             raw_storage: RawStorage object to pick documents from
-            chunk_storage: ChunkStorage object to put in it chunks
+            chunk_storage: ChunkStorage object to put chunks in it
             words_amount: number of words in each chunk
         """
         super().__init__(raw_storage, chunk_storage)
@@ -24,15 +24,7 @@ class WordCountingChunkingAlgorithm(ChunkingAlgorithm):
     
         
     def chunk_a_document(self, raw_document_index: str) -> int:
-        """
-        Function that chunks a document and adds it to the chunk storage.
-
-        Args:
-            raw_document_index: str, link to the document in the RawStorage
-
-        Returns:
-            int: Number of chunks added to the storage
-        """
+        
         assert type(raw_document_index) == str
 
         raw_text = self.raw_storage[raw_document_index]

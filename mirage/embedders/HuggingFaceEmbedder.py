@@ -12,7 +12,8 @@ class HuggingFaceEmbedder(Embedder):
                      "sentence-transformers/distilbert-base-nli-stsb-quora-ranking",
                      "Alibaba-NLP/gte-large-en-v1.5",
                      'ai-forever/ruRoberta-large',
-                     'DeepPavlov/rubert-base-cased-sentence'
+                     'DeepPavlov/rubert-base-cased-sentence',
+                     "BAAI/bge-m3"
                      ] = "Alibaba-NLP/gte-large-en-v1.5",
                  normalizer: Optional[TextNormalizer] | Callable[[str], str] | bool = None):
         """
