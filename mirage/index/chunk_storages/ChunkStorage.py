@@ -1,6 +1,6 @@
 from abc import abstractmethod, ABC
 import typing
-from typing import Callable, Generator, Literal
+from typing import Callable, Generator, List, Literal
 from pydantic import BaseModel
 
 from mirage.index import QueryResult
@@ -131,3 +131,9 @@ class ChunkStorage(ABC):
                 .raw_document_index - the index of document in RawStorage this chunk was originated from
         """
         pass
+
+    def get_texts_for_search_results(self, search_results: List[QueryResult]) -> List[str]:
+        return [
+            self.__getitem__(result.chunk_storage_key)
+            for result in search_results
+        ]
