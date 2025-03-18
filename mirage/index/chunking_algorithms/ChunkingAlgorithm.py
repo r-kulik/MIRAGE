@@ -23,6 +23,15 @@ class ChunkingAlgorithm(ABC):
 
     @abstractmethod
     def chunk_a_document(raw_document_index) -> int:
+        """
+        Function that chunks a document and adds it to the chunk storage.
+
+        Args:
+            raw_document_index: str, link to the document in the RawStorage
+
+        Returns:
+            int: Number of chunks added to the storage
+        """
         pass
 
 

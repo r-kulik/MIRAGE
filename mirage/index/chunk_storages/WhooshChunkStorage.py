@@ -17,7 +17,7 @@ class WhooshChunkStorage(ChunkStorage):
     def __init__(
         self,
         scoring_function: Literal["BM25", "BM25F", "TF-IDF"],
-        normalizer: Optional[TextNormalizer] | bool | Callable[[str], str] = None,
+        normalizer: Optional[TextNormalizer] | bool | Callable[[str], str] = True,
         K: Optional[float] = None,
         B1: Optional[float] = None
     ):

@@ -105,6 +105,9 @@ class ChunkStorage(ABC):
         text: str
         raw_document_index: str
 
+        def __hash__(self):
+            return (hash(self.text) + hash(self.raw_document_index)) // 2
+
     @abstractmethod
     def query(self, query: str) -> list[ChunkNote]:
         """The query of full-text search among the chunk storage
