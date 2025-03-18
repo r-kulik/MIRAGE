@@ -1,7 +1,18 @@
 from abc import abstractmethod, ABC
 import typing
-from typing import Callable, Generator, Literal
+from typing import Callable, Generator, List, Literal
 from pydantic import BaseModel
+
+from mirage.index import QueryResult
+
+
+class ChunkNote(BaseModel):
+    text: str
+    raw_document_index: str
+
+    def __hash__(self):
+        return (hash(self.text) + hash(self.raw_document_index)) // 2
+
 
 class ChunkStorage(ABC):
     """This class defines the interface of the storing and querying with the full-text search the storage of text chunks
@@ -101,15 +112,10 @@ class ChunkStorage(ABC):
         """     
         pass
 
-    class ChunkNote(BaseModel):
-        text: str
-        raw_document_index: str
-
-        def __hash__(self):
-            return (hash(self.text) + hash(self.raw_document_index)) // 2
+    
 
     @abstractmethod
-    def query(self, query: str) -> list[ChunkNote]:
+    def query(self, query: str) -> list[QueryResult]:
         """The query of full-text search among the chunk storage
 
         Parameters
@@ -125,3 +131,9 @@ class ChunkStorage(ABC):
                 .raw_document_index - the index of document in RawStorage this chunk was originated from
         """
         pass
+
+    def get_texts_for_search_results(self, search_results: List[QueryResult]) -> List[str]:
+        return [
+            self.__getitem__(result.chunk_storage_key)
+            for result in search_results
+        ]
