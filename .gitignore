@@ -173,3 +173,7 @@ data/*
 mirage/inference/quorums/212.zip
 180.zip
 *.bin
+prompts/synonimizator_prompts.md
+prompts/synonimizator_prompts.md
+/prompts
+mirage/inference/quorums/model.bin
