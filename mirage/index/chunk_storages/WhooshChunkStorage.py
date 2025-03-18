@@ -8,8 +8,10 @@ from typing import Callable, Generator, List, Optional
 from pydantic import BaseModel
 from typing import Literal
 
+from mirage.index.QueryResult import QueryResult
+
 from ...embedders import TextNormalizer
-from . import ChunkStorage
+from .ChunkStorage import ChunkNote, ChunkStorage
 
 
 class WhooshChunkStorage(ChunkStorage):
@@ -113,13 +115,15 @@ class WhooshChunkStorage(ChunkStorage):
             for doc in searcher.all_stored_fields():
                 yield (doc['id'], doc['text'])
 
-    def query(self, query: str) -> List[ChunkStorage.ChunkNote]:
+    def query(self, query: str) -> List[QueryResult]:
         query = self.__normalize(query)
         with self.ix.searcher(weighting=self._get_weighting()) as searcher:
             parser = qparser.QueryParser("normalized_text", self.ix.schema, group=syntax.OrGroup)
             q = parser.parse(query)
             results = searcher.search(q)
-            return [self.ChunkNote(
-                text=hit['text'],
-                raw_document_index=hit['raw_document_index']
-            ) for hit in results]
+            return [
+                QueryResult(
+                    score=hit.score,
+                    chunk_storage_key=hit['id'],
+                    vector=None
+                ) for hit in results]

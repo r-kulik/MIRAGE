@@ -3,8 +3,8 @@ import numpy as np
 from typing import Dict, List, Literal, Tuple, Generator
 
 from mirage.index.vector_index import VectorIndex
-from mirage.index.vector_index.VectorIndex import QueryResult, VectorKeyPair
-
+from mirage.index.vector_index.VectorIndex import VectorKeyPair
+from mirage.index.QueryResult import QueryResult
 
 class FaissIndexFlatL2(VectorIndex):
     """
@@ -51,7 +51,7 @@ class FaissIndexFlatL2(VectorIndex):
                 break
             vector = self.index.reconstruct(int(idx))
             chunk_storage_key = self.vector_to_key_map[tuple(vector)]
-            results.append(QueryResult(distance=dist, vector=vector, chunk_storage_key=chunk_storage_key))
+            results.append(QueryResult(score=dist, vector=vector, chunk_storage_key=chunk_storage_key))
         return results
 
     def attach_chunk_storage_key_to_vector(self, vector: np.ndarray, chunk_storage_key: str) -> None:
@@ -115,7 +115,7 @@ class FaissIndexFlatIP(VectorIndex):
                 break
             vector = self.index.reconstruct(int(idx))
             chunk_storage_key = self.vector_to_key_map[tuple(vector)]
-            results.append(QueryResult(distance=sim, vector=vector, chunk_storage_key=chunk_storage_key))
+            results.append(QueryResult(score=sim, vector=vector, chunk_storage_key=chunk_storage_key))
         return results
 
     def attach_chunk_storage_key_to_vector(self, vector: np.ndarray, chunk_storage_key: str) -> None:
@@ -186,7 +186,7 @@ class FaissIndexHNSWFlat(VectorIndex):
                 break
             vector = self.index.reconstruct(int(idx))
             chunk_storage_key = self.vector_to_key_map[tuple(vector)]
-            results.append(QueryResult(distance=dist, vector=vector, chunk_storage_key=chunk_storage_key))
+            results.append(QueryResult(score=dist, vector=vector, chunk_storage_key=chunk_storage_key))
         return results
 
     def attach_chunk_storage_key_to_vector(self, vector: np.ndarray, chunk_storage_key: str) -> None:
@@ -252,7 +252,7 @@ class FaissIndexIVFFlat(VectorIndex):
                 break
             vector = self.index.reconstruct(int(idx))
             chunk_storage_key = self.vector_to_key_map[tuple(vector)]
-            results.append(QueryResult(distance=dist, vector=vector, chunk_storage_key=chunk_storage_key))
+            results.append(QueryResult(score=dist, vector=vector, chunk_storage_key=chunk_storage_key))
         return results
 
     def attach_chunk_storage_key_to_vector(self, vector: np.ndarray, chunk_storage_key: str) -> None:
@@ -371,7 +371,7 @@ class FaissIndexIVFFlat(VectorIndex):
                 if chunk_storage_key is None:
                     raise RuntimeError(f"Could not find chunk storage key for vector: {vector}")
 
-                results.append(QueryResult(distance=dist, vector=vector, chunk_storage_key=chunk_storage_key))
+                results.append(QueryResult(score=dist, vector=vector, chunk_storage_key=chunk_storage_key))
             except Exception as e:
                 raise RuntimeError(f"Error while reconstructing vector for index {idx}: {e}")
 
@@ -473,7 +473,7 @@ class FaissIndexLSH(VectorIndex):
                     raise RuntimeError("Data inconsistency detected")
                     
                 results.append(QueryResult(
-                    distance=float(dist),
+                    score=float(dist),
                     vector=vector,
                     chunk_storage_key=key
                 ))
@@ -585,7 +585,7 @@ class FaissIndexScalarQuantizer(VectorIndex):
                 vector = self.stored_vectors[idx]
                 key = self.storage_keys[idx]
                 results.append(QueryResult(
-                    distance=float(dist),
+                    score=float(dist),
                     vector=vector,
                     chunk_storage_key=key
                 ))
@@ -742,7 +742,7 @@ class FaissIndexPQ(VectorIndex):
                 vector = self.stored_vectors[idx]
                 key = self.storage_keys[idx]
                 results.append(QueryResult(
-                    distance=float(dist),
+                    score=float(dist),
                     vector=vector,
                     chunk_storage_key=key
                 ))
@@ -896,7 +896,7 @@ class FaissIndexIVFScalarQuantizer(VectorIndex):
                 vector = self.stored_vectors[idx]
                 key = self.storage_keys[idx]
                 results.append(QueryResult(
-                    distance=float(dist),
+                    score=float(dist),
                     vector=vector,
                     chunk_storage_key=key
                 ))
@@ -1046,7 +1046,7 @@ class FaissIndexIVFPQ(VectorIndex):
                 vector = self.stored_vectors[idx]
                 key = self.storage_keys[idx]
                 results.append(QueryResult(
-                    distance=float(dist),
+                    score=float(dist),
                     vector=vector,
                     chunk_storage_key=key
                 ))
@@ -1200,7 +1200,7 @@ class FaissIndexIVFPQR(VectorIndex):
                 vector = self.stored_vectors[idx]
                 key = self.storage_keys[idx]
                 results.append(QueryResult(
-                    distance=float(dist),
+                    score=float(dist),
                     vector=vector,
                     chunk_storage_key=key
                 ))

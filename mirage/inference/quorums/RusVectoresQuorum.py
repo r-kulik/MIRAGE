@@ -4,7 +4,7 @@ from heapq import heappush, heappop
 from gensim.models import KeyedVectors
 from typing import Dict, List, Self, Tuple
 
-from mirage.index.chunk_storages import ChunkStorage
+from mirage.index.chunk_storages.ChunkStorage import ChunkStorage, ChunkNote
 
 class RusVectoresQuorum:
     """Synonimization module for enriching the search queries with the synonims
@@ -222,7 +222,7 @@ class RusVectoresQuorum:
         # --------------------------------------------------------
         return processed
 
-    def query(self, text: str) -> List[ChunkStorage.ChunkNote]:
+    def query(self, text: str) -> List[ChunkNote]:
         """
         Querying ChunkStorage with the closest possible synonimized queries
         Parameters
@@ -232,7 +232,7 @@ class RusVectoresQuorum:
 
         Returns
         -------
-        List[ChunkStorage.ChunkNote]
+        List[ChunkNote]
             Search results (need to be reweighted)
         """
         # --------------------------------------------------------
