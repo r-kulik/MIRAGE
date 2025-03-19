@@ -22,7 +22,7 @@ class Reranker(ABC):
         self, fulltext_search_results: List[QueryResult], 
         vector_search_results: List[QueryResult]
         ) -> List[QueryResult]:
-        """Executopn of the Rank Fusion algorithm
+        """Execution of the Rank Fusion algorithm
 
         Parameters
         ----------
