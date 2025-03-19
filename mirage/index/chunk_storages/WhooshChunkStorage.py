@@ -20,13 +20,13 @@ class WhooshChunkStorage(ChunkStorage):
         self,
         scoring_function: Literal["BM25", "BM25F", "TF-IDF"],
         normalizer: Optional[TextNormalizer] | bool | Callable[[str], str] = True,
-        K: Optional[float] = None,
-        B1: Optional[float] = None
+        K1: Optional[float] = None,
+        B: Optional[float] = None
     ):
         super().__init__(scoring_function)
         self.scoring_function = scoring_function
-        self.K = K
-        self.B1 = B1
+        self.K1 = K1
+        self.B = B
         if type(normalizer) == bool and normalizer:
             normalizer = TextNormalizer(stop_word_remove=True, word_generalization="stem")
         self.normalizer = normalizer
@@ -52,9 +52,9 @@ class WhooshChunkStorage(ChunkStorage):
         if self.scoring_function == "BM25F":
             kwargs = {}
             if self.K is not None:
-                kwargs["K1"] = self.K
+                kwargs["K1"] = self.K1
             if self.B1 is not None:
-                kwargs["B"] = self.B1
+                kwargs["B"] = self.B
             return scoring.BM25F(**kwargs)
         elif self.scoring_function == "BM25":
             return scoring.BM25F()  # Original behavior for BM25
