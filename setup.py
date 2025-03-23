@@ -22,7 +22,10 @@ setup(
         'chardet>=5.2.0',
         'pytest>=8.3.4',
         'fpdf>=1.7.2',
-        'pydantic>=2.10.6'
+        'pydantic>=2.10.6',
+        'whoosh>=2.7.4',
+        'pymorphy3>=2.0.3',
+        'gensim>=4.3.3'
     ],
     classifiers=[              # Classifiers for PyPI (optional)
         'Programming Language :: Python :: 3',
