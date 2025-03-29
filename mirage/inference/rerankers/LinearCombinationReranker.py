@@ -5,10 +5,29 @@ from .Reranker import Reranker
 
 
 class LinearCombinationReranker(Reranker):
+    """Reranker based on linear combination of two scores
+    score(d) = K1 * BM25(d, q) + K2 * sim(d, q)\n\n
+    where:
+        * d - document
+        * q - user query
+        * K1 - settable hyperparameter (fulltext_score_weight)
+        * K2 - settable hyperparameter (vector_score_weight)
+        * BM25(d, q) - score of document after fulltext_search of query
+        * sim(d, q) - cosine similarity between document vector and query vector
+    """
     fulltext_score_weight: float
     vector_score_weight: float
 
-    def __init__(self, fulltext_score_weight: float, vector_score_weight: float):
+    def __init__(self, fulltext_score_weight: float, vector_score_weight: float,):
+        """Creation of linear combination reranker
+
+        Parameters
+        ----------
+        fulltext_score_weight : float
+            Multiplicator of the score obtained from BM-25 algorithm
+        vector_score_weight : float
+            Multiplicator of the cosine similarity between query and document vectors
+        """
         super().__init__()
         self.fulltext_score_weight = fulltext_score_weight
         self.vector_score_weight = vector_score_weight
