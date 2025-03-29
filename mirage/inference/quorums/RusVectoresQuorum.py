@@ -2,8 +2,9 @@ import zipfile
 import pymorphy3
 from heapq import heappush, heappop
 from gensim.models import KeyedVectors
-from typing import Dict, List, Self, Tuple
+from typing import Dict, List, Self, Set, Tuple
 
+from mirage.index import QueryResult
 from mirage.index.chunk_storages.ChunkStorage import ChunkStorage, ChunkNote
 
 class RusVectoresQuorum:
@@ -258,12 +259,12 @@ class RusVectoresQuorum:
         # --------------------------------------------------------
         # Creating a heap with the following structure:
         # (priority, similarity, replacements dict ({word_index: synonim_index}) )
-        heap = [(-0.0, 0.0, {})]
+        heap = [(-1, 1, {})]
         # --------------------------------------------------------
         # Creating a set of the seen combinations of substitutions
         # and results obtained from the chunk storage
         seen = set()
-        results = set()
+        results: Set[QueryResult] = set()
         # --------------------------------------------------------
         combination_count = 0
         # --------------------------------------------------------
@@ -308,13 +309,12 @@ class RusVectoresQuorum:
             # adding the results of this query in the set of the results
             # without overfitting it
             for chunk_result in chunk_results:
-                results.add(chunk_result)
-                if len(results) > self.max_entries:
-                    break
-            # --------------------------------------------------------
-            # return results if we have reached the maximal amount of them
-            if len(results) >= self.max_entries:
-                return list(results)
+                chunk_result.score *= current_sim
+                if chunk_result not in results:
+                    results.add(chunk_result)
+                if len(results) >= self.max_entries:
+                    return list(sorted(results, key=lambda x: x.score, reverse=True))
+            
             # --------------------------------------------------------
             # or stopping the cycle if we have reached the maximal amount of iterations
             combination_count += 1
@@ -332,22 +332,22 @@ class RusVectoresQuorum:
                     for syn_idx, (syn, sim) in enumerate(syns):
                         new_replacements = replacements.copy()
                         new_replacements[word_idx] = syn_idx
-                        new_sim = current_sim + sim
+                        new_sim = current_sim * sim
                         heappush(heap, (-new_sim, new_sim, new_replacements))
                 # --------------------------------------------------------
                 # but if the word WAS changed, we are not adding its substiturion, but trying
-                # to push a new synonim in the heap instead of the current replaement if
+                # to push a new synonim in the heap instead of the current replacement if
                 # it is possible
                 else:
                     current_syn_idx = replacements[word_idx]
                     if current_syn_idx + 1 < len(syns):
                         new_replacements = replacements.copy()
                         new_replacements[word_idx] = current_syn_idx + 1
-                        new_sim = current_sim - syns[current_syn_idx][1] + syns[current_syn_idx + 1][1]
+                        new_sim = current_sim / syns[current_syn_idx][1] * syns[current_syn_idx + 1][1]
                         heappush(heap, (-new_sim, new_sim, new_replacements))
                 # --------------------------------------------------------
             # and running a new cycle with new heap
         # --------------------------------------------------------
         # returning the list of the results in the end
-        return list(results)
+        return list(sorted(results, key=lambda x: x.score, reverse=True ))
     #--------------------------------------------------------

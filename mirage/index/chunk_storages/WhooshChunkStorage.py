@@ -51,9 +51,9 @@ class WhooshChunkStorage(ChunkStorage):
     def _get_weighting(self):
         if self.scoring_function == "BM25F":
             kwargs = {}
-            if self.K is not None:
+            if self.K1 is not None:
                 kwargs["K1"] = self.K1
-            if self.B1 is not None:
+            if self.B is not None:
                 kwargs["B"] = self.B
             return scoring.BM25F(**kwargs)
         elif self.scoring_function == "BM25":

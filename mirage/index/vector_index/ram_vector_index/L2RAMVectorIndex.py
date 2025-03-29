@@ -114,13 +114,13 @@ class L2RAMVectorIndex(RAMVectorIndex):
             [
                 QueryResult(
                     # distance = np.sqrt(np.sum((query_vector - vkp.vector) ** 2)),
-                    distance = np.dot(query_vector, vkp.vector) / (np.linalg.norm(query_vector) * np.linalg.norm(vkp.vector)),
+                    score = np.dot(query_vector, vkp.vector) / (np.linalg.norm(query_vector) * np.linalg.norm(vkp.vector)),
                     vector=vkp.vector,
                     chunk_storage_key=vkp.chunk_storage_key
                 )
                 for vkp in self.vector_pairs
             ],
-            key=lambda x: -1 * x.distance
+            key=lambda x: -1 * x.score
         )[  :min(len(self.vector_pairs),  top_k)]
     
 
