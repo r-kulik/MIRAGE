@@ -167,7 +167,6 @@ data/*
 *.db
 /data_test
 /.vscode
-*.pdf
 *.json
 /prompts
 mirage/inference/quorums/212.zip
