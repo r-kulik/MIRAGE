@@ -1,13 +1,44 @@
-
-
-
 \chapter{Introduction}
 \label{chap:intro}
-\chaptermark{Optional running chapter heading}
-\section{Usage of AI in a Legal Sphere}
-\label{sec:section}
+\chaptermark{}
 
-Nowadays, an AI tools are widely used in a legal sphere.
+\section{Early Approaches to Automation in the Legal Sphere}
+\label{sec:early}
+
+The application of Artificial Intelligence in the legal domain began in 1958 with Lucien Mehl's seminal article \cite{automation_in_legal_1958}, which explored AI's potential in law and decision-making processes. Mehl proposed two primary approaches for legal AI systems:
+\begin{itemize}
+    \item \textit{Information machine} - "the machine for finding precedent"
+    \item \textit{Consultation machine} - "the judgement machine"
+\end{itemize}
+
+The author argued that both approaches required transforming natural language in legal documents into a strictly formalized, machine-readable format. This task was considered a preliminary step toward formalizing natural language as a whole. While Mehl proposed a framework for legal text formalization, this remains an unsolved challenge today.\footnote{
+    Modern projects like \cite{merigouxCatalaProgrammingLanguage2021} continue to explore machine-readable formats for legislative texts.
+}
+
+Early probabilistic approaches to natural language processing emerged in 1952 \cite{weaverTranslation1952}, but were deemed impractical due to computational constraints. Only in 1990 did IBM introduce efficient, computationally feasible methods \cite{brownStatisticalApproachMachine1990}. A 2003 review \cite{risslandAILawFruitful2003} confirmed that case-based and rule-based reasoning systems remained the most prevalent AI applications in law at that time.
+
+\section{Large Language Models in Law}
+Advances in computational power enabled complex natural language processing models. The field transformed with Word2Vec's semantically meaningful word vectors (2013) \cite{mikolovEfficientEstimationWord2013}, followed by Google's Transformer architecture (2017) \cite{vaswaniAttentionAllYou2017}. OpenAI's 2020 paper \cite{brownLanguageModelsAre2020} introduced few-shot learning through prompting, leading to powerful, accessible AI assistants applicable to legal domains.
+
+A 2024 Texas survey \cite{seabrookeSurveyLayPeoples2024} revealed that over 50\% of respondents would consult AI assistants for tenancy, tax, and traffic legal matters.\footnote{
+    However, only $\approx$30\% trusted AI for divorce, juvenile, or civil dispute cases.
+} Similarly, LexisNexis \cite{LawyersGearGenerative} reported 35\% of lawyers using AI assistants monthly.
+
+Specialized legal LLMs like LawGPT (2023) \cite{nguyenBriefReportLawGPT2023}, LawyerLLaMA (2023) \cite{huangLawyerLLaMATechnical2023}, and ChatLaw (2023) \cite{cuiChatlawMultiAgentCollaborative2024a} have emerged. Despite LLMs' strong performance in general domains, legal applications face accuracy challenges. Stanford research (2024) \cite{mageshHallucinationFreeAssessingReliability2024a} shows fine-tuned legal LLMs still hallucinate in 17-33\% of cases. OpenAI's theoretical analysis \cite{kalaiCalibratedLanguageModels2024} confirms all language models retain measurable hallucination probabilities regardless of size or training.
+
+Legal domains present unique challenges:
+\begin{itemize}
+    \item \textbf{Continuous evolution}: Legislative acts constantly expand and change
+    \item \textbf{Outdated information}: Documents may be deprecated, replaced, or amended
+    \item \textbf{Jurisdictional variation}: Legal documents apply differently across regions, requiring localized fine-tuning
+\end{itemize}
+
+These factors heighten risks when using hallucination-prone AI for felony or misdemeanor cases, particularly when relying solely on "consultation machines" without verified document retrieval.
+
+\section{RAG Approach}
+Retrieval-Augmented Generation (RAG), introduced in 2020 \cite{lewisRetrievalAugmentedGenerationKnowledgeIntensive2020}, combines LLMs with reliable information retrieval systems (see Section 2). \cite{mageshHallucinationFreeAssessingReliability2024a} demonstrates RAG can reduce legal QA hallucinations to near-zero with proper context retrieval.
+
+While RAG-based legal QA systems are rapidly developing (detailed in Section 2), existing research focuses on Western (primarily US and Australian) legal systems. Though Russian applications exist (e.g., \cite{kolaScienceCenter}), none address legal domains. Our work applies and evaluates RAG in Russian legal contexts, providing foundational insights for future research.
 % This is a section. This is a citation without brackets.
 % and this is one with brackets \cite{A}. Multiple \cite{A,B,C}
 %  Here's a reference to a subsection: \ref{sec:subsection}. 

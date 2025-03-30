@@ -16,5 +16,1145 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{automation_in_legal_1958}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=67d8c700a40651cd7740f594800996e2}{%
+           family={Mehl},
+           familyi={M\bibinitperiod},
+           given={D.\bibnamedelimi L.},
+           giveni={D\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{67d8c700a40651cd7740f594800996e2}
+      \strng{fullhash}{67d8c700a40651cd7740f594800996e2}
+      \strng{fullhashraw}{67d8c700a40651cd7740f594800996e2}
+      \strng{bibnamehash}{67d8c700a40651cd7740f594800996e2}
+      \strng{authorbibnamehash}{67d8c700a40651cd7740f594800996e2}
+      \strng{authornamehash}{67d8c700a40651cd7740f594800996e2}
+      \strng{authorfullhash}{67d8c700a40651cd7740f594800996e2}
+      \strng{authorfullhashraw}{67d8c700a40651cd7740f594800996e2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Mechanisation of Thought Processes}
+      \field{title}{AUTOMATION IN THE LEGAL WORLD}
+      \field{year}{1958}
+    \endentry
+    \entry{merigouxCatalaProgrammingLanguage2021}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=338999641744d5be6f8e715fec562d59}{%
+           family={Merigoux},
+           familyi={M\bibinitperiod},
+           given={Denis},
+           giveni={D\bibinitperiod}}}%
+        {{hash=02279ee9274564c38eda7081a0c4b57e}{%
+           family={Chataing},
+           familyi={C\bibinitperiod},
+           given={Nicolas},
+           giveni={N\bibinitperiod}}}%
+        {{hash=f33aae5dd832a1ed4cb88dd24de0dd75}{%
+           family={Protzenko},
+           familyi={P\bibinitperiod},
+           given={Jonathan},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{a55c628a2b552a934aa447daa951be0e}
+      \strng{fullhash}{400ef96ed6f70bb87d2590c6f6784f45}
+      \strng{fullhashraw}{400ef96ed6f70bb87d2590c6f6784f45}
+      \strng{bibnamehash}{400ef96ed6f70bb87d2590c6f6784f45}
+      \strng{authorbibnamehash}{400ef96ed6f70bb87d2590c6f6784f45}
+      \strng{authornamehash}{a55c628a2b552a934aa447daa951be0e}
+      \strng{authorfullhash}{400ef96ed6f70bb87d2590c6f6784f45}
+      \strng{authorfullhashraw}{400ef96ed6f70bb87d2590c6f6784f45}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Law at large underpins modern society, codifying and governing many aspects of citizens' daily lives. Oftentimes, law is subject to interpretation, debate and challenges throughout various courts and jurisdictions. But in some other areas, law leaves little room for interpretation, and essentially aims to rigorously describe a computation, a decision procedure or, simply said, an algorithm. Unfortunately, prose remains a woefully inadequate tool for the job. The lack of formalism leaves room for ambiguities; the structure of legal statutes, with many paragraphs and subsections spread across multiple pages, makes it hard to compute the intended outcome of the algorithm underlying a given text; and, as with any other piece of poorly-specified critical software, the use of informal, natural language leaves corner cases unaddressed. We introduce Catala, a new programming language that we specifically designed to allow a straightforward and systematic translation of statutory law into an executable implementation. Catala aims to bring together lawyers and programmers through a shared medium, which together they can understand, edit and evolve, bridging a gap that too often results in dramatically incorrect implementations of the law. We have implemented a compiler for Catala, and have proven the correctness of its core compilation steps using the F {$\star$} proof assistant. We evaluate Catala on several legal texts that are algorithms in disguise, notably section 121 of the US federal income tax and the byzantine French family benefits; in doing so, we uncover a bug in the official implementation of the French benefits. We observe as a consequence of the formalization process that using Catala enables rich interactions between lawyers and programmers, leading to a greater understanding of the original legislative intent, while producing a correct-by-construction executable specification reusable by the greater software ecosystem. Doing so, Catala increases trust in legal institutions, and mitigates the risk of societal damage due to incorrect implementations of the law.}
+      \field{journaltitle}{Proceedings of the ACM on Programming Languages}
+      \field{langid}{english}
+      \field{number}{ICFP}
+      \field{shorttitle}{Catala}
+      \field{title}{Catala: {{A Programming Language}} for the {{Law}}}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2025}
+      \field{volume}{5}
+      \field{year}{2021}
+      \field{urldateera}{ce}
+      \field{pages}{77:1}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1145/3473582
+      \endverb
+      \verb{file}
+      \verb C:\Users\Bulkin\Zotero\storage\BXJLTKJH\Merigoux и др. - 2021 - Catala A Programming Language for the Law.pdf
+      \endverb
+    \endentry
+    \entry{weaverTranslation1952}{inproceedings}{}{}
+      \name{author}{1}{}{%
+        {{hash=c912bb61084481fe9b3162f421319179}{%
+           family={Weaver},
+           familyi={W\bibinitperiod},
+           given={Warren},
+           giveni={W\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Massachusetts Institute of Technology}%
+      }
+      \strng{namehash}{c912bb61084481fe9b3162f421319179}
+      \strng{fullhash}{c912bb61084481fe9b3162f421319179}
+      \strng{fullhashraw}{c912bb61084481fe9b3162f421319179}
+      \strng{bibnamehash}{c912bb61084481fe9b3162f421319179}
+      \strng{authorbibnamehash}{c912bb61084481fe9b3162f421319179}
+      \strng{authornamehash}{c912bb61084481fe9b3162f421319179}
+      \strng{authorfullhash}{c912bb61084481fe9b3162f421319179}
+      \strng{authorfullhashraw}{c912bb61084481fe9b3162f421319179}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the {{Conference}} on {{Mechanical Translation}}}
+      \field{title}{Translation}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2025}
+      \field{year}{1952}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb C:\Users\Bulkin\Zotero\storage\DN7I9A2I\Weaver - 1952 - Translation.pdf
+      \endverb
+    \endentry
+    \entry{brownStatisticalApproachMachine1990}{article}{}{}
+      \name{author}{8}{}{%
+        {{hash=b269d63ed0974176f251e8034564855e}{%
+           family={Brown},
+           familyi={B\bibinitperiod},
+           given={Peter\bibnamedelima F.},
+           giveni={P\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=7e6f41b987a6ec2b9b01a3d33cdd2ddb}{%
+           family={Cocke},
+           familyi={C\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=4a93f8dffb0593ae148a8ef335eabe24}{%
+           family={Della\bibnamedelima Pietra},
+           familyi={D\bibinitperiod\bibinitdelim P\bibinitperiod},
+           given={Stephen\bibnamedelima A.},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=4bbdbda1345838fb46c88bd6afda258c}{%
+           family={Della\bibnamedelima Pietra},
+           familyi={D\bibinitperiod\bibinitdelim P\bibinitperiod},
+           given={Vincent\bibnamedelima J.},
+           giveni={V\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=3629ef158b240f3dd4bd6db0b67d5b36}{%
+           family={Jelinek},
+           familyi={J\bibinitperiod},
+           given={Fredrick},
+           giveni={F\bibinitperiod}}}%
+        {{hash=06ad0d36b10b63af526c5ab65eb770bd}{%
+           family={Lafferty},
+           familyi={L\bibinitperiod},
+           given={John\bibnamedelima D.},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=619872e7225f85d3b1c89906ec54e067}{%
+           family={Mercer},
+           familyi={M\bibinitperiod},
+           given={Robert\bibnamedelima L.},
+           giveni={R\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=60b30df74a8e4cd8b96789ea5dae645e}{%
+           family={Roossin},
+           familyi={R\bibinitperiod},
+           given={Paul\bibnamedelima S.},
+           giveni={P\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{e1a7aeb09589fa95d5b84765dc9acb1d}
+      \strng{fullhash}{b427d9e90cc77f30dc1895c4386287f3}
+      \strng{fullhashraw}{b427d9e90cc77f30dc1895c4386287f3}
+      \strng{bibnamehash}{e1a7aeb09589fa95d5b84765dc9acb1d}
+      \strng{authorbibnamehash}{e1a7aeb09589fa95d5b84765dc9acb1d}
+      \strng{authornamehash}{e1a7aeb09589fa95d5b84765dc9acb1d}
+      \strng{authorfullhash}{b427d9e90cc77f30dc1895c4386287f3}
+      \strng{authorfullhashraw}{b427d9e90cc77f30dc1895c4386287f3}
+      \field{extraname}{1}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Computational Linguistics}
+      \field{number}{2}
+      \field{title}{A {{Statistical Approach}} to {{Machine Translation}}}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2025}
+      \field{volume}{16}
+      \field{year}{1990}
+      \field{urldateera}{ce}
+      \field{pages}{79\bibrangedash 85}
+      \range{pages}{7}
+      \verb{file}
+      \verb C:\Users\Bulkin\Zotero\storage\LBZXV7DH\Brown и др. - 1990 - A Statistical Approach to Machine Translation.pdf
+      \endverb
+    \endentry
+    \entry{risslandAILawFruitful2003}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=2ff551813409cbd34683fb4f4bdc2f0b}{%
+           family={Rissland},
+           familyi={R\bibinitperiod},
+           given={Edwina\bibnamedelima L.},
+           giveni={E\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=6a15dab5c9ea2c126283722c463548fc}{%
+           family={Ashley},
+           familyi={A\bibinitperiod},
+           given={Kevin\bibnamedelima D.},
+           giveni={K\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=33c29d39aa236dc509ab3f528fe98bb3}{%
+           family={Loui},
+           familyi={L\bibinitperiod},
+           given={R.P.},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{15df675387137b4ea08d577ca993137c}
+      \strng{fullhash}{55bf862b4f28ddb72c70d84e7d647302}
+      \strng{fullhashraw}{55bf862b4f28ddb72c70d84e7d647302}
+      \strng{bibnamehash}{55bf862b4f28ddb72c70d84e7d647302}
+      \strng{authorbibnamehash}{55bf862b4f28ddb72c70d84e7d647302}
+      \strng{authornamehash}{15df675387137b4ea08d577ca993137c}
+      \strng{authorfullhash}{55bf862b4f28ddb72c70d84e7d647302}
+      \strng{authorfullhashraw}{55bf862b4f28ddb72c70d84e7d647302}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{00043702}
+      \field{journaltitle}{Artificial Intelligence}
+      \field{langid}{english}
+      \field{month}{11}
+      \field{number}{1-2}
+      \field{shorttitle}{{{AI}} and {{Law}}}
+      \field{title}{{{AI}} and {{Law}}: {{A}} Fruitful Synergy}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2025}
+      \field{volume}{150}
+      \field{year}{2003}
+      \field{urldateera}{ce}
+      \field{pages}{1\bibrangedash 15}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1016/S0004-3702(03)00122-X
+      \endverb
+      \verb{file}
+      \verb C:\Users\Bulkin\Zotero\storage\QQZRGSQ2\Rissland и др. - 2003 - AI and Law A fruitful synergy.pdf
+      \endverb
+    \endentry
+    \entry{mikolovEfficientEstimationWord2013}{misc}{}{}
+      \name{author}{4}{}{%
+        {{hash=a2d359b12ca2fadf0b40136a73f021bb}{%
+           family={Mikolov},
+           familyi={M\bibinitperiod},
+           given={Tomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=ee3f7d7b96add98106db907e189d6c13}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Kai},
+           giveni={K\bibinitperiod}}}%
+        {{hash=3d11e6f2a0d0a1183b2cf62996525afc}{%
+           family={Corrado},
+           familyi={C\bibinitperiod},
+           given={Greg},
+           giveni={G\bibinitperiod}}}%
+        {{hash=4aecfb0cc2e1e3b7899129fa2a94e2b8}{%
+           family={Dean},
+           familyi={D\bibinitperiod},
+           given={Jeffrey},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{d4849f6d57e38d9b9846cfb360e45131}
+      \strng{fullhash}{f24c60896b6daa69474b40efb61f4e88}
+      \strng{fullhashraw}{f24c60896b6daa69474b40efb61f4e88}
+      \strng{bibnamehash}{f24c60896b6daa69474b40efb61f4e88}
+      \strng{authorbibnamehash}{f24c60896b6daa69474b40efb61f4e88}
+      \strng{authornamehash}{d4849f6d57e38d9b9846cfb360e45131}
+      \strng{authorfullhash}{f24c60896b6daa69474b40efb61f4e88}
+      \strng{authorfullhashraw}{f24c60896b6daa69474b40efb61f4e88}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We propose two novel model architectures for computing continuous vector representations of words from very large data sets. The quality of these representations is measured in a word similarity task, and the results are compared to the previously best performing techniques based on different types of neural networks. We observe large improvements in accuracy at much lower computational cost, i.e. it takes less than a day to learn high quality word vectors from a 1.6 billion words data set. Furthermore, we show that these vectors provide state-of-the-art performance on our test set for measuring syntactic and semantic word similarities.}
+      \field{eprintclass}{cs}
+      \field{eprinttype}{arXiv}
+      \field{month}{9}
+      \field{number}{arXiv:1301.3781}
+      \field{title}{Efficient {{Estimation}} of {{Word Representations}} in {{Vector Space}}}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2025}
+      \field{year}{2013}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.1301.3781
+      \endverb
+      \verb{eprint}
+      \verb 1301.3781
+      \endverb
+      \verb{file}
+      \verb C\:\\Users\\Bulkin\\Zotero\\storage\\J464P85D\\Mikolov и др. - 2013 - Efficient Estimation of Word Representations in Vector Space.pdf;C\:\\Users\\Bulkin\\Zotero\\storage\\GPA4B3NK\\1301.html
+      \endverb
+      \keyw{Computer Science - Computation and Language}
+    \endentry
+    \entry{vaswaniAttentionAllYou2017}{inproceedings}{}{}
+      \name{author}{8}{}{%
+        {{hash=7f28e84700536646dd6620a0db07ad09}{%
+           family={Vaswani},
+           familyi={V\bibinitperiod},
+           given={Ashish},
+           giveni={A\bibinitperiod}}}%
+        {{hash=62efade83d70f0323fe248755e6c90c5}{%
+           family={Shazeer},
+           familyi={S\bibinitperiod},
+           given={Noam},
+           giveni={N\bibinitperiod}}}%
+        {{hash=06649ebab1ea5cac0250746a19764975}{%
+           family={Parmar},
+           familyi={P\bibinitperiod},
+           given={Niki},
+           giveni={N\bibinitperiod}}}%
+        {{hash=831027ee0ebf22375e2a86afc1881909}{%
+           family={Uszkoreit},
+           familyi={U\bibinitperiod},
+           given={Jakob},
+           giveni={J\bibinitperiod}}}%
+        {{hash=2fd2982e30ebcec93ec1cf76e0d797fd}{%
+           family={Jones},
+           familyi={J\bibinitperiod},
+           given={Llion},
+           giveni={L\bibinitperiod}}}%
+        {{hash=27b07e4eacbf4ef7a1438e3badb7dd8d}{%
+           family={Gomez},
+           familyi={G\bibinitperiod},
+           given={Aidan\bibnamedelima N},
+           giveni={A\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{hash=540fcd72e1fa4bbed46604f4e6cff817}{%
+           family={Kaiser},
+           familyi={K\bibinitperiod},
+           given={{Ł}},
+           giveni={Ł\bibinitperiod},
+           prefix={ukasz},
+           prefixi={u\bibinitperiod}}}%
+        {{hash=95595a0fefb86187cbc36e551017d332}{%
+           family={Polosukhin},
+           familyi={P\bibinitperiod},
+           given={Illia},
+           giveni={I\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Curran Associates, Inc.}%
+      }
+      \strng{namehash}{ee273ab30cfb889666f8c4d806eb9ce7}
+      \strng{fullhash}{cb26e47f6b8133865271fc8483132297}
+      \strng{fullhashraw}{cb26e47f6b8133865271fc8483132297}
+      \strng{bibnamehash}{ee273ab30cfb889666f8c4d806eb9ce7}
+      \strng{authorbibnamehash}{ee273ab30cfb889666f8c4d806eb9ce7}
+      \strng{authornamehash}{ee273ab30cfb889666f8c4d806eb9ce7}
+      \strng{authorfullhash}{cb26e47f6b8133865271fc8483132297}
+      \strng{authorfullhashraw}{cb26e47f6b8133865271fc8483132297}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The dominant sequence transduction models are based on complex recurrent orconvolutional neural networks in an encoder and decoder configuration. The best performing such models also connect the encoder and decoder through an attentionm echanisms. We propose a novel, simple network architecture based solely onan attention mechanism, dispensing with recurrence and convolutions entirely.Experiments on two machine translation tasks show these models to be superiorin quality while being more parallelizable and requiring significantly less timeto train. Our single model with 165 million parameters, achieves 27.5 BLEU onEnglish-to-German translation, improving over the existing best ensemble result by over 1 BLEU. On English-to-French translation, we outperform the previoussingle state-of-the-art with model by 0.7 BLEU, achieving a BLEU score of 41.1.}
+      \field{booktitle}{Advances in {{Neural Information Processing Systems}}}
+      \field{title}{Attention Is {{All}} You {{Need}}}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2025}
+      \field{volume}{30}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb C:\Users\Bulkin\Zotero\storage\EJNRUMJ4\Vaswani и др. - 2017 - Attention is All you Need.pdf
+      \endverb
+    \endentry
+    \entry{brownLanguageModelsAre2020}{inproceedings}{}{}
+      \name{author}{31}{}{%
+        {{hash=ad9f5a3d8c696d78ce2a831ce8ac7524}{%
+           family={Brown},
+           familyi={B\bibinitperiod},
+           given={Tom},
+           giveni={T\bibinitperiod}}}%
+        {{hash=d4543c3bcd6aaf414da4296b349603e5}{%
+           family={Mann},
+           familyi={M\bibinitperiod},
+           given={Benjamin},
+           giveni={B\bibinitperiod}}}%
+        {{hash=9ac58bd43db2434e8e1ffd6182c3fcda}{%
+           family={Ryder},
+           familyi={R\bibinitperiod},
+           given={Nick},
+           giveni={N\bibinitperiod}}}%
+        {{hash=9ed243177743da3e650f1cff6376bb3c}{%
+           family={Subbiah},
+           familyi={S\bibinitperiod},
+           given={Melanie},
+           giveni={M\bibinitperiod}}}%
+        {{hash=1e2dad58400c2dd6405837788e785d19}{%
+           family={Kaplan},
+           familyi={K\bibinitperiod},
+           given={Jared\bibnamedelima D},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=4164e43d8cf919f5e3f8d80f5ea23f36}{%
+           family={Dhariwal},
+           familyi={D\bibinitperiod},
+           given={Prafulla},
+           giveni={P\bibinitperiod}}}%
+        {{hash=4ca421ceeb5b516dd8fc64bea5a23f2a}{%
+           family={Neelakantan},
+           familyi={N\bibinitperiod},
+           given={Arvind},
+           giveni={A\bibinitperiod}}}%
+        {{hash=ab5d7d7b9cfeaad635c4a60e8950d7dd}{%
+           family={Shyam},
+           familyi={S\bibinitperiod},
+           given={Pranav},
+           giveni={P\bibinitperiod}}}%
+        {{hash=3c1d9a663596faaf544c1a65aac581be}{%
+           family={Sastry},
+           familyi={S\bibinitperiod},
+           given={Girish},
+           giveni={G\bibinitperiod}}}%
+        {{hash=1e84eff933be9f4887bf369cf181bf12}{%
+           family={Askell},
+           familyi={A\bibinitperiod},
+           given={Amanda},
+           giveni={A\bibinitperiod}}}%
+        {{hash=abe4801e322e893b23785fd6d0800b5c}{%
+           family={Agarwal},
+           familyi={A\bibinitperiod},
+           given={Sandhini},
+           giveni={S\bibinitperiod}}}%
+        {{hash=787b9715a98ea66a8d5e6bae042ae0b9}{%
+           family={{Herbert-Voss}},
+           familyi={H\bibinitperiod},
+           given={Ariel},
+           giveni={A\bibinitperiod}}}%
+        {{hash=c3a5cc5e520e0d1a9f8bbf377c74cd27}{%
+           family={Krueger},
+           familyi={K\bibinitperiod},
+           given={Gretchen},
+           giveni={G\bibinitperiod}}}%
+        {{hash=eb1d3044b466619459c76843f0e98bb9}{%
+           family={Henighan},
+           familyi={H\bibinitperiod},
+           given={Tom},
+           giveni={T\bibinitperiod}}}%
+        {{hash=5c2f5c2e6d4a9ec8681377f8a8e5e6af}{%
+           family={Child},
+           familyi={C\bibinitperiod},
+           given={Rewon},
+           giveni={R\bibinitperiod}}}%
+        {{hash=82063a12702e7b2c026ae0ff03b8f102}{%
+           family={Ramesh},
+           familyi={R\bibinitperiod},
+           given={Aditya},
+           giveni={A\bibinitperiod}}}%
+        {{hash=84650a9afb83d2e878b03bef608700cf}{%
+           family={Ziegler},
+           familyi={Z\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod}}}%
+        {{hash=495187f3a2c93ddb8083bd18a5702527}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Jeffrey},
+           giveni={J\bibinitperiod}}}%
+        {{hash=fdaff50f84c08440dcb5fad75b559780}{%
+           family={Winter},
+           familyi={W\bibinitperiod},
+           given={Clemens},
+           giveni={C\bibinitperiod}}}%
+        {{hash=07acc23f6ec051b64b82cd33255c0a69}{%
+           family={Hesse},
+           familyi={H\bibinitperiod},
+           given={Chris},
+           giveni={C\bibinitperiod}}}%
+        {{hash=fb15a691583ec94aafe0be6e7da4878f}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Mark},
+           giveni={M\bibinitperiod}}}%
+        {{hash=2a5f009f12a0567430729b5ace41435d}{%
+           family={Sigler},
+           familyi={S\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod}}}%
+        {{hash=e5aa3a709cbe706efba113bec9789364}{%
+           family={Litwin},
+           familyi={L\bibinitperiod},
+           given={Mateusz},
+           giveni={M\bibinitperiod}}}%
+        {{hash=7006ca8c1ce969019b89de50fece60dd}{%
+           family={Gray},
+           familyi={G\bibinitperiod},
+           given={Scott},
+           giveni={S\bibinitperiod}}}%
+        {{hash=01f70651539bbd7dccc01e86ed9c78c3}{%
+           family={Chess},
+           familyi={C\bibinitperiod},
+           given={Benjamin},
+           giveni={B\bibinitperiod}}}%
+        {{hash=1480c861b1a73e1d1de1b227e985b179}{%
+           family={Clark},
+           familyi={C\bibinitperiod},
+           given={Jack},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ca86811e7a0582a9e7cb8d33e7ab445d}{%
+           family={Berner},
+           familyi={B\bibinitperiod},
+           given={Christopher},
+           giveni={C\bibinitperiod}}}%
+        {{hash=b51e7c5fe92844f39ce52b8a5fa5675f}{%
+           family={McCandlish},
+           familyi={M\bibinitperiod},
+           given={Sam},
+           giveni={S\bibinitperiod}}}%
+        {{hash=a812c46caad94fc8701be37871f303ba}{%
+           family={Radford},
+           familyi={R\bibinitperiod},
+           given={Alec},
+           giveni={A\bibinitperiod}}}%
+        {{hash=8d569d1d5b8b5a7836017a98b430f959}{%
+           family={Sutskever},
+           familyi={S\bibinitperiod},
+           given={Ilya},
+           giveni={I\bibinitperiod}}}%
+        {{hash=1e6adbf36ab730cd5fdadb838b4d2667}{%
+           family={Amodei},
+           familyi={A\bibinitperiod},
+           given={Dario},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Curran Associates, Inc.}%
+      }
+      \strng{namehash}{85437fe07696e4c57f916c83d4ba5581}
+      \strng{fullhash}{28676992274ff1a4ebfa6e23ba7b2efd}
+      \strng{fullhashraw}{28676992274ff1a4ebfa6e23ba7b2efd}
+      \strng{bibnamehash}{85437fe07696e4c57f916c83d4ba5581}
+      \strng{authorbibnamehash}{85437fe07696e4c57f916c83d4ba5581}
+      \strng{authornamehash}{85437fe07696e4c57f916c83d4ba5581}
+      \strng{authorfullhash}{28676992274ff1a4ebfa6e23ba7b2efd}
+      \strng{authorfullhashraw}{28676992274ff1a4ebfa6e23ba7b2efd}
+      \field{extraname}{2}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We demonstrate that scaling up language models greatly improves task-agnostic, few-shot performance, sometimes even becoming competitive with prior state-of-the-art fine-tuning approaches. Specifically, we train GPT-3, an autoregressive language model with 175 billion parameters, 10x more than any previous non-sparse language model, and test its performance in the few-shot setting. For all tasks, GPT-3 is applied without any gradient updates or fine-tuning, with tasks and few-shot demonstrations specified purely via text interaction with the model. GPT-3 achieves strong performance on many NLP datasets, including translation, question-answering, and cloze tasks. We also identify some datasets where GPT-3's few-shot learning still struggles, as well as some datasets where GPT-3 faces methodological issues related to training on large web corpora.}
+      \field{booktitle}{Advances in {{Neural Information Processing Systems}}}
+      \field{title}{Language {{Models}} Are {{Few-Shot Learners}}}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2025}
+      \field{volume}{33}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \field{pages}{1877\bibrangedash 1901}
+      \range{pages}{25}
+      \verb{file}
+      \verb C:\Users\Bulkin\Zotero\storage\7RSQQA4Q\Brown и др. - 2020 - Language Models are Few-Shot Learners.pdf
+      \endverb
+    \endentry
+    \entry{seabrookeSurveyLayPeoples2024}{inproceedings}{}{}
+      \name{author}{8}{}{%
+        {{hash=31463c7e85a0e7e2f4d16c6e2b84429a}{%
+           family={Seabrooke},
+           familyi={S\bibinitperiod},
+           given={Tina},
+           giveni={T\bibinitperiod}}}%
+        {{hash=386b9f2380911621da012c1a7ff827a1}{%
+           family={Schneiders},
+           familyi={S\bibinitperiod},
+           given={Eike},
+           giveni={E\bibinitperiod}}}%
+        {{hash=cd7833f73c97365e063f43b392456214}{%
+           family={Dowthwaite},
+           familyi={D\bibinitperiod},
+           given={Liz},
+           giveni={L\bibinitperiod}}}%
+        {{hash=fd81a5a07877e36a652eaa045f9f81c9}{%
+           family={Krook},
+           familyi={K\bibinitperiod},
+           given={Joshua},
+           giveni={J\bibinitperiod}}}%
+        {{hash=34a403e1e77436340bbffa5d8297bc6f}{%
+           family={Leesakul},
+           familyi={L\bibinitperiod},
+           given={Natalie},
+           giveni={N\bibinitperiod}}}%
+        {{hash=c6a87672531cebe6cdf38dd968708786}{%
+           family={Clos},
+           familyi={C\bibinitperiod},
+           given={Jeremie},
+           giveni={J\bibinitperiod}}}%
+        {{hash=5968a8179a13fed30e358ed146ecdca0}{%
+           family={Maior},
+           familyi={M\bibinitperiod},
+           given={Horia},
+           giveni={H\bibinitperiod}}}%
+        {{hash=eea15c426610c05cfb23332409dd763e}{%
+           family={Fischer},
+           familyi={F\bibinitperiod},
+           given={Joel},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Austin TX USA}%
+      }
+      \list{publisher}{1}{%
+        {ACM}%
+      }
+      \strng{namehash}{59f91ecd49753fb585836448291442a0}
+      \strng{fullhash}{fe6ecffd8af4648501e004b9ed600033}
+      \strng{fullhashraw}{fe6ecffd8af4648501e004b9ed600033}
+      \strng{bibnamehash}{59f91ecd49753fb585836448291442a0}
+      \strng{authorbibnamehash}{59f91ecd49753fb585836448291442a0}
+      \strng{authornamehash}{59f91ecd49753fb585836448291442a0}
+      \strng{authorfullhash}{fe6ecffd8af4648501e004b9ed600033}
+      \strng{authorfullhashraw}{fe6ecffd8af4648501e004b9ed600033}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the {{Second International Symposium}} on {{Trustworthy Autonomous Systems}}}
+      \field{isbn}{979-8-4007-0989-0}
+      \field{langid}{english}
+      \field{month}{9}
+      \field{title}{A {{Survey}} of {{Lay People}}'s {{Willingness}} to {{Generate Legal Advice}} Using {{Large Language Models}} ({{LLMs}})}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2025}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \field{pages}{1\bibrangedash 5}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1145/3686038.3686043
+      \endverb
+      \verb{file}
+      \verb C:\Users\Bulkin\Zotero\storage\NWUM5DG7\Seabrooke и др. - 2024 - A Survey of Lay People's Willingness to Generate Legal Advice using Large Language Models (LLMs).pdf
+      \endverb
+    \endentry
+    \entry{LawyersGearGenerative}{misc}{}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{abstract}{AI adoption rates accelerate. Yet, UK lawyers demand AI that is grounded in legal sources.}
+      \field{howpublished}{https://www.lexisnexis.co.uk/insights/lawyers-cross-into-the-new-era-of-generative-ai/}
+      \field{langid}{english}
+      \field{title}{Lawyers Gear up for Generative {{AI}}}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2025}
+      \field{urldateera}{ce}
+    \endentry
+    \entry{nguyenBriefReportLawGPT2023}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=c9830a8df4f25bd142b8f8a7d3a55360}{%
+           family={Nguyen},
+           familyi={N\bibinitperiod},
+           given={Ha-Thanh},
+           giveni={H\bibinithyphendelim T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{c9830a8df4f25bd142b8f8a7d3a55360}
+      \strng{fullhash}{c9830a8df4f25bd142b8f8a7d3a55360}
+      \strng{fullhashraw}{c9830a8df4f25bd142b8f8a7d3a55360}
+      \strng{bibnamehash}{c9830a8df4f25bd142b8f8a7d3a55360}
+      \strng{authorbibnamehash}{c9830a8df4f25bd142b8f8a7d3a55360}
+      \strng{authornamehash}{c9830a8df4f25bd142b8f8a7d3a55360}
+      \strng{authorfullhash}{c9830a8df4f25bd142b8f8a7d3a55360}
+      \strng{authorfullhashraw}{c9830a8df4f25bd142b8f8a7d3a55360}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{LawGPT 1.0 is a virtual legal assistant built on the state-of-the-art language model GPT-3, fine-tuned for the legal domain. The system is designed to provide legal assistance to users in a conversational manner, helping them with tasks such as answering legal questions, generating legal documents, and providing legal advice. In this paper, we provide a brief overview of LawGPT 1.0, its architecture, and its performance on a set of legal benchmark tasks. Please note that the detailed information about the model is protected by a non-disclosure agreement (NDA) and cannot be disclosed in this report.}
+      \field{eprintclass}{cs}
+      \field{eprinttype}{arXiv}
+      \field{month}{2}
+      \field{number}{arXiv:2302.05729}
+      \field{shorttitle}{A {{Brief Report}} on {{LawGPT}} 1.0}
+      \field{title}{A {{Brief Report}} on {{LawGPT}} 1.0: {{A Virtual Legal Assistant Based}} on {{GPT-3}}}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2025}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2302.05729
+      \endverb
+      \verb{eprint}
+      \verb 2302.05729
+      \endverb
+      \verb{file}
+      \verb C\:\\Users\\Bulkin\\Zotero\\storage\\N2ZYXW7G\\Nguyen - 2023 - A Brief Report on LawGPT 1.0 A Virtual Legal Assistant Based on GPT-3.pdf;C\:\\Users\\Bulkin\\Zotero\\storage\\M2Q3M8AG\\2302.html
+      \endverb
+      \keyw{Computer Science - Artificial Intelligence,Computer Science - Computation and Language}
+    \endentry
+    \entry{huangLawyerLLaMATechnical2023}{misc}{}{}
+      \name{author}{8}{}{%
+        {{hash=8e07b7771d91dee7cf386cef5674446f}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Quzhe},
+           giveni={Q\bibinitperiod}}}%
+        {{hash=e197269864ef5dad9b24072f1b5c183a}{%
+           family={Tao},
+           familyi={T\bibinitperiod},
+           given={Mingxu},
+           giveni={M\bibinitperiod}}}%
+        {{hash=c9191dc69bc22ce41fc456ae9eb63db8}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Chen},
+           giveni={C\bibinitperiod}}}%
+        {{hash=1152b66dfd9169cbd2aa4ffc8a5a7107}{%
+           family={An},
+           familyi={A\bibinitperiod},
+           given={Zhenwei},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=624273b8a7c17e673069e33872e30070}{%
+           family={Jiang},
+           familyi={J\bibinitperiod},
+           given={Cong},
+           giveni={C\bibinitperiod}}}%
+        {{hash=a0bbb12cc2fc5322876f5f283f7c0119}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Zhibin},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=f2c5d2f203996f97d4f7cc85295a1789}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Zirui},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=74cf0f0851b9291c233197ce5d32657f}{%
+           family={Feng},
+           familyi={F\bibinitperiod},
+           given={Yansong},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{f3e5d7f60e50df9b831fbf00ec54774f}
+      \strng{fullhash}{fcfc35b4c625552ad5b5a08f05d6c1e4}
+      \strng{fullhashraw}{fcfc35b4c625552ad5b5a08f05d6c1e4}
+      \strng{bibnamehash}{f3e5d7f60e50df9b831fbf00ec54774f}
+      \strng{authorbibnamehash}{f3e5d7f60e50df9b831fbf00ec54774f}
+      \strng{authornamehash}{f3e5d7f60e50df9b831fbf00ec54774f}
+      \strng{authorfullhash}{fcfc35b4c625552ad5b5a08f05d6c1e4}
+      \strng{authorfullhashraw}{fcfc35b4c625552ad5b5a08f05d6c1e4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Large Language Models (LLMs), like LLaMA, have exhibited remarkable performance across various tasks. Nevertheless, when deployed to specific domains such as law or medicine, the models still confront the challenge of a deficiency in domain-specific knowledge and an inadequate capability to leverage that knowledge to resolve domain-related problems. In this paper, we propose a new framework to adapt LLMs to specific domains and build Lawyer LLaMA, a legal domain LLM, based on this framework. Specifically, we inject domain knowledge during the continual training stage and teach the model to learn professional skills using properly designed supervised fine-tuning tasks. Moreover, to alleviate the hallucination problem during the model's generation, we add a retrieval module and extract relevant legal articles before the model answers any queries. When learning domain-specific skills, we find that experts' experience is much more useful than experiences distilled from ChatGPT, where hundreds of expert-written data outperform tens of thousands of ChatGPT-generated ones. We will release our model and data.}
+      \field{eprintclass}{cs}
+      \field{eprinttype}{arXiv}
+      \field{month}{10}
+      \field{number}{arXiv:2305.15062}
+      \field{title}{Lawyer {{LLaMA Technical Report}}}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2025}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2305.15062
+      \endverb
+      \verb{eprint}
+      \verb 2305.15062
+      \endverb
+      \verb{file}
+      \verb C\:\\Users\\Bulkin\\Zotero\\storage\\VEV5BVZ5\\Huang и др. - 2023 - Lawyer LLaMA Technical Report.pdf;C\:\\Users\\Bulkin\\Zotero\\storage\\RCV252QF\\2305.html
+      \endverb
+      \keyw{Computer Science - Artificial Intelligence,Computer Science - Computation and Language}
+    \endentry
+    \entry{cuiChatlawMultiAgentCollaborative2024a}{misc}{}{}
+      \name{author}{9}{}{%
+        {{hash=6019fbb5f042d0375a58cfd9a8823e92}{%
+           family={Cui},
+           familyi={C\bibinitperiod},
+           given={Jiaxi},
+           giveni={J\bibinitperiod}}}%
+        {{hash=3277a20434df59b83aa8e1b1cef94dbd}{%
+           family={Ning},
+           familyi={N\bibinitperiod},
+           given={Munan},
+           giveni={M\bibinitperiod}}}%
+        {{hash=016b54c91277b0fd2cbdc292d4b4cb57}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Zongjian},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=a83c9cfc40f465e5490e50cb90e5975a}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Bohua},
+           giveni={B\bibinitperiod}}}%
+        {{hash=2290677b4e6d17eb36e64084a1640590}{%
+           family={Yan},
+           familyi={Y\bibinitperiod},
+           given={Yang},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=2620b9afd37cca5b9b7354f67c036d4d}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Hao},
+           giveni={H\bibinitperiod}}}%
+        {{hash=a0d6c18d848ff12c2a7512f91f220186}{%
+           family={Ling},
+           familyi={L\bibinitperiod},
+           given={Bin},
+           giveni={B\bibinitperiod}}}%
+        {{hash=7734b80d050024ca0fefbde5a51e2473}{%
+           family={Tian},
+           familyi={T\bibinitperiod},
+           given={Yonghong},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=218fa32d4e65e6f95699163d9632ea2b}{%
+           family={Yuan},
+           familyi={Y\bibinitperiod},
+           given={Li},
+           giveni={L\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{7300b5d6aabf4642bbea920625f583d2}
+      \strng{fullhash}{f58edd57e7ce19282909f89f626e21d9}
+      \strng{fullhashraw}{f58edd57e7ce19282909f89f626e21d9}
+      \strng{bibnamehash}{7300b5d6aabf4642bbea920625f583d2}
+      \strng{authorbibnamehash}{7300b5d6aabf4642bbea920625f583d2}
+      \strng{authornamehash}{7300b5d6aabf4642bbea920625f583d2}
+      \strng{authorfullhash}{f58edd57e7ce19282909f89f626e21d9}
+      \strng{authorfullhashraw}{f58edd57e7ce19282909f89f626e21d9}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{AI legal assistants based on Large Language Models (LLMs) can provide accessible legal consulting services, but the hallucination problem poses potential legal risks. This paper presents Chatlaw, an innovative legal assistant utilizing a Mixture-of-Experts (MoE) model and a multi-agent system to enhance the reliability and accuracy of AI-driven legal services. By integrating knowledge graphs with artificial screening, we construct a high-quality legal dataset to train the MoE model. This model utilizes different experts to address various legal issues, optimizing the accuracy of legal responses. Additionally, Standardized Operating Procedures (SOP), modeled after real law firm workflows, significantly reduce errors and hallucinations in legal services. Our MoE model outperforms GPT-4 in the Lawbench and Unified Qualification Exam for Legal Professionals by 7.73\% in accuracy and 11 points, respectively, and also surpasses other models in multiple dimensions during real-case consultations, demonstrating our robust capability for legal consultation.}
+      \field{eprintclass}{cs}
+      \field{eprinttype}{arXiv}
+      \field{month}{5}
+      \field{number}{arXiv:2306.16092}
+      \field{shorttitle}{Chatlaw}
+      \field{title}{Chatlaw: {{A Multi-Agent Collaborative Legal Assistant}} with {{Knowledge Graph Enhanced Mixture-of-Experts Large Language Model}}}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2025}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2306.16092
+      \endverb
+      \verb{eprint}
+      \verb 2306.16092
+      \endverb
+      \verb{file}
+      \verb C:\Users\Bulkin\Zotero\storage\MHKUIQRR\Cui и др. - 2024 - Chatlaw A Multi-Agent Collaborative Legal Assistant with Knowledge Graph Enhanced Mixture-of-Expert.pdf
+      \endverb
+      \keyw{Computer Science - Computation and Language}
+    \endentry
+    \entry{mageshHallucinationFreeAssessingReliability2024a}{misc}{}{}
+      \name{author}{6}{}{%
+        {{hash=d3ee608a512ffa52f89b64052f9a8fd3}{%
+           family={Magesh},
+           familyi={M\bibinitperiod},
+           given={Varun},
+           giveni={V\bibinitperiod}}}%
+        {{hash=c3cd120a3cb12ded7576834bb7fa0922}{%
+           family={Surani},
+           familyi={S\bibinitperiod},
+           given={Faiz},
+           giveni={F\bibinitperiod}}}%
+        {{hash=c6b5169e06bc2b299ad8099fa09760fb}{%
+           family={Dahl},
+           familyi={D\bibinitperiod},
+           given={Matthew},
+           giveni={M\bibinitperiod}}}%
+        {{hash=25ec2d343e5a8bcf8fd2513198259cd1}{%
+           family={Suzgun},
+           familyi={S\bibinitperiod},
+           given={Mirac},
+           giveni={M\bibinitperiod}}}%
+        {{hash=2214edb8305f7ccd7cdc310b3a8ae1b4}{%
+           family={Manning},
+           familyi={M\bibinitperiod},
+           given={Christopher\bibnamedelima D.},
+           giveni={C\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=2e146a981c17f3c9b6f92736f5fde3c1}{%
+           family={Ho},
+           familyi={H\bibinitperiod},
+           given={Daniel\bibnamedelima E.},
+           giveni={D\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{bbde2afd0335ffafa578ede99d786d6c}
+      \strng{fullhash}{9dd2fe5b7ba7bf1eaae944b4d4d7cdeb}
+      \strng{fullhashraw}{9dd2fe5b7ba7bf1eaae944b4d4d7cdeb}
+      \strng{bibnamehash}{9dd2fe5b7ba7bf1eaae944b4d4d7cdeb}
+      \strng{authorbibnamehash}{9dd2fe5b7ba7bf1eaae944b4d4d7cdeb}
+      \strng{authornamehash}{bbde2afd0335ffafa578ede99d786d6c}
+      \strng{authorfullhash}{9dd2fe5b7ba7bf1eaae944b4d4d7cdeb}
+      \strng{authorfullhashraw}{9dd2fe5b7ba7bf1eaae944b4d4d7cdeb}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Legal practice has witnessed a sharp rise in products incorporating artificial intelligence (AI). Such tools are designed to assist with a wide range of core legal tasks, from search and summarization of caselaw to document drafting. But the large language models used in these tools are prone to "hallucinate," or make up false information, making their use risky in high-stakes domains. Recently, certain legal research providers have touted methods such as retrieval-augmented generation (RAG) as "eliminating" (Casetext, 2023) or "avoid[ing]" hallucinations (Thomson Reuters, 2023), or guaranteeing "hallucination-free" legal citations (LexisNexis, 2023). Because of the closed nature of these systems, systematically assessing these claims is challenging. In this article, we design and report on the first preregistered empirical evaluation of AI-driven legal research tools. We demonstrate that the providers' claims are overstated. While hallucinations are reduced relative to general-purpose chatbots (GPT-4), we find that the AI research tools made by LexisNexis (Lexis+ AI) and Thomson Reuters (Westlaw AI-Assisted Research and Ask Practical Law AI) each hallucinate between 17\% and 33\% of the time. We also document substantial differences between systems in responsiveness and accuracy. Our article makes four key contributions. It is the first to assess and report the performance of RAG-based proprietary legal AI tools. Second, it introduces a comprehensive, preregistered dataset for identifying and understanding vulnerabilities in these systems. Third, it proposes a clear typology for differentiating between hallucinations and accurate legal responses. Last, it provides evidence to inform the responsibilities of legal professionals in supervising and verifying AI outputs, which remains a central open question for the responsible integration of AI into law.}
+      \field{eprintclass}{cs}
+      \field{eprinttype}{arXiv}
+      \field{month}{5}
+      \field{number}{arXiv:2405.20362}
+      \field{shorttitle}{Hallucination-{{Free}}?}
+      \field{title}{Hallucination-{{Free}}? {{Assessing}} the {{Reliability}} of {{Leading AI Legal Research Tools}}}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2025}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2405.20362
+      \endverb
+      \verb{eprint}
+      \verb 2405.20362
+      \endverb
+      \verb{file}
+      \verb C\:\\Users\\Bulkin\\Zotero\\storage\\ME98BGAX\\Magesh и др. - 2024 - Hallucination-Free Assessing the Reliability of Leading AI Legal Research Tools.pdf;C\:\\Users\\Bulkin\\Zotero\\storage\\ZILRH9Y8\\2405.html
+      \endverb
+      \keyw{Computer Science - Computation and Language,Computer Science - Computers and Society}
+    \endentry
+    \entry{kalaiCalibratedLanguageModels2024}{misc}{}{}
+      \name{author}{2}{}{%
+        {{hash=e0093646e23599f644f65127812bbf7b}{%
+           family={Kalai},
+           familyi={K\bibinitperiod},
+           given={Adam\bibnamedelima Tauman},
+           giveni={A\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+        {{hash=dd0bba24ed8e132acb3c89ed21ac70d4}{%
+           family={Vempala},
+           familyi={V\bibinitperiod},
+           given={Santosh\bibnamedelima S.},
+           giveni={S\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{ff7b81175db75e4aae02aec82f75522e}
+      \strng{fullhash}{ff7b81175db75e4aae02aec82f75522e}
+      \strng{fullhashraw}{ff7b81175db75e4aae02aec82f75522e}
+      \strng{bibnamehash}{ff7b81175db75e4aae02aec82f75522e}
+      \strng{authorbibnamehash}{ff7b81175db75e4aae02aec82f75522e}
+      \strng{authornamehash}{ff7b81175db75e4aae02aec82f75522e}
+      \strng{authorfullhash}{ff7b81175db75e4aae02aec82f75522e}
+      \strng{authorfullhashraw}{ff7b81175db75e4aae02aec82f75522e}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Recent language models generate false but plausible-sounding text with surprising frequency. Such "hallucinations" are an obstacle to the usability of language-based AI systems and can harm people who rely upon their outputs. This work shows that there is an inherent statistical lower-bound on the rate that pretrained language models hallucinate certain types of facts, having nothing to do with the transformer LM architecture or data quality. For "arbitrary" facts whose veracity cannot be determined from the training data, we show that hallucinations must occur at a certain rate for language models that satisfy a statistical calibration condition appropriate for generative language models. Specifically, if the maximum probability of any fact is bounded, we show that the probability of generating a hallucination is close to the fraction of facts that occur exactly once in the training data (a "Good-Turing" estimate), even assuming ideal training data without errors. One conclusion is that models pretrained to be sufficiently good predictors (i.e., calibrated) may require post-training to mitigate hallucinations on the type of arbitrary facts that tend to appear once in the training set. However, our analysis also suggests that there is no statistical reason that pretraining will lead to hallucination on facts that tend to appear more than once in the training data (like references to publications such as articles and books, whose hallucinations have been particularly notable and problematic) or on systematic facts (like arithmetic calculations). Therefore, different architectures and learning algorithms may mitigate these latter types of hallucinations.}
+      \field{eprintclass}{cs}
+      \field{eprinttype}{arXiv}
+      \field{month}{3}
+      \field{number}{arXiv:2311.14648}
+      \field{title}{Calibrated {{Language Models Must Hallucinate}}}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2025}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2311.14648
+      \endverb
+      \verb{eprint}
+      \verb 2311.14648
+      \endverb
+      \verb{file}
+      \verb C\:\\Users\\Bulkin\\Zotero\\storage\\WJRT8QUR\\Kalai и Vempala - 2024 - Calibrated Language Models Must Hallucinate.pdf;C\:\\Users\\Bulkin\\Zotero\\storage\\GMV3DA63\\2311.html
+      \endverb
+      \keyw{Computer Science - Artificial Intelligence,Computer Science - Computation and Language}
+    \endentry
+    \entry{lewisRetrievalAugmentedGenerationKnowledgeIntensive2020}{inproceedings}{}{}
+      \name{author}{12}{}{%
+        {{hash=ecbe786a5668bf643d74bb24fe1c3cfe}{%
+           family={Lewis},
+           familyi={L\bibinitperiod},
+           given={Patrick},
+           giveni={P\bibinitperiod}}}%
+        {{hash=79978685fd7b37606022b06c0f6419a1}{%
+           family={Perez},
+           familyi={P\bibinitperiod},
+           given={Ethan},
+           giveni={E\bibinitperiod}}}%
+        {{hash=d205faec67355b6e0ec49f82a492324c}{%
+           family={Piktus},
+           familyi={P\bibinitperiod},
+           given={Aleksandra},
+           giveni={A\bibinitperiod}}}%
+        {{hash=e1c32989a78998fe3c03c981d0da2dc7}{%
+           family={Petroni},
+           familyi={P\bibinitperiod},
+           given={Fabio},
+           giveni={F\bibinitperiod}}}%
+        {{hash=b24392ebfb2c0a35979fc689c389c649}{%
+           family={Karpukhin},
+           familyi={K\bibinitperiod},
+           given={Vladimir},
+           giveni={V\bibinitperiod}}}%
+        {{hash=78a420900f50a8470ad085fb05231bf6}{%
+           family={Goyal},
+           familyi={G\bibinitperiod},
+           given={Naman},
+           giveni={N\bibinitperiod}}}%
+        {{hash=1bbb1fd798ca49ec46b557ebda750cf1}{%
+           family={Kutler},
+           familyi={K\bibinitperiod},
+           given={Heinrich},
+           giveni={H\bibinitperiod}}}%
+        {{hash=c97f53fdeeb04c28de19e3324cb4bc0a}{%
+           family={Lewis},
+           familyi={L\bibinitperiod},
+           given={Mike},
+           giveni={M\bibinitperiod}}}%
+        {{hash=d4d56d3d370b3afd4ad2ebf985fbd3f8}{%
+           family={Yih},
+           familyi={Y\bibinitperiod},
+           given={Wen-tau},
+           giveni={W\bibinithyphendelim t\bibinitperiod}}}%
+        {{hash=b3ff4029884ead9928954ea33714192c}{%
+           family={Rocktäschel},
+           familyi={R\bibinitperiod},
+           given={Tim},
+           giveni={T\bibinitperiod}}}%
+        {{hash=6cd024b217f3f2f8126e253b8c84d24d}{%
+           family={Riedel},
+           familyi={R\bibinitperiod},
+           given={Sebastian},
+           giveni={S\bibinitperiod}}}%
+        {{hash=ca01c762f4a52dd8a8548508f8d727c9}{%
+           family={Kiela},
+           familyi={K\bibinitperiod},
+           given={Douwe},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Curran Associates, Inc.}%
+      }
+      \strng{namehash}{f238c3bfc4b30650dd17e65c4aadfc66}
+      \strng{fullhash}{d003c6be4c9e1fdb193e43ab084ae014}
+      \strng{fullhashraw}{d003c6be4c9e1fdb193e43ab084ae014}
+      \strng{bibnamehash}{f238c3bfc4b30650dd17e65c4aadfc66}
+      \strng{authorbibnamehash}{f238c3bfc4b30650dd17e65c4aadfc66}
+      \strng{authornamehash}{f238c3bfc4b30650dd17e65c4aadfc66}
+      \strng{authorfullhash}{d003c6be4c9e1fdb193e43ab084ae014}
+      \strng{authorfullhashraw}{d003c6be4c9e1fdb193e43ab084ae014}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Large pre-trained language models have been shown to store factual knowledge in their parameters, and achieve state-of-the-art results when fine-tuned on downstream NLP tasks. However, their ability to access and precisely manipulate knowledge is still limited, and hence on knowledge-intensive tasks, their performance lags behind task-specific architectures. Additionally, providing provenance for their decisions and updating their world knowledge remain open research problems. Pre-trained models with a differentiable access mechanism to explicit non-parametric memory can overcome this issue, but have so far been only investigated for extractive downstream tasks. We explore a general-purpose fine-tuning recipe for retrieval-augmented generation (RAG) -- models which combine pre-trained parametric and non-parametric memory for language generation. We introduce RAG models where the parametric memory is a pre-trained seq2seq model and the non-parametric memory is a dense vector index of Wikipedia, accessed with a pre-trained neural retriever. We compare two RAG formulations, one which conditions on the same retrieved passages across the whole generated sequence, the other can use different passages per token. We fine-tune and evaluate our models on a wide range of knowledge-intensive NLP tasks and set the state-of-the-art on three open domain QA tasks, outperforming parametric seq2seq models and task-specific retrieve-and-extract architectures. For language generation tasks, we find that RAG models generate more specific, diverse and factual language than a state-of-the-art parametric-only seq2seq baseline.}
+      \field{booktitle}{Advances in {{Neural Information Processing Systems}}}
+      \field{title}{Retrieval-{{Augmented Generation}} for {{Knowledge-Intensive NLP Tasks}}}
+      \field{urlday}{21}
+      \field{urlmonth}{3}
+      \field{urlyear}{2025}
+      \field{volume}{33}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \field{pages}{9459\bibrangedash 9474}
+      \range{pages}{16}
+      \verb{file}
+      \verb C:\Users\Bulkin\Zotero\storage\JHYAZZU9\Lewis и др. - 2020 - Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks.pdf
+      \endverb
+    \endentry
+    \entry{kolaScienceCenter}{article}{}{}
+      \name{author}{6}{}{%
+        {{hash=5ebbbe841324b70d6382e31aee4e4e81}{%
+           family={Oleynik},
+           familyi={O\bibinitperiod},
+           given={Andrey\bibnamedelima G.},
+           giveni={A\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=5f2292e9fc272b47ae68842f1a3a0066}{%
+           family={Datyev},
+           familyi={D\bibinitperiod},
+           given={Igor\bibnamedelima O.},
+           giveni={I\bibinitperiod\bibinitdelim O\bibinitperiod}}}%
+        {{hash=7860fd9dd2668957a7704950f4b5afd1}{%
+           family={Zuenko},
+           familyi={Z\bibinitperiod},
+           given={Alexander\bibnamedelima A.},
+           giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=8bbbea63b820b54ce89cd74850400acf}{%
+           family={Fedorov},
+           familyi={F\bibinitperiod},
+           given={Andrey\bibnamedelima M.},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=5118c1e1e612ba4091dd4232406b5e87}{%
+           family={Shestakov},
+           familyi={S\bibinitperiod},
+           given={Aleksey\bibnamedelima V.},
+           giveni={A\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+        {{hash=97cfb486d44b9a85cd7b4841017a804f}{%
+           family={Vishnyakov},
+           familyi={V\bibinitperiod},
+           given={Ivan\bibnamedelima G.},
+           giveni={I\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \strng{namehash}{9f303156ee514e22fe064382b68079e5}
+      \strng{fullhash}{7b9fc1cc22bef52674ebf2782a023836}
+      \strng{fullhashraw}{7b9fc1cc22bef52674ebf2782a023836}
+      \strng{bibnamehash}{7b9fc1cc22bef52674ebf2782a023836}
+      \strng{authorbibnamehash}{7b9fc1cc22bef52674ebf2782a023836}
+      \strng{authornamehash}{9f303156ee514e22fe064382b68079e5}
+      \strng{authorfullhash}{7b9fc1cc22bef52674ebf2782a023836}
+      \strng{authorfullhashraw}{7b9fc1cc22bef52674ebf2782a023836}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Transactions of the Kola Science Centre of RAS. Series: Engineering Sciences}
+      \field{number}{3}
+      \field{title}{Using RAG technology to design an intelligent information system for support exploratory search}
+      \field{volume}{15}
+      \field{year}{2024}
+      \field{pages}{5\bibrangedash 27}
+      \range{pages}{23}
+      \verb{doi}
+      \verb 10.37614/2949.1215.2024.15.3.001
+      \endverb
+      \verb{urlraw}
+      \verb https://rio.ksc.ru/data/documents/60_3_2024_15_IIMM/60_Trud_Teh_3_2024_15.pdf
+      \endverb
+      \verb{url}
+      \verb https://rio.ksc.ru/data/documents/60_3_2024_15_IIMM/60_Trud_Teh_3_2024_15.pdf
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
 \endinput
 
