@@ -23,7 +23,7 @@ class WordCountingChunkingAlgorithm(ChunkingAlgorithm):
 
     
         
-    def chunk_a_document(self, raw_document_index: str) -> int:
+    def chunk_a_document(self, raw_document_index: str, visualize: bool = False) -> int:
         
         assert type(raw_document_index) == str
 

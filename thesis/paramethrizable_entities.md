@@ -45,11 +45,15 @@
 |--------------------|-----------|--------------|  
 | scoring_function   | Choice    | tfidf, BM25F |  
 | normalizer         | bool      | 1, 0         |  
-| K1                 | float     | 0-3          |  
-| B                  | float     | 0-1          |  
+| K1                 | float     | 1.2 - 2.0 (шаг 0.2)|  
+| B                  | float     | 0.6-1 (шаг 0.2)|
+
+25 комбинаций (никаких улчшений)
 
 ## FAISS Vector  
-Хранение для поиска по векторным представлениям чанков  
+Хранение для поиска по векторным представлениям чанков 
+
+10 вариантов
 
 ### FaissIndexFlatL2  
 Простой flat-индекс, полный перебор по норме L2 (евклидово расстояние)  
@@ -58,26 +62,35 @@
 Простой flat-индекс, полный перебор по InnerProduct  
 
 ### FaissIndexHNSWFlat  
-Индекс, основанный на Hierarchical Navigable Small World  
+Индекс, основанный на Hierchical Navigable Small World
+
+M - "плотность связей", количество связей для каждой ноды с другими нодами
+
+efConstruction - количество рассматриваемых кандидатов для создания связи  > M 
+
 
 **Параметры:**  
 | Parameter        | Type | Domain |  
 |-----------------|------|--------|  
-| M               | int  | 2-22?  |  
-| efConstruction  | int  | 3-22?  |  
+| M               | int  | 2-???  |  
+| efConstruction  | int  | 3-???  |  
 
 ### FaissIndexIVFFlat  
 Индекс, основанный на ячейках Вороного  
 
+nlist - количество клеток вороного (работают на индексе FlatL2)\
+metric - евклидово или косинусное расстояние
+
+
 **Параметры:**  
 | Parameter | Type        | Domain   |  
 |----------|-------------|----------|  
-| nlist    | int         | 127?     |  
+| nlist    | int         | 1 - n / 2|  
 | metric   | Categorical | L2, IP   |  
 
 ### FaissIndexLSH  
 Local Sensitive Hashing  
-
+nbits - размер "хэша" вектора, количество гиперплоскостей на которые разбито пространство. 1 -- по позитивному направлению нормали, 0 против (к примеру) больше nbits -- меньше бакеты, в среднем точнее
 **Параметры:**  
 | Parameter | Type | Domain     |  
 |----------|------|------------|  
@@ -85,6 +98,9 @@ Local Sensitive Hashing
 
 ### FaissIndexScalarQuantizer  
 Скалярная квантизация индексов  
+quantizer - уровень квантизации (8, 6, 4 бит)\
+metric - евклидово или косинусное расстояние
+
 
 **Параметры:**  
 | Parameter | Type        | Domain          |  
@@ -94,6 +110,10 @@ Local Sensitive Hashing
 
 ### FaissIndexPQ  
 Product Quantization  
+Что происходит под капотом?\
+Разбиение: Векторы разбиваются на M частей.\
+Квантование: Каждая часть квантуется с использованием $2^{n_{bits}}$ центроидов
+
 
 **Параметры:**  
 | Parameter | Type        | Domain          |  
@@ -103,7 +123,12 @@ Product Quantization
 | metric   | Categorical | L2, IP          |  
 
 ### FaissIndexIVFScalarQuantizer  
-Скалярная квантизация индексов с хранением в ячейках Вороного  
+Скалярная квантизация индексов с хранением в ячейках Вороного 
+
+Скалярная квантизация индексов и хранение полученных векторов в клетках Вороного\
+quantizer - уровень квантизации (8, 6, 4 бит)\
+metric - евклидово или косинусное расстояние
+
 
 **Параметры:**  
 | Parameter | Type        | Domain          |  
@@ -161,11 +186,19 @@ Product Quantization с хранением в ячейках Вороного
 | global_similarity_threshold | float  | 0-1                  |  
 | POS_thresholds             | dict   | {PoS-tag: 0-1}       |  
 | max_entries                | int    | 1 - chunks_amount    |  
-| max_combinations           | int    | 1-22                 |  
-| max_synonyms               | int    | 1-22?                |  
+| max_combinations           | int    | 1-???                 |  
+| max_synonyms               | int    | 1-???                |  
 
-## Reranker  
+https://ufal.mff.cuni.cz/pbml/105/art-leeuwenberg-et-al.pdf
+
+все придумали за нас
+
+
+3 стратегии (глобальный трешхолд на 0,5 - 0.9 (шаг 0.1), относительный на 0.15 - 0.3 (шаг 0.05), или стратегия "второго выбора" не параметризуемая)
+итого 9 комбинаций
+## Reranker
 Пересортировка результатов из разных выпадов по релевантности  
+
 
 ### LinearCombinationRerank  
 
