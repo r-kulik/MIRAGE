@@ -178,7 +178,7 @@ Product Quantization с хранением в ячейках Вороного
 ## Query  
 Синхронизация запросов для полнотекстового поиска  
 
-### RusVectoresQuery  
+### RusVectoresQuorums
 
 **Параметры:**  
 | Parameter                   | Type   | Domain               |  
