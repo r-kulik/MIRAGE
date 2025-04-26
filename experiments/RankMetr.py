@@ -1,7 +1,11 @@
+from collections import namedtuple
+from typing import List, Tuple
 import numpy as np
 
+ScorePairType = namedtuple('ScorePairType', ['score', 'relevance'])
+
 class RankMetr:
-    def ndcg(self, rel_scores):
+    def ndcg(self, rel_scores: List[ScorePairType]):
         rel_scores = [i[1] for i in rel_scores]
         dcg_score = 0
         for i, rel in enumerate(rel_scores, start=1):

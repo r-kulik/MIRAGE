@@ -4,6 +4,7 @@ import requests
 from pydantic import BaseModel
 
 from mirage import ChunkStorage
+from mirage.inference.llm_adapters.LLMAdapter import LLMAdapter
 
 class LlmRequestParamsDTO(BaseModel):
     prompt: Optional[str]
@@ -15,7 +16,7 @@ class LlmRequestParamsDTO(BaseModel):
     num_return_sequences: int
     
 
-class LLM:
+class LLM(LLMAdapter):
     def __init__(
         self, 
         max_length: int = 5000,

@@ -1,7 +1,10 @@
 from typing import List, Optional
 from groq import Groq
+from loguru import logger
 from mirage import ChunkStorage
 from pydantic import BaseModel
+
+from mirage.inference.llm_adapters.LLMAdapter import LLMAdapter
 from .groq_keys import groq_api_keys
 import os
 
@@ -14,7 +17,7 @@ class GroqRequestParamsDTO(BaseModel):
     frequency_penalty: Optional[float] = 1.2  # Frequency penalty
     n: Optional[int] = 1  # Number of completions to generate
 
-class GroqLLM:
+class GroqLLM(LLMAdapter):
     def __init__(
         self, 
         model: str = 'llama3-8b-8192',  # Default model
@@ -71,5 +74,8 @@ class GroqLLM:
         if response.choices:
             generated_text = response.choices[0].message.content
             print(generated_text)
+            return generated_text
         else:
-            print("No completions found in the response.")
+            error_text = "No completions found in the response."
+            logger.error(error_text)
+            raise ValueError(error_text)

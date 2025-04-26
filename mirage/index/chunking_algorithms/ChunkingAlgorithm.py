@@ -18,8 +18,6 @@ class ChunkingAlgorithm(ABC):
         """
         Chunking algorithms realizations must take raw_storage, chunk_storage only. Other parameters must be optional with the provided default value
         """
-        self.raw_storage = raw_storage
-        self.chunk_storage = chunk_storage
 
     @abstractmethod
     def chunk_a_document(raw_document_index) -> int:

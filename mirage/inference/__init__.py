@@ -1,4 +1,4 @@
 from .caching import *
-from .prompters import *
+from .llm_adapters import *
 from .quorums import *
 from .rerankers import *

@@ -1,3 +1,4 @@
+from typing import List
 from sklearn.metrics.pairwise import euclidean_distances, cosine_similarity
 from abc import ABC, abstractmethod
 import numpy as np
@@ -19,9 +20,9 @@ class RelevanceFunction(ABC):
     def get_relevance_float(self, str_model: str) -> float:
         pass
     
-    def get_relevance(self, str_model: str):
+    def get_relevance(self, str_model: str) -> List[bool]:
         score = self.get_relevance_float(str_model)
-        return [score, int(score > self.threshhold)]
+        return (score, int(score > self.threshhold))
     
 class CosineRelevance(RelevanceFunction):
     def __init__(self, threshhold = 0.8):
@@ -48,3 +49,10 @@ class IoU(RelevanceFunction):
         res = len(set(arr_model) & self.ideal_context) / len(arr_model)
         
         return res
+    
+
+class ContextPrecision:
+    ...
+
+class ContextRecall:
+    ...
