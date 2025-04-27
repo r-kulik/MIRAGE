@@ -1,9 +1,12 @@
 import json
 import os
 import zipfile
+from loguru import logger
 import pdfplumber
 import docx
 import typing
+
+from tqdm import tqdm
 
 from .RawStorage import RawStorage
 
@@ -82,7 +85,8 @@ class FolderRawStorage(RawStorage):
     def __read_pdf(file_name) -> str:
         with pdfplumber.open(file_name) as pdf:
             full_text = []
-            for page in pdf.pages:
+            logger.info(f'Reading pages of {file_name}')
+            for page in tqdm(pdf.pages):
                 full_text.append(page.extract_text())
         return '\n'.join(full_text)
     

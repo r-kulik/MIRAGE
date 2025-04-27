@@ -24,7 +24,7 @@ class WordCountingChunkingAlgorithm(ChunkingAlgorithm):
     
         
     def chunk_a_document(self, raw_document_index: str) -> int:
-        
+        logger.info(f'Reading a document... {raw_document_index}')
         assert type(raw_document_index) == str
 
         raw_text = self.raw_storage[raw_document_index]

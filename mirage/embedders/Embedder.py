@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Optional, Dict, Callable, final
+from loguru import logger
 import numpy as np
 from .TextNormalizer import TextNormalizer
 from ..index.chunk_storages import ChunkStorage
@@ -141,7 +142,7 @@ class Embedder(ABC):
             raise EmbedderIsNotTrainedException
 
         if visualize:
-            print("Converting ChunkStorage to VectorIndex")
+            logger.info("Converting ChunkStorage to VectorIndex")
             progress_bar = tqdm.tqdm(total=len(chunk_storage.get_indexes()))
         
         for chunk_storage_key, chunk_text in chunk_storage:
