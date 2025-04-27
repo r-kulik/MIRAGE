@@ -43,7 +43,7 @@ class WordCountingChunkingAlgorithm(ChunkingAlgorithm):
             return 1
 
         # Calculate the number of words in the overlap
-        overlap_size = math.ceil(self.words_amount * self.overlap)
+        overlap_size = math.floor(self.words_amount * self.overlap)
         # logger.info(f"Using an overlap size of {overlap_size} words")
 
         # Chunking the document with overlap
