@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import threading
 from typing import Optional, Dict, Callable, final
 from loguru import logger
 import numpy as np
@@ -122,7 +124,7 @@ class Embedder(ABC):
             self,
             chunk_storage: ChunkStorage,
             vector_index: VectorIndex,
-            visualize = False
+            visualize: bool = False
     ) -> None:
         '''
         This function automatically "populate" a VectorIndex object with the vectors obtained from the chunks from ChunkStorage object

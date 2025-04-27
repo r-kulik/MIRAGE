@@ -7,12 +7,12 @@ from mirage.index import MirageIndex
 
 def main():
     logger.debug('Started script')
-    raw_doc = FolderRawStorage(folder_path='data')
+    raw_doc = FolderRawStorage(folder_path='data_txt')
     chunks = WhooshChunkStorage(scoring_function='BM25F', normalizer=True)
     chunking_algorithm = WordCountingChunkingAlgorithm(
         raw_storage=raw_doc,
         chunk_storage=chunks,
-        words_amount=1000
+        words_amount=128, overlap=0.5
     )
     logger.debug('Starting chunking')
     chunking_algorithm.execute()
