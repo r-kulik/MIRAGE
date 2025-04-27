@@ -36,7 +36,8 @@ class FaissIndexFlatL2(VectorIndex):
         if vector.shape[0] != self.dim:
             raise ValueError(f"Vector dimensionality {vector.shape[0]} does not match index dimensionality {self.dim}")
         if tuple(vector) in self.vector_to_key_map:
-            raise ValueError(f"Vector {vector} is already present in the index")
+            # raise ValueError(f"Vector {vector} is already present in the index")
+            return
 
         if self.is_trained:
             self.index.add(np.expand_dims(vector, axis=0))
@@ -163,7 +164,8 @@ class FaissIndexFlatIP(VectorIndex):
         if vector.shape[0] != self.dim:
             raise ValueError(f"Vector dimensionality {vector.shape[0]} does not match index dimensionality {self.dim}")
         if tuple(vector) in self.vector_to_key_map:
-            raise ValueError(f"Vector {vector} is already present in the index")
+            # raise ValueError(f"Vector {vector} is already present in the index")
+            return
 
         if self.is_trained:
             self.index.add(np.expand_dims(vector, axis=0))
