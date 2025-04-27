@@ -17,6 +17,12 @@ class MIRAGE:
             vector_index=self.index.vector_index
         )
 
+    def save(self, filepath: str):
+        ...
+
+    def load(self, filepath: str):
+        ...
+
     def query(self, query_text):
         return self.inference.llm_adapter.do_request(
             query_text,

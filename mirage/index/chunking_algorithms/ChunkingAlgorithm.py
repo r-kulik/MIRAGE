@@ -18,6 +18,8 @@ class ChunkingAlgorithm(ABC):
         """
         Chunking algorithms realizations must take raw_storage, chunk_storage only. Other parameters must be optional with the provided default value
         """
+        self.raw_storage = raw_storage
+        self.chunk_storage = chunk_storage
 
     @abstractmethod
     def chunk_a_document(raw_document_index) -> int:
@@ -33,7 +35,7 @@ class ChunkingAlgorithm(ABC):
         pass
 
 
-    def execute(self, visualize=False) -> None:
+    def execute(self) -> None:
         # self.chunk_storage.clear() 
         logger.info("Chunking of documents")
         raw_document_indexes = self.raw_storage.get_indexes()
@@ -41,7 +43,7 @@ class ChunkingAlgorithm(ABC):
             self.chunk_storage.get_raw_index_of_document(index) for index in  self.chunk_storage.get_indexes()
         )
         return sum([
-            self.chunk_a_document(raw_document_index, visualize=visualize)
+            self.chunk_a_document(raw_document_index)
             for raw_document_index in 
             raw_document_indexes if not raw_document_index in parsed_indexes
         ])

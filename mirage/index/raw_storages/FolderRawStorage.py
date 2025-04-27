@@ -12,7 +12,7 @@ class FolderRawStorage(RawStorage):
     """
     Basic Raw Storage that stores content of all text files in the folder 
     """
-    CONFIG_FILENAME: str = 'folder_raw_storage.mirage'
+    CONFIG_FILENAME: str = 'folder_raw_storage.mirage_config'
 
     def __init__(
             self, folder_path, 

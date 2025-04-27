@@ -1,9 +1,8 @@
-
-
 from numpy import ndarray
 from typing import Callable, Optional, Literal
 from mirage.embedders import Embedder, TextNormalizer
 from sentence_transformers import SentenceTransformer
+import torch  # Добавляем torch для проверки доступности CUDA
 
 
 class HuggingFaceEmbedder(Embedder):
@@ -24,7 +23,8 @@ class HuggingFaceEmbedder(Embedder):
             normalizer (TextNormalizer | bool | Callable | None): Нормализатор текста.
         """
         super().__init__(normalizer)
-        self.model = SentenceTransformer(model_name, trust_remote_code=True)
+        device = "cuda" if torch.cuda.is_available() else "cpu"  # Проверяем доступность CUDA
+        self.model = SentenceTransformer(model_name, trust_remote_code=True, device=device)
         self._dim = self.model.get_sentence_embedding_dimension()  # Устанавливаем размерность вектора
 
     def embed(self, text: str) -> ndarray:
@@ -37,13 +37,10 @@ class HuggingFaceEmbedder(Embedder):
         Returns:
             np.ndarray: Vector representation as a numpy ndarray
         """
-        # Нормализация текста, если задан нормализатор
         normalized_text = self._normalize(text) 
-        # Векторизация текста с помощью модели SentenceTransformer
-        vector = self.model.encode(normalized_text)
+        vector = self.model.encode(normalized_text, device=self.model.device)  # Указываем устройство
         
         return vector
     
     def fit(*args, **kwargs):
         pass
-    

@@ -1,7 +1,13 @@
+import gc
+import json
+import os
+import shutil
+import tempfile
 import uuid
+import zipfile
 from whoosh import index, fields, scoring, qparser
 from whoosh.analysis import StemmingAnalyzer
-from whoosh.filedb.filestore import RamStorage
+from whoosh.filedb.filestore import RamStorage, FileStorage, copy_to_ram
 from whoosh.qparser import syntax
 from typing import Callable, Generator, List, Optional
 
@@ -127,3 +133,85 @@ class WhooshChunkStorage(ChunkStorage):
                     chunk_storage_key=hit['id'],
                     vector=None
                 ) for hit in results]
+        
+    def save(self, path: str) -> None:
+        """Сохраняет индекс и настройки в zip-файл с расширением .whoosh."""
+        if not path.endswith('.whoosh'):
+            raise ValueError("Файл должен иметь расширение .whoosh")
+
+        # Создаем временную директорию
+        with tempfile.TemporaryDirectory() as tmpdirname:
+            temp_storage = FileStorage(tmpdirname)
+            temp_index = temp_storage.create_index(self.ix.schema)
+
+            # Копируем все документы
+            writer = temp_index.writer()
+            with self.ix.searcher() as searcher:
+                for fields in searcher.all_stored_fields():
+                    writer.add_document(**fields)
+            writer.commit()
+
+            # Сохраняем метаданные
+            metadata = {
+                "scoring_function": self.scoring_function,
+                "K1": self.K1,
+                "B": self.B,
+                "normalizer": bool(self.normalizer)  # Сохраняем только факт использования нормализатора
+            }
+            with open(os.path.join(tmpdirname, "metadata.json"), "w", encoding="utf-8") as f:
+                json.dump(metadata, f)
+
+            # Упаковываем директорию в zip-архив с расширением .whoosh
+            with zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED) as zf:
+                for root, dirs, files in os.walk(tmpdirname):
+                    for file in files:
+                        filepath = os.path.join(root, file)
+                        arcname = os.path.relpath(filepath, tmpdirname)
+                        zf.write(filepath, arcname)
+
+    @classmethod
+    def load(cls, path: str) -> "WhooshChunkStorage":
+        """
+        Загружает индекс и настройки из zip-архива .whoosh и возвращает
+        полностью функциональный экземпляр WhooshChunkStorage с RamStorage.
+        """
+        if not os.path.exists(path):
+            raise FileNotFoundError(f"Файл {path} не найден")
+
+        # распакуем в «temporary directory» — контекстный менеджер сам позаботится об удалении
+        with tempfile.TemporaryDirectory() as tmpdir:
+            with zipfile.ZipFile(path, 'r') as zf:
+                zf.extractall(tmpdir)
+
+            # прочитаем метаданные
+            meta_path = os.path.join(tmpdir, "metadata.json")
+            if not os.path.isfile(meta_path):
+                raise ValueError("В архиве нет файла metadata.json")
+            with open(meta_path, "r", encoding="utf-8") as mf:
+                meta = json.load(mf)
+
+            scoring_function = meta["scoring_function"]
+            K1               = meta.get("K1")
+            B                = meta.get("B")
+            norm_flag        = meta.get("normalizer", True)
+
+            # создаём экземпляр с нужными параметрами
+            instance = cls(
+                scoring_function=scoring_function,
+                normalizer=norm_flag,
+                K1=K1,
+                B=B
+            )
+
+            # открываем файловое хранилище и сразу копируем его в память
+            file_storage = FileStorage(tmpdir)
+            ram_storage  = copy_to_ram(file_storage)  # копирует все файлы в RamStorage :contentReference[oaicite:0]{index=0}
+
+            # создаём индекс поверх RamStorage
+            instance.storage = ram_storage
+            instance.ix      = ram_storage.open_index()
+
+            # к этому моменту ни один дескриптор к файлам на диске не держится,
+            # и TemporaryDirectory при выходе спокойно удалит tmpdir
+
+        return instance

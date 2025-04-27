@@ -1,3 +1,8 @@
+import os
+import pickle
+import tempfile
+import zipfile
+import zlib
 import faiss
 import numpy as np
 from typing import Dict, List, Literal, Tuple, Generator
@@ -69,6 +74,69 @@ class FaissIndexFlatL2(VectorIndex):
             self._buffer.clear()
             self.is_trained = True
 
+    def save(self, path: str) -> None:
+        """
+        Сохраняет FAISS индекс и сопоставление в zip-архив (.faiss),
+        используя pickle+zlib для метаданных.
+        """
+        path = os.path.abspath(path)
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            # 1. Сохраняем faiss-индекс
+            index_path = os.path.join(tmpdir, "index.faiss")
+            faiss.write_index(self.index, index_path)
+
+            # 2. Сохраняем метаинформацию сжатым пиклом
+            meta = {
+                "dimensionality": self.dim,
+                "vector_to_key_map": self.vector_to_key_map
+            }
+            meta_path = os.path.join(tmpdir, "metadata.pklz")
+            with open(meta_path, "wb") as f:
+                compressed = zlib.compress(pickle.dumps(meta, protocol=pickle.HIGHEST_PROTOCOL))
+                f.write(compressed)
+
+            # 3. Упаковываем всё в zip
+            with zipfile.ZipFile(path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+                zf.write(index_path, arcname="index.faiss")
+                zf.write(meta_path, arcname="metadata.pklz")
+
+    @classmethod
+    def load(cls, path: str) -> "FaissIndexFlatL2":
+        """
+        Загружает FAISS индекс и сопоставление из zip-архива (.faiss),
+        используя pickle+zlib для метаданных.
+        """
+        if not os.path.exists(path):
+            raise FileNotFoundError(f"Файл {path} не найден")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            # 1. Распаковываем архив
+            with zipfile.ZipFile(path, "r") as zf:
+                zf.extractall(tmpdir)
+
+            # 2. Загружаем индекс
+            index_path = os.path.join(tmpdir, "index.faiss")
+            index = faiss.read_index(index_path)
+
+            # 3. Загружаем метаданные
+            meta_path = os.path.join(tmpdir, "metadata.pklz")
+            with open(meta_path, "rb") as f:
+                compressed = f.read()
+                meta = pickle.loads(zlib.decompress(compressed))
+
+            dim = meta["dimensionality"]
+            vector_to_key_map = meta["vector_to_key_map"]
+
+            # 4. Создаём объект
+            instance = cls(dimensionality=dim)
+            instance.index = index
+            instance.vector_to_key_map = vector_to_key_map
+            instance.is_trained = True  # FlatL2 не требует тренировки
+
+        return instance
+
 
 class FaissIndexFlatIP(VectorIndex):
     """
@@ -132,6 +200,69 @@ class FaissIndexFlatIP(VectorIndex):
                 self.vector_to_key_map[tuple(vector)] = chunk_storage_key
             self._buffer.clear()
             self.is_trained = True
+
+    def save(self, path: str) -> None:
+        """
+        Сохраняет FAISS индекс и сопоставление в zip-архив (.faiss),
+        используя pickle+zlib для метаданных.
+        """
+        path = os.path.abspath(path)
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            # 1. Сохраняем faiss-индекс
+            index_path = os.path.join(tmpdir, "index.faiss")
+            faiss.write_index(self.index, index_path)
+
+            # 2. Сохраняем метаинформацию сжатым пиклом
+            meta = {
+                "dimensionality": self.dim,
+                "vector_to_key_map": self.vector_to_key_map
+            }
+            meta_path = os.path.join(tmpdir, "metadata.pklz")
+            with open(meta_path, "wb") as f:
+                compressed = zlib.compress(pickle.dumps(meta, protocol=pickle.HIGHEST_PROTOCOL))
+                f.write(compressed)
+
+            # 3. Упаковываем всё в zip
+            with zipfile.ZipFile(path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+                zf.write(index_path, arcname="index.faiss")
+                zf.write(meta_path, arcname="metadata.pklz")
+
+    @classmethod
+    def load(cls, path: str) -> "FaissIndexFlatIP":
+        """
+        Загружает FAISS индекс и сопоставление из zip-архива (.faiss),
+        используя pickle+zlib для метаданных.
+        """
+        if not os.path.exists(path):
+            raise FileNotFoundError(f"Файл {path} не найден")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            # 1. Распаковываем архив
+            with zipfile.ZipFile(path, "r") as zf:
+                zf.extractall(tmpdir)
+
+            # 2. Загружаем индекс
+            index_path = os.path.join(tmpdir, "index.faiss")
+            index = faiss.read_index(index_path)
+
+            # 3. Загружаем метаданные
+            meta_path = os.path.join(tmpdir, "metadata.pklz")
+            with open(meta_path, "rb") as f:
+                compressed = f.read()
+                meta = pickle.loads(zlib.decompress(compressed))
+
+            dim = meta["dimensionality"]
+            vector_to_key_map = meta["vector_to_key_map"]
+
+            # 4. Создаём объект
+            instance = cls(dimensionality=dim)
+            instance.index = index
+            instance.vector_to_key_map = vector_to_key_map
+            instance.is_trained = True  # FlatIP не требует тренировки
+
+        return instance
 
 
 class FaissIndexHNSWFlat(VectorIndex):
