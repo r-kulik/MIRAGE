@@ -177,4 +177,6 @@ prompts/synonimizator_prompts.md
 /prompts
 mirage/inference/quorums/model.bin
 groq_keys.py
-indexes/*
+cuad_*
+/indexes
+/indexes
