@@ -1,4 +1,3 @@
-
 import json
 
 
@@ -6,9 +5,8 @@ with open('test_combinations.json', 'r', encoding='utf-8') as file:
     combinations = json.loads(file.read())
 
 
-START_COMBINATION = 60
-END_COMBINATION = 70
-
+START_COMBINATION = 90
+END_COMBINATION = len(combinations)
 
 import datetime
 from os import PathLike
@@ -89,6 +87,3 @@ for indx in range(START_COMBINATION, END_COMBINATION):
         combination,
         get_name(combination)
     )
-
-
-
