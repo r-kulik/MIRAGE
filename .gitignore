@@ -178,3 +178,4 @@ prompts/synonimizator_prompts.md
 mirage/inference/quorums/model.bin
 groq_keys.py
 cuad_*
+/indexes
