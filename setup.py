@@ -25,7 +25,8 @@ setup(
         'pydantic>=2.10.6',
         'whoosh>=2.7.4',
         'pymorphy3>=2.0.3',
-        'gensim>=4.3.3'
+        'gensim>=4.3.3',
+        'loguru>=0.7.3'
     ],
     classifiers=[              # Classifiers for PyPI (optional)
         'Programming Language :: Python :: 3',
