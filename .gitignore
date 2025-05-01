@@ -179,3 +179,4 @@ mirage/inference/quorums/model.bin
 groq_keys.py
 cuad_*
 /indexes
+/indexes
