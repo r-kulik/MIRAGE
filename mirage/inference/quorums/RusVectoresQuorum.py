@@ -1,4 +1,5 @@
 import zipfile
+# from loguru import logger
 import pymorphy3
 from heapq import heappush, heappop
 from gensim.models import KeyedVectors
@@ -6,6 +7,8 @@ from typing import Dict, List, Self, Set, Tuple
 
 from mirage.index import QueryResult
 from mirage.index.chunk_storages.ChunkStorage import ChunkStorage, ChunkNote
+
+# logger.disable(__name__)
 
 class RusVectoresQuorum:
     """Synonimization module for enriching the search queries with the synonims
@@ -15,7 +18,8 @@ class RusVectoresQuorum:
     def __init__(self, chunk_storage: ChunkStorage, path_to_model: str,
                  global_similarity_threshold: float = 0.75, 
                  second_closest_strategy: bool = True, 
-                 POS_thresholds: List[str] | Dict[str, float] = ['ADJ', 'VERB'], 
+                 POS_thresholds: List[str] | Dict[str, float] = ['ADJ', 'VERB', 'NOUN', 'ADV'],
+                 relative_cosine_similarity_strategy: bool = True,
                  max_entries: int = 50, max_combinations: int = 100,
                  max_synonims: int = 20,
                  visualize: bool = False) -> Self:
@@ -52,7 +56,7 @@ class RusVectoresQuorum:
         Raises
         ------
         ValueError
-            Raises if POS_thresholds dict or list contains POS-tags that are not presented in thre model 
+            Raises if POS_thresholds dict or list contains POS-tags that are not presented in the model 
         """
         self.chunk_storage = chunk_storage
         self.visualize = visualize
@@ -73,6 +77,11 @@ class RusVectoresQuorum:
         self.max_synonims = max_synonims
         self.morph = pymorphy3.MorphAnalyzer()
 
+        # --------------------------------------------------
+        # Strategy from the A Minimally Supervised Approach for Synonym Extraction with Word Embeddings
+        self.relative_cosine_similarity_strategy: bool = relative_cosine_similarity_strategy
+        self.TOP_N = 10
+        self.RCS_THRESHOLD = 0.11
         # ------------ loading the Word2Vec Model from the file
         self.word_vectors: KeyedVectors = KeyedVectors.load_word2vec_format(path_to_model, binary=True)
         
@@ -154,6 +163,22 @@ class RusVectoresQuorum:
         inflected = parsed_syn.inflect(tags)
         # ------------------------------------------------------
         return inflected.word if inflected else synonym
+    
+    def get_relative_cosine_similarity_synonyms(self, lemma: str):
+        # logger.debug(f"Getting relative cosine similarity synonyms for {lemma}")
+        try:
+            candidate_synonyms = self.word_vectors.most_similar(
+                positive=lemma, topn=self.TOP_N
+            )
+        except KeyError:
+            return []
+        # logger.debug(f"Candidate synonyms for {lemma}: {candidate_synonyms}")
+        total_similarity = sum(sim for _, sim in candidate_synonyms)
+        filtered_synonyms = [
+            (syn, sim) for syn, sim in candidate_synonyms
+            if sim / total_similarity > self.RCS_THRESHOLD
+        ]
+        return filtered_synonyms 
 
     def _get_synonyms(self, word: str, pos: str) -> List[Tuple[str, float]]:
         """Returns the list of the synonims of the provided form
@@ -170,28 +195,38 @@ class RusVectoresQuorum:
             List of pairs (synonim, cosine similarity) of the word
             
         """
+        # logger.debug(f"Getting synonyms for {word} with pos {pos}")
         # --------------------------------------------------------
         # downcasting pymorphy PoS-tag to RusVectores PoS-tag
         downcasted_pos = RusVectoresQuorum.downcast_pos(pos)
         # -------------------------------------------------------- 
         # we are not looking up  synonims for PoS'es not presented in the PoS_thresholds 
+        # logger.debug(f"Downcasted pos: {downcasted_pos}")
         if downcasted_pos not in self.POS_thresholds:
             return []
+        # logger.debug('')
         # --------------------------------------------------------
         # Obtaining lemmatized (dictionary) form of the word
         parsed_word = self.morph.parse(word)[0]
         lemma = parsed_word.normal_form + '_' + downcasted_pos
         # --------------------------------------------------------
         # lemma is not known for the RusVectotes model, return empty list
+        # logger.debug(f"Obtained lemma {lemma} for {word}")
         if lemma not in self.word_vectors:
+            # logger.warning(f"Word {lemma} is not in the model")
             return []
         # --------------------------------------------------------
         # trying to obtain max_synonims close words
-        try:
-            synonyms = self.word_vectors.most_similar(lemma, topn=self.max_synonims)
-        except KeyError:
-            return []
-        # --------------------------------------------------------
+        if self.relative_cosine_similarity_strategy:
+            synonyms = self.get_relative_cosine_similarity_synonyms(
+                lemma
+            )
+        else:
+            try:
+                synonyms = self.word_vectors.most_similar(lemma, topn=self.max_synonims)
+            except KeyError:
+                return []
+            # --------------------------------------------------------
         
         if self.visualize: 
             print(f" For word \"{word}\" obtained synonims:\n{synonyms}")
