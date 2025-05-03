@@ -15,6 +15,8 @@ from abc import abstractmethod, ABC
 from typing import Any, Optional, final
 from loguru import logger
 
+logger.disable(__name__)
+
 class MirageIndex(ABC):
 
     def __init__(self, raw_storage: Optional[RawStorage], 

@@ -1,5 +1,6 @@
+import traceback
 import zipfile
-# from loguru import logger
+from loguru import logger
 import pymorphy3
 from heapq import heappush, heappop
 from gensim.models import KeyedVectors
@@ -9,6 +10,16 @@ from mirage.index import QueryResult
 from mirage.index.chunk_storages.ChunkStorage import ChunkStorage, ChunkNote
 
 # logger.disable(__name__)
+
+class ComparableDict(dict):
+    def __lt__(self, other: Self):
+        return len(self) < len(other)
+    def copy(self) -> Self:
+        newd = ComparableDict()
+        for key, value in self.items():
+            newd[key] = value
+        return newd
+        
 
 class RusVectoresQuorum:
     """Synonimization module for enriching the search queries with the synonims
@@ -294,7 +305,7 @@ class RusVectoresQuorum:
         # --------------------------------------------------------
         # Creating a heap with the following structure:
         # (priority, similarity, replacements dict ({word_index: synonim_index}) )
-        heap = [(-1, 1, {})]
+        heap = [(-1, 1, ComparableDict())]
         # --------------------------------------------------------
         # Creating a set of the seen combinations of substitutions
         # and results obtained from the chunk storage
@@ -307,7 +318,14 @@ class RusVectoresQuorum:
         while heap and combination_count < self.max_combinations:
             # --------------------------------------------------------
             # we are popping the element with the highest priority (lowest current sim)
-            current_priority, current_sim, replacements = heappop(heap)
+            try:
+                current_priority, current_sim, replacements = heappop(heap)
+            except Exception as e:
+                logger.error(traceback.format_exc())
+                logger.error(f"heap = {heap}")
+                logger.debug(replaceable)
+
+                raise e
             current_query = words.copy()
             # --------------------------------------------------------
             # creating modified query (list of words in query) by applying 

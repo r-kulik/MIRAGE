@@ -1,4 +1,5 @@
 
+from typing import Optional
 from loguru import logger
 from numpy import array, cov, expand_dims, log, ndarray, trace, zeros, float32
 from pydantic import BaseModel
@@ -12,7 +13,10 @@ from mirage.index.vector_index.VectorIndex import VectorIndex
 from sklearn.metrics import silhouette_score
 import skdim
 
+logger.disable(__name__)
+
 class IndexInvestigationResultDTO(BaseModel):
+    file: Optional[str] = None
     vector_variance: float
     silhouette_score_euclidian: float
     silhouette_score_cosine: float

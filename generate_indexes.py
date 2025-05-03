@@ -5,7 +5,7 @@ with open('test_combinations.json', 'r', encoding='utf-8') as file:
     combinations = json.loads(file.read())
 
 
-START_COMBINATION = 90
+START_COMBINATION = 0
 END_COMBINATION = len(combinations)
 
 import datetime
@@ -23,23 +23,16 @@ from mirage.index.chunking_algorithms.NatashaSentenсeChunking import NatashaSen
 from mirage.index.raw_storages import FolderRawStorage
 from mirage.index.vector_index.FaissVectorIndex import FaissIndexFlatIP, FaissIndexFlatL2
 
-short_names = {
-    'WordCountingChunkingAlgorithm': "WC_128_05_BAAI",
-    'SentenceChunkingAlgorithm': 'SC'
-}
 
-
-def get_name(c):
+def get_name(idx, c):
     ch = 'W' if c['ChunkingAlgorithm']['method'] == 'WordCountingChunkingAlgorithm' else 'S'
     ch_par = '_'.join([str(i) for i in list(c['ChunkingAlgorithm']['params'].values())])
     e_params = c['Embedder']['params']['model'].split('/')[0]
-    return 'indexes\\' + '_'.join([ch, ch_par, e_params])
-
-get_name(combinations[12])
+    return f'indexes\\{idx}_' + '_'.join([ch, ch_par, e_params])
 
 
 
-raw_storage = FolderRawStorage('data_txt')
+raw_storage = FolderRawStorage('cuad')
 def generate_index(combination: Dict, filepath_prefix: str) -> None:
     logger.info(combination)
     chunk_storage = WhooshChunkStorage(scoring_function='BM25F', normalizer=True)
@@ -85,5 +78,5 @@ for indx in range(START_COMBINATION, END_COMBINATION):
     combination = combinations[indx]
     generate_index(
         combination,
-        get_name(combination)
+        get_name(indx, combination)
     )
