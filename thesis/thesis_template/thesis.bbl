@@ -878,6 +878,353 @@
       \endverb
       \keyw{Computer Science - Computation and Language}
     \endentry
+    \entry{brouard2008legislative}{inproceedings}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{10}{}{%
+        {{hash=aa19da56a555b2b6e417e457bf070116}{%
+           family={Brouard},
+           familyi={B\bibinitperiod},
+           given={Sylvain},
+           giveni={S\bibinitperiod}}}%
+        {{hash=851021670e27b97882cca9a4598596ab}{%
+           family={Baumgartner},
+           familyi={B\bibinitperiod},
+           given={Frank},
+           giveni={F\bibinitperiod}}}%
+        {{hash=07d723148119d27fc8dd1c18370ba8a0}{%
+           family={Wilkerson},
+           familyi={W\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e097e898ee0d841d41a56fc7ac94aaed}{%
+           family={Bevan},
+           familyi={B\bibinitperiod},
+           given={Shaun},
+           giveni={S\bibinitperiod}}}%
+        {{hash=7affdef90f8a8d8fa7286078f8d1f6e9}{%
+           family={Breeman},
+           familyi={B\bibinitperiod},
+           given={Gerard},
+           giveni={G\bibinitperiod}}}%
+        {{hash=dbe0a32df950658ebbf8c4d44c150517}{%
+           family={Breunig},
+           familyi={B\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod}}}%
+        {{hash=ec5ed7aeaff711fbfd83aadf5443d580}{%
+           family={Chaques},
+           familyi={C\bibinitperiod},
+           given={Laura},
+           giveni={L\bibinitperiod}}}%
+        {{hash=b29d0afdf936c9d795fb192eea590ccf}{%
+           family={Green-Pedersen},
+           familyi={G\bibinithyphendelim P\bibinitperiod},
+           given={Christopher},
+           giveni={C\bibinitperiod}}}%
+        {{hash=0086863015e8b64ffd17034100760eeb}{%
+           family={Jennings},
+           familyi={J\bibinitperiod},
+           given={Will},
+           giveni={W\bibinitperiod}}}%
+        {{hash=417e47dd65f0d96abc85c4450d635c95}{%
+           family={John},
+           familyi={J\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{7e1b4995209bd28c4655f08fdc05eaf0}
+      \strng{fullhash}{18918832e9a6bf249af84d601395c8ed}
+      \strng{fullhashraw}{18918832e9a6bf249af84d601395c8ed}
+      \strng{bibnamehash}{7e1b4995209bd28c4655f08fdc05eaf0}
+      \strng{authorbibnamehash}{7e1b4995209bd28c4655f08fdc05eaf0}
+      \strng{authornamehash}{7e1b4995209bd28c4655f08fdc05eaf0}
+      \strng{authorfullhash}{18918832e9a6bf249af84d601395c8ed}
+      \strng{authorfullhashraw}{18918832e9a6bf249af84d601395c8ed}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{ECPR Joint Sessions}
+      \field{title}{Legislative Productivity in Comparative Perspective: An Introduction to the Comparative Agendas Project}
+      \field{year}{2008}
+    \endentry
+    \entry{kullPatternsDatasetShift}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=ad0a95639e9e4d1b4b966605f4d4ec79}{%
+           family={Kull},
+           familyi={K\bibinitperiod},
+           given={Meelis},
+           giveni={M\bibinitperiod}}}%
+        {{hash=715b97044ba694410083d16b5c29b92c}{%
+           family={Flach},
+           familyi={F\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{a1e8235ab7938fd186389c693bb1b2e6}
+      \strng{fullhash}{a1e8235ab7938fd186389c693bb1b2e6}
+      \strng{fullhashraw}{a1e8235ab7938fd186389c693bb1b2e6}
+      \strng{bibnamehash}{a1e8235ab7938fd186389c693bb1b2e6}
+      \strng{authorbibnamehash}{a1e8235ab7938fd186389c693bb1b2e6}
+      \strng{authornamehash}{a1e8235ab7938fd186389c693bb1b2e6}
+      \strng{authorfullhash}{a1e8235ab7938fd186389c693bb1b2e6}
+      \strng{authorfullhashraw}{a1e8235ab7938fd186389c693bb1b2e6}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Dataset shift is a frequent cause of failure of a predictor. A model which performs well in several contexts can give bad predictions in other contexts where the data are shifted compared to the training context. Earlier work has revealed many different causes of shift systematised by Storkey [11] and three important types of effects of shift on probability distributions systematised by Moreno-Torres et al. [8]: covariate shift (distribution shift in attributes), prior probability shift (shift in labels) and concept shift (shift in the relationship between attributes and labels). However, many causes lead to effects not covered by these three types, and hence are called `other types of shift' by Moreno-Torres et al. [8]. We propose a formal notation for the effects of shift using graphical models. We identify 12 patterns of shift (6 of them novel), which cover the effects of all 6 causes described by Storkey [11]. Furthermore, these patterns can be combined to describe effects of multiple or more complex reasons of shift. We see three avenues of work benefitting from our formalism. First, reviewing shift-adaptive methods regarding their applicability range could be done in our notation. Second, identifying patterns of shift in a practical task might aid in finding an existing method to solve the task. Finally, our novel patterns and pattern combinations suggest niches for new shift-adaptive methods.}
+      \field{langid}{english}
+      \field{title}{Patterns of Dataset Shift}
+      \verb{file}
+      \verb C:\Users\Bulkin\Zotero\storage\8P4LK3T2\Kull и Flach - Patterns of dataset shift.pdf
+      \endverb
+    \endentry
+    \entry{chenghaozhuYourLLMOutdated2025}{inproceedings}{}{}
+      \name{author}{6}{}{%
+        {{hash=a7720d5ebb6b7809742e61a798071a8e}{%
+           family={ChenghaoZhu},
+           familyi={C\bibinitperiod},
+           given={ChenghaoZhu},
+           giveni={C\bibinitperiod}}}%
+        {{hash=b3c2e18efaa175e08bf1dba335b69513}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Nuo},
+           giveni={N\bibinitperiod}}}%
+        {{hash=1935a0f07f72523193c876d34efa406c}{%
+           family={Gao},
+           familyi={G\bibinitperiod},
+           given={Yufei},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=46b08070734059747be09df3462fb2e8}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Yunyi},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=ee3f2f07708626f3b215518c4fd2a9ca}{%
+           family={Tiwari},
+           familyi={T\bibinitperiod},
+           given={Prayag},
+           giveni={P\bibinitperiod}}}%
+        {{hash=07b6ac71b6c34f04b3c5593596b3dc53}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Benyou},
+           giveni={B\bibinitperiod}}}%
+      }
+      \name{editor}{3}{}{%
+        {{hash=abfdb79acbce2a1c1980e1be947f1874}{%
+           family={Chiruzzo},
+           familyi={C\bibinitperiod},
+           given={Luis},
+           giveni={L\bibinitperiod}}}%
+        {{hash=365d1940ae632ca53c9775daa8216e4b}{%
+           family={Ritter},
+           familyi={R\bibinitperiod},
+           given={Alan},
+           giveni={A\bibinitperiod}}}%
+        {{hash=55f210233ac686af68eba11a97bd84e2}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Lu},
+           giveni={L\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Albuquerque, New Mexico}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computational Linguistics}%
+      }
+      \strng{namehash}{04bc0b45476549ae195046284af3ff97}
+      \strng{fullhash}{aa0f270ae44073a18acbe88bf13c9e0f}
+      \strng{fullhashraw}{aa0f270ae44073a18acbe88bf13c9e0f}
+      \strng{bibnamehash}{aa0f270ae44073a18acbe88bf13c9e0f}
+      \strng{authorbibnamehash}{aa0f270ae44073a18acbe88bf13c9e0f}
+      \strng{authornamehash}{04bc0b45476549ae195046284af3ff97}
+      \strng{authorfullhash}{aa0f270ae44073a18acbe88bf13c9e0f}
+      \strng{authorfullhashraw}{aa0f270ae44073a18acbe88bf13c9e0f}
+      \strng{editorbibnamehash}{10617b496cc51648a89ab366dce6fe5a}
+      \strng{editornamehash}{a7fefbe6d5fd5f98d6263ec92d02955d}
+      \strng{editorfullhash}{10617b496cc51648a89ab366dce6fe5a}
+      \strng{editorfullhashraw}{10617b496cc51648a89ab366dce6fe5a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{The rapid advancement of Large Language Models (LLMs) has led to the development of benchmarks that consider temporal dynamics, however, there remains a gap in understanding how well these models can generalize across temporal contexts due to the inherent dynamic nature of language and information. This paper introduces the concept of temporal generalization in LLMs, including bias in past and future generalizations. Then we introduce FreshBench, a new evaluation framework that employs fresh text and event prediction for assessing LLMs' temporal adaptability, ensuring the evaluation process free from data leakage and subjective bias. The experiment shows significant temporal biases and a decline in performance over time.}
+      \field{booktitle}{Proceedings of the 2025 {{Conference}} of the {{Nations}} of the {{Americas Chapter}} of the {{Association}} for {{Computational Linguistics}}: {{Human Language Technologies}} ({{Volume}} 1: {{Long Papers}})}
+      \field{isbn}{979-8-89176-189-6}
+      \field{month}{4}
+      \field{shorttitle}{Is {{Your LLM Outdated}}?}
+      \field{title}{Is {{Your LLM Outdated}}? {{A Deep Look}} at {{Temporal Generalization}}}
+      \field{urlday}{11}
+      \field{urlmonth}{5}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \field{pages}{7433\bibrangedash 7457}
+      \range{pages}{25}
+      \verb{file}
+      \verb C:\Users\Bulkin\Zotero\storage\EFTDJP4M\ChenghaoZhu и др. - 2025 - Is Your LLM Outdated A Deep Look at Temporal Generalization.pdf
+      \endverb
+    \endentry
+    \entry{robinsCatastrophicForgettingRehearsal1995}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=92627063847d604a7f67bd1d1fefac10}{%
+           family={ROBINS},
+           familyi={R\bibinitperiod},
+           given={ANTHONY},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Taylor & Francis}%
+      }
+      \strng{namehash}{92627063847d604a7f67bd1d1fefac10}
+      \strng{fullhash}{92627063847d604a7f67bd1d1fefac10}
+      \strng{fullhashraw}{92627063847d604a7f67bd1d1fefac10}
+      \strng{bibnamehash}{92627063847d604a7f67bd1d1fefac10}
+      \strng{authorbibnamehash}{92627063847d604a7f67bd1d1fefac10}
+      \strng{authornamehash}{92627063847d604a7f67bd1d1fefac10}
+      \strng{authorfullhash}{92627063847d604a7f67bd1d1fefac10}
+      \strng{authorfullhashraw}{92627063847d604a7f67bd1d1fefac10}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0954-0091}
+      \field{journaltitle}{Connection Science}
+      \field{month}{6}
+      \field{number}{2}
+      \field{title}{Catastrophic {{Forgetting}}, {{Rehearsal}} and {{Pseudorehearsal}}}
+      \field{urlday}{11}
+      \field{urlmonth}{5}
+      \field{urlyear}{2025}
+      \field{volume}{7}
+      \field{year}{1995}
+      \field{urldateera}{ce}
+      \field{pages}{123\bibrangedash 146}
+      \range{pages}{24}
+      \verb{doi}
+      \verb 10.1080/09540099550039318
+      \endverb
+    \endentry
+    \entry{kalajdzievskiScalingLawsForgetting2024}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=a1ded0e22c31115687fb66503a41a22f}{%
+           family={Kalajdzievski},
+           familyi={K\bibinitperiod},
+           given={Damjan},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{a1ded0e22c31115687fb66503a41a22f}
+      \strng{fullhash}{a1ded0e22c31115687fb66503a41a22f}
+      \strng{fullhashraw}{a1ded0e22c31115687fb66503a41a22f}
+      \strng{bibnamehash}{a1ded0e22c31115687fb66503a41a22f}
+      \strng{authorbibnamehash}{a1ded0e22c31115687fb66503a41a22f}
+      \strng{authornamehash}{a1ded0e22c31115687fb66503a41a22f}
+      \strng{authorfullhash}{a1ded0e22c31115687fb66503a41a22f}
+      \strng{authorfullhashraw}{a1ded0e22c31115687fb66503a41a22f}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We study and quantify the problem of forgetting when fine-tuning pre-trained large language models (LLMs) on a downstream task. We find that parameter-efficient fine-tuning (PEFT) strategies, such as Low-Rank Adapters (LoRA), still suffer from catastrophic forgetting. In particular, we identify a strong inverse linear relationship between the fine-tuning performance and the amount of forgetting when fine-tuning LLMs with LoRA. We further obtain precise scaling laws that show forgetting increases as a shifted power law in the number of parameters fine-tuned and the number of update steps. We also examine the impact of forgetting on knowledge, reasoning, and the safety guardrails trained into Llama 2 7B chat. Our study suggests that forgetting cannot be avoided through early stopping or by varying the number of parameters fine-tuned. We believe this opens up an important safety-critical direction for future research to evaluate and develop fine-tuning schemes which mitigate forgetting}
+      \field{eprintclass}{cs}
+      \field{eprinttype}{arXiv}
+      \field{month}{1}
+      \field{number}{arXiv:2401.05605}
+      \field{title}{Scaling {{Laws}} for {{Forgetting When Fine-Tuning Large Language Models}}}
+      \field{urlday}{11}
+      \field{urlmonth}{5}
+      \field{urlyear}{2025}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2401.05605
+      \endverb
+      \verb{eprint}
+      \verb 2401.05605
+      \endverb
+      \verb{file}
+      \verb C\:\\Users\\Bulkin\\Zotero\\storage\\XSBNAVNG\\Kalajdzievski - 2024 - Scaling Laws for Forgetting When Fine-Tuning Large Language Models.pdf;C\:\\Users\\Bulkin\\Zotero\\storage\\BEGSS8ZP\\2401.html
+      \endverb
+      \keyw{Computer Science - Computation and Language,Computer Science - Machine Learning}
+    \endentry
+    \entry{zhaiInvestigatingCatastrophicForgetting2024}{inproceedings}{}{}
+      \name{author}{7}{}{%
+        {{hash=74bda007bc17e6a80df95b6bbd5baee0}{%
+           family={Zhai},
+           familyi={Z\bibinitperiod},
+           given={Yuexiang},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=9ca2d7036a31fd581b558afdf390bb6e}{%
+           family={Tong},
+           familyi={T\bibinitperiod},
+           given={Shengbang},
+           giveni={S\bibinitperiod}}}%
+        {{hash=9974d6382df9a9870c97dad6837bcf62}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Xiao},
+           giveni={X\bibinitperiod}}}%
+        {{hash=d0175560d50542759c19543f3c120ca6}{%
+           family={Cai},
+           familyi={C\bibinitperiod},
+           given={Mu},
+           giveni={M\bibinitperiod}}}%
+        {{hash=cac9e8c38fcd786f4cd021d721c0abc7}{%
+           family={Qu},
+           familyi={Q\bibinitperiod},
+           given={Qing},
+           giveni={Q\bibinitperiod}}}%
+        {{hash=0058780d2044b7ad95d263c45e1a1b15}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Yong\bibnamedelima Jae},
+           giveni={Y\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=c47e10dd604b310c579f0d85b77544cd}{%
+           family={Ma},
+           familyi={M\bibinitperiod},
+           given={Yi},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {PMLR}%
+      }
+      \strng{namehash}{8f1dc95ea738555ee75f2dca9c59f3bd}
+      \strng{fullhash}{e2d942d52a153651fdc0c6ed52abff42}
+      \strng{fullhashraw}{e2d942d52a153651fdc0c6ed52abff42}
+      \strng{bibnamehash}{8f1dc95ea738555ee75f2dca9c59f3bd}
+      \strng{authorbibnamehash}{8f1dc95ea738555ee75f2dca9c59f3bd}
+      \strng{authornamehash}{8f1dc95ea738555ee75f2dca9c59f3bd}
+      \strng{authorfullhash}{e2d942d52a153651fdc0c6ed52abff42}
+      \strng{authorfullhashraw}{e2d942d52a153651fdc0c6ed52abff42}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Following the success of GPT4, there has been a surge in interest in multimodal large language model (MLLM) research. This line of research focuses on developing general-purpose LLMs through fine-tuning pre-trained LLMs and vision models. However, catastrophic forgetting, a notorious phenomenon where the fine-tuned model fails to retain similar performance compared to the pre-trained model, still remains an inherited problem in multimodal LLMs (MLLM). In this paper, we introduce EMT: Evaluating MulTimodality for evaluating the catastrophic forgetting in MLLMs, by treating each MLLM as an image classifier. We first apply EMT to evaluate several open-source fine-tuned MLLMs and we discover that almost all evaluated MLLMs fail to retain the same performance levels as their vision encoders on standard image classification tasks. Moreover, we continue fine-tuning LLaVA, an MLLM and utilize EMT to assess performance throughout the fine-tuning. Interestingly, our results suggest that early-stage fine-tuning on an image dataset improves performance across other image datasets, by enhancing the alignment of text and language features. However, as fine-tuning proceeds, the MLLMs begin to hallucinate, resulting in a significant loss of generalizability, even when the image encoder remains frozen. Our results suggest that MLLMs have yet to demonstrate performance on par with their vision models on standard image classification tasks and the current MLLM fine-tuning procedure still has room for improvement.}
+      \field{booktitle}{Conference on {{Parsimony}} and {{Learning}}}
+      \field{issn}{2640-3498}
+      \field{langid}{english}
+      \field{month}{1}
+      \field{title}{Investigating the {{Catastrophic Forgetting}} in {{Multimodal Large Language Model Fine-Tuning}}}
+      \field{urlday}{11}
+      \field{urlmonth}{5}
+      \field{urlyear}{2025}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \field{pages}{202\bibrangedash 227}
+      \range{pages}{26}
+      \verb{file}
+      \verb C:\Users\Bulkin\Zotero\storage\WHE596VC\Zhai и др. - 2024 - Investigating the Catastrophic Forgetting in Multimodal Large Language Model Fine-Tuning.pdf
+      \endverb
+    \endentry
     \entry{mageshHallucinationFreeAssessingReliability2024a}{misc}{}{}
       \name{author}{6}{}{%
         {{hash=d3ee608a512ffa52f89b64052f9a8fd3}{%
@@ -922,8 +1269,8 @@
       \strng{authornamehash}{bbde2afd0335ffafa578ede99d786d6c}
       \strng{authorfullhash}{9dd2fe5b7ba7bf1eaae944b4d4d7cdeb}
       \strng{authorfullhashraw}{9dd2fe5b7ba7bf1eaae944b4d4d7cdeb}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{shorttitle}
       \field{abstract}{Legal practice has witnessed a sharp rise in products incorporating artificial intelligence (AI). Such tools are designed to assist with a wide range of core legal tasks, from search and summarization of caselaw to document drafting. But the large language models used in these tools are prone to "hallucinate," or make up false information, making their use risky in high-stakes domains. Recently, certain legal research providers have touted methods such as retrieval-augmented generation (RAG) as "eliminating" (Casetext, 2023) or "avoid[ing]" hallucinations (Thomson Reuters, 2023), or guaranteeing "hallucination-free" legal citations (LexisNexis, 2023). Because of the closed nature of these systems, systematically assessing these claims is challenging. In this article, we design and report on the first preregistered empirical evaluation of AI-driven legal research tools. We demonstrate that the providers' claims are overstated. While hallucinations are reduced relative to general-purpose chatbots (GPT-4), we find that the AI research tools made by LexisNexis (Lexis+ AI) and Thomson Reuters (Westlaw AI-Assisted Research and Ask Practical Law AI) each hallucinate between 17\% and 33\% of the time. We also document substantial differences between systems in responsiveness and accuracy. Our article makes four key contributions. It is the first to assess and report the performance of RAG-based proprietary legal AI tools. Second, it introduces a comprehensive, preregistered dataset for identifying and understanding vulnerabilities in these systems. Third, it proposes a clear typology for differentiating between hallucinations and accurate legal responses. Last, it provides evidence to inform the responsibilities of legal professionals in supervising and verifying AI outputs, which remains a central open question for the responsible integration of AI into law.}
@@ -973,8 +1320,8 @@
       \strng{authornamehash}{ff7b81175db75e4aae02aec82f75522e}
       \strng{authorfullhash}{ff7b81175db75e4aae02aec82f75522e}
       \strng{authorfullhashraw}{ff7b81175db75e4aae02aec82f75522e}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Recent language models generate false but plausible-sounding text with surprising frequency. Such "hallucinations" are an obstacle to the usability of language-based AI systems and can harm people who rely upon their outputs. This work shows that there is an inherent statistical lower-bound on the rate that pretrained language models hallucinate certain types of facts, having nothing to do with the transformer LM architecture or data quality. For "arbitrary" facts whose veracity cannot be determined from the training data, we show that hallucinations must occur at a certain rate for language models that satisfy a statistical calibration condition appropriate for generative language models. Specifically, if the maximum probability of any fact is bounded, we show that the probability of generating a hallucination is close to the fraction of facts that occur exactly once in the training data (a "Good-Turing" estimate), even assuming ideal training data without errors. One conclusion is that models pretrained to be sufficiently good predictors (i.e., calibrated) may require post-training to mitigate hallucinations on the type of arbitrary facts that tend to appear once in the training set. However, our analysis also suggests that there is no statistical reason that pretraining will lead to hallucination on facts that tend to appear more than once in the training data (like references to publications such as articles and books, whose hallucinations have been particularly notable and problematic) or on systematic facts (like arithmetic calculations). Therefore, different architectures and learning algorithms may mitigate these latter types of hallucinations.}
@@ -998,6 +1345,353 @@
       \verb C\:\\Users\\Bulkin\\Zotero\\storage\\WJRT8QUR\\Kalai и Vempala - 2024 - Calibrated Language Models Must Hallucinate.pdf;C\:\\Users\\Bulkin\\Zotero\\storage\\GMV3DA63\\2311.html
       \endverb
       \keyw{Computer Science - Artificial Intelligence,Computer Science - Computation and Language}
+    \endentry
+    \entry{xiaUnderstandingPerformanceEstimating2024}{misc}{}{}
+      \name{author}{7}{}{%
+        {{hash=eafd9dea91854353a294ae57017e1d45}{%
+           family={Xia},
+           familyi={X\bibinitperiod},
+           given={Yuchen},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=dc7fd5ac7d8198121c8bebec26ed4c53}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Jiho},
+           giveni={J\bibinitperiod}}}%
+        {{hash=2d60ad3163adfc30fc8715495d77cd38}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Yuhan},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=8fd556135cd9f81a9d2c181721e81e32}{%
+           family={Ye},
+           familyi={Y\bibinitperiod},
+           given={Haojie},
+           giveni={H\bibinitperiod}}}%
+        {{hash=4870c7f16b14108591a4cdc900f83c72}{%
+           family={Kundu},
+           familyi={K\bibinitperiod},
+           given={Souvik},
+           giveni={S\bibinitperiod}}}%
+        {{hash=60a3d3b5a8f20d6aae2cbcb363641dde}{%
+           family={Hao},
+           familyi={H\bibinitperiod},
+           given={Cong},
+           giveni={C\bibinitperiod}}}%
+        {{hash=243246ca83de7ca624c51be06bba5ac3}{%
+           family={Talati},
+           familyi={T\bibinitperiod},
+           given={Nishil},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{d8c167f040ad9acace037719ecf10551}
+      \strng{fullhash}{99d55d4a88b774d96049020148e940d9}
+      \strng{fullhashraw}{99d55d4a88b774d96049020148e940d9}
+      \strng{bibnamehash}{d8c167f040ad9acace037719ecf10551}
+      \strng{authorbibnamehash}{d8c167f040ad9acace037719ecf10551}
+      \strng{authornamehash}{d8c167f040ad9acace037719ecf10551}
+      \strng{authorfullhash}{99d55d4a88b774d96049020148e940d9}
+      \strng{authorfullhashraw}{99d55d4a88b774d96049020148e940d9}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Due to the cost-prohibitive nature of training Large Language Models (LLMs), fine-tuning has emerged as an attractive alternative for specializing LLMs for specific tasks using limited compute resources in a cost-effective manner. In this paper, we characterize sparse Mixture of Experts (MoE) based LLM fine-tuning to understand their accuracy and runtime performance on a single GPU. Our evaluation provides unique insights into the training efficacy of sparse and dense versions of MoE models, as well as their runtime characteristics, including maximum batch size, execution time breakdown, end-to-end throughput, GPU hardware utilization, and load distribution. Our study identifies the optimization of the MoE layer as crucial for further improving the performance of LLM fine-tuning. Using our profiling results, we also develop and validate an analytical model to estimate the cost of LLM fine-tuning on the cloud. This model, based on parameters of the model and GPU architecture, estimates LLM throughput and the cost of training, aiding practitioners in industry and academia to budget the cost of fine-tuning a specific model.}
+      \field{eprintclass}{cs}
+      \field{eprinttype}{arXiv}
+      \field{month}{8}
+      \field{number}{arXiv:2408.04693}
+      \field{title}{Understanding the {{Performance}} and {{Estimating}} the {{Cost}} of {{LLM Fine-Tuning}}}
+      \field{urlday}{11}
+      \field{urlmonth}{5}
+      \field{urlyear}{2025}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2408.04693
+      \endverb
+      \verb{eprint}
+      \verb 2408.04693
+      \endverb
+      \verb{file}
+      \verb C\:\\Users\\Bulkin\\Zotero\\storage\\9VF3TSZF\\Xia и др. - 2024 - Understanding the Performance and Estimating the Cost of LLM Fine-Tuning.pdf;C\:\\Users\\Bulkin\\Zotero\\storage\\9MNNNJH7\\2408.html
+      \endverb
+      \keyw{Computer Science - Artificial Intelligence,Computer Science - Computation and Language,Computer Science - Machine Learning}
+    \endentry
+    \entry{jiangMixtralExperts2024}{misc}{}{}
+      \name{author}{26}{}{%
+        {{hash=a91e014a59af240c37c0fc26432a125b}{%
+           family={Jiang},
+           familyi={J\bibinitperiod},
+           given={Albert\bibnamedelima Q.},
+           giveni={A\bibinitperiod\bibinitdelim Q\bibinitperiod}}}%
+        {{hash=2b9ab922e693d9237ad952a8030eee9d}{%
+           family={Sablayrolles},
+           familyi={S\bibinitperiod},
+           given={Alexandre},
+           giveni={A\bibinitperiod}}}%
+        {{hash=68e595df4e0c87236640e9c73afb008f}{%
+           family={Roux},
+           familyi={R\bibinitperiod},
+           given={Antoine},
+           giveni={A\bibinitperiod}}}%
+        {{hash=e9a587c57b1dcb4834850800386d8aca}{%
+           family={Mensch},
+           familyi={M\bibinitperiod},
+           given={Arthur},
+           giveni={A\bibinitperiod}}}%
+        {{hash=29b66431b799bff473261d61c1739960}{%
+           family={Savary},
+           familyi={S\bibinitperiod},
+           given={Blanche},
+           giveni={B\bibinitperiod}}}%
+        {{hash=5d11905f79ca61f62a93a43574139850}{%
+           family={Bamford},
+           familyi={B\bibinitperiod},
+           given={Chris},
+           giveni={C\bibinitperiod}}}%
+        {{hash=d61a282b0086c5c4d52c371e7c748278}{%
+           family={Chaplot},
+           familyi={C\bibinitperiod},
+           given={Devendra\bibnamedelima Singh},
+           giveni={D\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=af4c75452e1c1c77b8727f6dace64a42}{%
+           family={Casas},
+           familyi={C\bibinitperiod},
+           given={Diego},
+           giveni={D\bibinitperiod},
+           prefix={de\bibnamedelima las},
+           prefixi={d\bibinitperiod\bibinitdelim l\bibinitperiod}}}%
+        {{hash=bb80e68474ca9c8acad404867013c8a5}{%
+           family={Hanna},
+           familyi={H\bibinitperiod},
+           given={Emma\bibnamedelima Bou},
+           giveni={E\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=dafbd4ebc73fd986f482b5cb24ed701d}{%
+           family={Bressand},
+           familyi={B\bibinitperiod},
+           given={Florian},
+           giveni={F\bibinitperiod}}}%
+        {{hash=a9285c2c0cdc863e02225039176bb017}{%
+           family={Lengyel},
+           familyi={L\bibinitperiod},
+           given={Gianna},
+           giveni={G\bibinitperiod}}}%
+        {{hash=c6bedbe30e4fea139ddae348fc15ed93}{%
+           family={Bour},
+           familyi={B\bibinitperiod},
+           given={Guillaume},
+           giveni={G\bibinitperiod}}}%
+        {{hash=56509a94ba6cdaf0c71304d6cf806cee}{%
+           family={Lample},
+           familyi={L\bibinitperiod},
+           given={Guillaume},
+           giveni={G\bibinitperiod}}}%
+        {{hash=f7808ab68c1e6e06aee1eb1c723ff6eb}{%
+           family={Lavaud},
+           familyi={L\bibinitperiod},
+           given={Lélio\bibnamedelima Renard},
+           giveni={L\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=1c3686dfd5bade81bcfe2f5c89d70465}{%
+           family={Saulnier},
+           familyi={S\bibinitperiod},
+           given={Lucile},
+           giveni={L\bibinitperiod}}}%
+        {{hash=08284515d256b832e9dba10a88af84f4}{%
+           family={Lachaux},
+           familyi={L\bibinitperiod},
+           given={Marie-Anne},
+           giveni={M\bibinithyphendelim A\bibinitperiod}}}%
+        {{hash=0af14ac84bf3a9d753c1ece79a50a55e}{%
+           family={Stock},
+           familyi={S\bibinitperiod},
+           given={Pierre},
+           giveni={P\bibinitperiod}}}%
+        {{hash=a74063219474ad33f9d0580979ea5ab6}{%
+           family={Subramanian},
+           familyi={S\bibinitperiod},
+           given={Sandeep},
+           giveni={S\bibinitperiod}}}%
+        {{hash=fea7f6955b0ef21c63fb83f9a959780b}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Sophia},
+           giveni={S\bibinitperiod}}}%
+        {{hash=adf6131d2f44f7ec486f055e0f705572}{%
+           family={Antoniak},
+           familyi={A\bibinitperiod},
+           given={Szymon},
+           giveni={S\bibinitperiod}}}%
+        {{hash=761b98e2f87c0718576d10e3d2f4028f}{%
+           family={Scao},
+           familyi={S\bibinitperiod},
+           given={Teven\bibnamedelima Le},
+           giveni={T\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=429eaf3778dc2c96b539e81af28b0e34}{%
+           family={Gervet},
+           familyi={G\bibinitperiod},
+           given={Théophile},
+           giveni={T\bibinitperiod}}}%
+        {{hash=c641a91d616b6eda08cbbdca7b7eb186}{%
+           family={Lavril},
+           familyi={L\bibinitperiod},
+           given={Thibaut},
+           giveni={T\bibinitperiod}}}%
+        {{hash=7d3b9bf09e1fd7987770a8954ff63f3c}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=1d29ae55d8d993d9f195b3c97bd34f7c}{%
+           family={Lacroix},
+           familyi={L\bibinitperiod},
+           given={Timothée},
+           giveni={T\bibinitperiod}}}%
+        {{hash=c3ed554a7cc845f45e0541d9ed913581}{%
+           family={Sayed},
+           familyi={S\bibinitperiod},
+           given={William\bibnamedelima El},
+           giveni={W\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{066da2bf78c9b2e3d4c5f5a2cc6c4bff}
+      \strng{fullhash}{6e0a4355624809e7ae2935879f753fe6}
+      \strng{fullhashraw}{6e0a4355624809e7ae2935879f753fe6}
+      \strng{bibnamehash}{066da2bf78c9b2e3d4c5f5a2cc6c4bff}
+      \strng{authorbibnamehash}{066da2bf78c9b2e3d4c5f5a2cc6c4bff}
+      \strng{authornamehash}{066da2bf78c9b2e3d4c5f5a2cc6c4bff}
+      \strng{authorfullhash}{6e0a4355624809e7ae2935879f753fe6}
+      \strng{authorfullhashraw}{6e0a4355624809e7ae2935879f753fe6}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We introduce Mixtral 8x7B, a Sparse Mixture of Experts (SMoE) language model. Mixtral has the same architecture as Mistral 7B, with the difference that each layer is composed of 8 feedforward blocks (i.e. experts). For every token, at each layer, a router network selects two experts to process the current state and combine their outputs. Even though each token only sees two experts, the selected experts can be different at each timestep. As a result, each token has access to 47B parameters, but only uses 13B active parameters during inference. Mixtral was trained with a context size of 32k tokens and it outperforms or matches Llama 2 70B and GPT-3.5 across all evaluated benchmarks. In particular, Mixtral vastly outperforms Llama 2 70B on mathematics, code generation, and multilingual benchmarks. We also provide a model fine-tuned to follow instructions, Mixtral 8x7B - Instruct, that surpasses GPT-3.5 Turbo, Claude-2.1, Gemini Pro, and Llama 2 70B - chat model on human benchmarks. Both the base and instruct models are released under the Apache 2.0 license.}
+      \field{eprintclass}{cs}
+      \field{eprinttype}{arXiv}
+      \field{month}{1}
+      \field{number}{arXiv:2401.04088}
+      \field{title}{Mixtral of {{Experts}}}
+      \field{urlday}{11}
+      \field{urlmonth}{5}
+      \field{urlyear}{2025}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2401.04088
+      \endverb
+      \verb{eprint}
+      \verb 2401.04088
+      \endverb
+      \verb{file}
+      \verb C\:\\Users\\Bulkin\\Zotero\\storage\\466BLNKK\\Jiang и др. - 2024 - Mixtral of Experts.pdf;C\:\\Users\\Bulkin\\Zotero\\storage\\KFT38E4U\\2401.html
+      \endverb
+      \keyw{Computer Science - Computation and Language,Computer Science - Machine Learning}
+    \endentry
+    \entry{cobbeTrainingVerifiersSolve2021}{misc}{}{}
+      \name{author}{12}{}{%
+        {{hash=c9355eeb51a7665fc3d58f45e210fbf6}{%
+           family={Cobbe},
+           familyi={C\bibinitperiod},
+           given={Karl},
+           giveni={K\bibinitperiod}}}%
+        {{hash=da0f106450b289c3010ca569b3de9949}{%
+           family={Kosaraju},
+           familyi={K\bibinitperiod},
+           given={Vineet},
+           giveni={V\bibinitperiod}}}%
+        {{hash=69471b8ab1a1d92877d0dfe5f57411e3}{%
+           family={Bavarian},
+           familyi={B\bibinitperiod},
+           given={Mohammad},
+           giveni={M\bibinitperiod}}}%
+        {{hash=fb15a691583ec94aafe0be6e7da4878f}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Mark},
+           giveni={M\bibinitperiod}}}%
+        {{hash=3dd736ee38ff1cbcc6f0d05487b9950b}{%
+           family={Jun},
+           familyi={J\bibinitperiod},
+           given={Heewoo},
+           giveni={H\bibinitperiod}}}%
+        {{hash=f2bc899b1160163417da7bf510f15d33}{%
+           family={Kaiser},
+           familyi={K\bibinitperiod},
+           given={Lukasz},
+           giveni={L\bibinitperiod}}}%
+        {{hash=599240d5bfe42aeb65a0c26dae77cd31}{%
+           family={Plappert},
+           familyi={P\bibinitperiod},
+           given={Matthias},
+           giveni={M\bibinitperiod}}}%
+        {{hash=98cbd7022a1c31a6293aa1c8b62bdebf}{%
+           family={Tworek},
+           familyi={T\bibinitperiod},
+           given={Jerry},
+           giveni={J\bibinitperiod}}}%
+        {{hash=9e4edc142b0564cbbb1cf93a401e4434}{%
+           family={Hilton},
+           familyi={H\bibinitperiod},
+           given={Jacob},
+           giveni={J\bibinitperiod}}}%
+        {{hash=13b885c1233d3f59261e0e53ec1aece0}{%
+           family={Nakano},
+           familyi={N\bibinitperiod},
+           given={Reiichiro},
+           giveni={R\bibinitperiod}}}%
+        {{hash=68a04c5006dbbf98f7719709540c6b56}{%
+           family={Hesse},
+           familyi={H\bibinitperiod},
+           given={Christopher},
+           giveni={C\bibinitperiod}}}%
+        {{hash=3e09bd2a25d237ebdaed560a07c0451e}{%
+           family={Schulman},
+           familyi={S\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{45858a0ae98644e6c6bc549ac1a2cfa3}
+      \strng{fullhash}{2b1c5987decdf5a17625aab169f4133e}
+      \strng{fullhashraw}{2b1c5987decdf5a17625aab169f4133e}
+      \strng{bibnamehash}{45858a0ae98644e6c6bc549ac1a2cfa3}
+      \strng{authorbibnamehash}{45858a0ae98644e6c6bc549ac1a2cfa3}
+      \strng{authornamehash}{45858a0ae98644e6c6bc549ac1a2cfa3}
+      \strng{authorfullhash}{2b1c5987decdf5a17625aab169f4133e}
+      \strng{authorfullhashraw}{2b1c5987decdf5a17625aab169f4133e}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{State-of-the-art language models can match human performance on many tasks, but they still struggle to robustly perform multi-step mathematical reasoning. To diagnose the failures of current models and support research, we introduce GSM8K, a dataset of 8.5K high quality linguistically diverse grade school math word problems. We find that even the largest transformer models fail to achieve high test performance, despite the conceptual simplicity of this problem distribution. To increase performance, we propose training verifiers to judge the correctness of model completions. At test time, we generate many candidate solutions and select the one ranked highest by the verifier. We demonstrate that verification significantly improves performance on GSM8K, and we provide strong empirical evidence that verification scales more effectively with increased data than a finetuning baseline.}
+      \field{eprintclass}{cs}
+      \field{eprinttype}{arXiv}
+      \field{month}{11}
+      \field{number}{arXiv:2110.14168}
+      \field{title}{Training {{Verifiers}} to {{Solve Math Word Problems}}}
+      \field{urlday}{11}
+      \field{urlmonth}{5}
+      \field{urlyear}{2025}
+      \field{year}{2021}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2110.14168
+      \endverb
+      \verb{eprint}
+      \verb 2110.14168
+      \endverb
+      \verb{file}
+      \verb C\:\\Users\\Bulkin\\Zotero\\storage\\K2LED2PA\\Cobbe и др. - 2021 - Training Verifiers to Solve Math Word Problems.pdf;C\:\\Users\\Bulkin\\Zotero\\storage\\ZB5ULPKL\\2110.html
+      \endverb
+      \keyw{Computer Science - Computation and Language,Computer Science - Machine Learning}
     \endentry
     \entry{lewisRetrievalAugmentedGenerationKnowledgeIntensive2020}{inproceedings}{}{}
       \name{author}{12}{}{%
@@ -1073,8 +1767,8 @@
       \strng{authornamehash}{f238c3bfc4b30650dd17e65c4aadfc66}
       \strng{authorfullhash}{d003c6be4c9e1fdb193e43ab084ae014}
       \strng{authorfullhashraw}{d003c6be4c9e1fdb193e43ab084ae014}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Large pre-trained language models have been shown to store factual knowledge in their parameters, and achieve state-of-the-art results when fine-tuned on downstream NLP tasks. However, their ability to access and precisely manipulate knowledge is still limited, and hence on knowledge-intensive tasks, their performance lags behind task-specific architectures. Additionally, providing provenance for their decisions and updating their world knowledge remain open research problems. Pre-trained models with a differentiable access mechanism to explicit non-parametric memory can overcome this issue, but have so far been only investigated for extractive downstream tasks. We explore a general-purpose fine-tuning recipe for retrieval-augmented generation (RAG) -- models which combine pre-trained parametric and non-parametric memory for language generation. We introduce RAG models where the parametric memory is a pre-trained seq2seq model and the non-parametric memory is a dense vector index of Wikipedia, accessed with a pre-trained neural retriever. We compare two RAG formulations, one which conditions on the same retrieved passages across the whole generated sequence, the other can use different passages per token. We fine-tune and evaluate our models on a wide range of knowledge-intensive NLP tasks and set the state-of-the-art on three open domain QA tasks, outperforming parametric seq2seq models and task-specific retrieve-and-extract architectures. For language generation tasks, we find that RAG models generate more specific, diverse and factual language than a state-of-the-art parametric-only seq2seq baseline.}
@@ -1133,8 +1827,8 @@
       \strng{authornamehash}{9f303156ee514e22fe064382b68079e5}
       \strng{authorfullhash}{7b9fc1cc22bef52674ebf2782a023836}
       \strng{authorfullhashraw}{7b9fc1cc22bef52674ebf2782a023836}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Transactions of the Kola Science Centre of RAS. Series: Engineering Sciences}

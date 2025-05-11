@@ -2386,12 +2386,22 @@
     <bcf:citekey order="11" intorder="1">nguyenBriefReportLawGPT2023</bcf:citekey>
     <bcf:citekey order="12" intorder="1">huangLawyerLLaMATechnical2023</bcf:citekey>
     <bcf:citekey order="13" intorder="1">cuiChatlawMultiAgentCollaborative2024a</bcf:citekey>
-    <bcf:citekey order="14" intorder="1">mageshHallucinationFreeAssessingReliability2024a</bcf:citekey>
-    <bcf:citekey order="15" intorder="1">kalaiCalibratedLanguageModels2024</bcf:citekey>
-    <bcf:citekey order="16" intorder="1">lewisRetrievalAugmentedGenerationKnowledgeIntensive2020</bcf:citekey>
-    <bcf:citekey order="17" intorder="1">mageshHallucinationFreeAssessingReliability2024a</bcf:citekey>
-    <bcf:citekey order="18" intorder="1">kolaScienceCenter</bcf:citekey>
-    <bcf:citekey order="19" intorder="1">lewisRetrievalAugmentedGenerationKnowledgeIntensive2020</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">brouard2008legislative</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">nguyenBriefReportLawGPT2023</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">huangLawyerLLaMATechnical2023</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">kullPatternsDatasetShift</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">chenghaozhuYourLLMOutdated2025</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">robinsCatastrophicForgettingRehearsal1995</bcf:citekey>
+    <bcf:citekey order="20" intorder="1">kalajdzievskiScalingLawsForgetting2024</bcf:citekey>
+    <bcf:citekey order="21" intorder="1">zhaiInvestigatingCatastrophicForgetting2024</bcf:citekey>
+    <bcf:citekey order="22" intorder="1">mageshHallucinationFreeAssessingReliability2024a</bcf:citekey>
+    <bcf:citekey order="23" intorder="1">kalaiCalibratedLanguageModels2024</bcf:citekey>
+    <bcf:citekey order="24" intorder="1">xiaUnderstandingPerformanceEstimating2024</bcf:citekey>
+    <bcf:citekey order="25" intorder="1">jiangMixtralExperts2024</bcf:citekey>
+    <bcf:citekey order="26" intorder="1">cobbeTrainingVerifiersSolve2021</bcf:citekey>
+    <bcf:citekey order="27" intorder="1">lewisRetrievalAugmentedGenerationKnowledgeIntensive2020</bcf:citekey>
+    <bcf:citekey order="28" intorder="1">mageshHallucinationFreeAssessingReliability2024a</bcf:citekey>
+    <bcf:citekey order="29" intorder="1">kolaScienceCenter</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

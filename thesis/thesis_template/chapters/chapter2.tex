@@ -3,12 +3,166 @@
 \chaptermark{Second Chapter Heading}
 
 
-\section[Foundations of Retrieval-Augmented Generation]{\texorpdfstring{Foundations of \\ Retrieval-Augmented Generation}{Foundations of Retrieval-Augmented Generation}}
-\subsection{Core architecture of RAG-systems}
-As it was said in Chapter 1, in 2020 a Retrieval-Augmented approach was presented by Lewis et al. in \cite{lewisRetrievalAugmentedGenerationKnowledgeIntensive2020}.
+\section{Early Approaches to Automation in the Legal Sphere}
+\label{sec:early}
+
+The application of Artificial Intelligence in the legal domain began in 1958 with Lucien Mehl's seminal article \cite{automation_in_legal_1958}, which explored AI's potential in law and decision-making processes. Mehl proposed two primary approaches for legal AI systems:
+\begin{itemize}
+    \item \textit{Information machine} - "the machine for finding precedent"
+    \item \textit{Consultation machine} - "the judgement machine"
+\end{itemize}
+
+The author argued that both approaches required transforming natural language in legal documents into a strictly formalized, machine-readable format. This task was considered a preliminary step toward formalizing natural language as a whole. While Mehl proposed a framework for legal text formalization, this remains an unsolved challenge today.\footnote{
+    Modern projects like \cite{merigouxCatalaProgrammingLanguage2021} continue to explore machine-readable formats for legislative texts.
+}
+
+Early probabilistic approaches to natural language processing emerged in 1952 \cite{weaverTranslation1952}, but were deemed impractical due to computational constraints. Only in 1990 did IBM introduce efficient, computationally feasible methods \cite{brownStatisticalApproachMachine1990}. A 2003 review \cite{risslandAILawFruitful2003} confirmed that case-based and rule-based reasoning systems remained the most prevalent AI applications in law at that time.
+
+\section{Large Language Models in Law}
+Advances in computational power enabled opportunity to utilize complex natural language processing models.
+The field transformed with Word2Vec's semantically meaningful word vectors (2013) \cite{mikolovEfficientEstimationWord2013},
+followed by Google's Transformer architecture (2017) \cite{vaswaniAttentionAllYou2017}. 
+OpenAI's 2020 paper \cite{brownLanguageModelsAre2020} introduced few-shot learning through prompting, 
+leading to powerful, accessible AI assistants applicable to legal domains.
+
+
+A 2024 Texas survey \cite{seabrookeSurveyLayPeoples2024} revealed that over 50\% of respondents would consult AI assistants for tenancy, tax, and traffic legal matters.\footnote{
+    However, only $\approx$30\% trusted AI for divorce, juvenile, or civil dispute cases.
+} Similarly, LexisNexis \cite{LawyersGearGenerative} reported 35\% of lawyers using AI assistants monthly.
+
+Specialized legal LLMs like LawGPT (2023) \cite{nguyenBriefReportLawGPT2023}, LawyerLLaMA (2023) \cite{huangLawyerLLaMATechnical2023}, and ChatLaw (2023) \cite{cuiChatlawMultiAgentCollaborative2024a} have emerged. 
+
+
+\section{Limitations of Language Models in the Legal Domain}
+
+Despite the active use of Large Language Models (LLMs) by legal professionals, 
+their application to a broad range of legal tasks remains constrained by several 
+factors that are particularly critical in the legal field:
+
+\subsection{Continuous Changes in Legal Frameworks}
+
+Legal systems undergo constant modifications. 
+A comprehensive study on parliamentary productivity \cite{brouard2008legislative} 
+reports that between 1990--2003, national parliaments passed between 698 laws 
+($\approx$49 annually, United Kingdom) and 3,346 laws 
+($\approx$239 annually, United States). 
+This issue is particularly acute in Russia, where the State Duma adopted 653 laws in 2022 alone.\footnote{https://tass.ru/politika/16661451}
+The described statistics only account for parliamentary legislation.
+ When including regulatory acts issued by government agencies, 
+ the volume increases to levels where continuous LLM retraining becomes impractical. 
+ Current research on purely fine-tuned Law-LLMs, including LawGPT \cite{nguyenBriefReportLawGPT2023} and Lawyer LLaMa \cite{huangLawyerLLaMATechnical2023}, 
+ fails to adequately address this legislative volatility due to the novelty of the domain.
+
+\subsubsection{Legal Changes as Dataset Shifts}
+Following the dataset shift framework \cite{kullPatternsDatasetShift}, we model legislative changes as following:
+
+Let $P_1(X)$ represent the probability distribution of legal provisions before changes, 
+and $P_2(X)$ after changes. Then:
+\begin{itemize}
+    \item $P_1(Y)$: Distribution of correct legal interpretations pre-change
+    \item $P_2(Y)$: Distribution post-change
+\end{itemize}
+
+Where $P_1(X) \neq P_2(X) \implies P_1(Y) \neq P_2(Y)$
+\footnote{If this implication doesn't hold, model outputs remain valid without retraining}. 
+This yields three shift types:
+\begin{enumerate}
+    \item \textbf{New legislation}: 
+    \begin{equation*}
+        P_1(Y|X) = P_2(Y|X) \quad \text{(covariate shift)}
+    \end{equation*}
+    
+    \item \textbf{Amended legislation}:
+    \begin{equation*}
+        P_1(Y|X) \neq P_2(Y|X) \quad \text{(concept shift)}
+    \end{equation*}
+    
+    \item \textbf{Repealed legislation}:
+    \begin{equation*}
+        P_1(Y) \neq P_2(Y) \quad \text{with} \quad P(X|Y) \quad \text{constant (prior probability shift)}
+    \end{equation*}
+\end{enumerate}
+
+\subsection{Temporal Shift}
+
+Recent research by Chenghao Zhu et al. \cite{chenghaozhuYourLLMOutdated2025} demonstrates that 
+language models exhibit two critical limitations:
+\begin{itemize}
+    \item Inability to process information absent from their training data
+    \item Systematic preference for chronologically earlier information (termed ``nostalgia bias'')
+\end{itemize}
+
+The study reveals that nostalgia bias intensifies with improved model performance metrics. 
+Consequently, even with continuous retraining, LLMs maintain significant 
+risk of utilizing outdated information - 
+a particularly critical limitation for the legal domain given its constant evolution.
+
+\subsection{The Problem of Catastrophic Forgetting}
+The phenomenon of Catastrophic Forgetting, first defined by Anthony Robins in \cite{robinsCatastrophicForgettingRehearsal1995} 
+as ``the loss or disruption of previously learned information when new information is learned,'' 
+remains relevant for LLMs. 
+Recent studies demonstrate that both LLMs \cite{kalajdzievskiScalingLawsForgetting2024} 
+and Multimodal LLMs \cite{zhaiInvestigatingCatastrophicForgetting2024} 
+exhibit tendencies toward catastrophic forgetting. 
+
+The research reveals a linear relationship where:
+\begin{itemize}
+    \item Improvement in loss function values for new tasks during fine-tuning
+    \item Corresponding degradation in loss function values for original tasks
+\end{itemize}
+The exact coefficient of performance degradation on general tasks varies depending on 
+specific model architecture, training data characteristics and task parameters.
+Nevertheless, the cited works investigate various methods to decrease this forgetting effect 
+during model fine-tuning.
+
+\subsection{Hallucinations}
+Despite LLMs' strong performance in general domains, legal applications face accuracy challenges. 
+Stanford research (2024) \cite{mageshHallucinationFreeAssessingReliability2024a} shows 
+fine-tuned legal LLMs still hallucinate in 17-33\% of cases. 
+OpenAI's theoretical analysis \cite{kalaiCalibratedLanguageModels2024} confirms 
+all language models retain measurable hallucination probabilities regardless of size or training. 
+Consequently, even a theoretical model that is retrained daily 
+cannot guarantee response accuracy in legal applications.
+
+\subsection{Cost of Fine-Tuning}
+
+While being significantly cheaper than training a language model from scratch 
+in terms of computational time, resources, and financial costs, 
+fine-tuning large language models still leads to substantial expenses. 
+
+In their 2024 study, Xia et al.\cite{xiaUnderstandingPerformanceEstimating2024} 
+examine the fine-tuning costs of the Mixtral model \cite{jiangMixtralExperts2024} 
+on the GSM8K dataset \cite{cobbeTrainingVerifiersSolve2021}, 
+which contains 8.5 thousand grade-school level math problems. 
+Their estimated fine-tuning costs range from \$17 to \$32, 
+depending on hardware configurations, excluding equipment acquisition costs and 
+labor costs for specialists conducting the fine-tuning.
+
+While a comprehensive cost assessment for maintaining model relevance falls beyond this work's scope, we note that given the aforementioned need for daily fine-tuning, these expenses may reach prohibitive levels for practical deployment.
+
+\section{RAG Approach}
+Retrieval-Augmented Generation (RAG), introduced in 2020 \cite{lewisRetrievalAugmentedGenerationKnowledgeIntensive2020}, combines LLMs with reliable information retrieval systems (see Section 2). \cite{mageshHallucinationFreeAssessingReliability2024a} demonstrates RAG can reduce legal QA hallucinations to near-zero with proper context retrieval.
+
+While RAG-based legal QA systems are rapidly developing (detailed in Section 2), existing research focuses on Western (primarily US and Australian) legal systems. Though Russian applications exist (e.g., \cite{kolaScienceCenter}), none address legal domains. Our work applies and evaluates RAG in Russian legal contexts, providing foundational insights for future research.
 The idea of RAG is novel and simple at the same time: it combines the power of LLMs with the reliability of information retrieval systems.
 Its architecture consists of two main componentents: a retriever and a generator.
 The retriever is responsible for searching and retrieving relevant documents from a large corpus, while the generator uses these documents to produce coherent and contextually relevant responses.
 The retriever can be based on various techniques, such as dense retrieval, sparse retrieval, or a combination of both.
 The generator is typically a pre-trained language model, such as BART or T5, which is fine-tuned on the task of generating text based on the retrieved documents.
 
+\subsection{Diversity and Hierarchy of Legal Systems}
+
+Legal systems vary significantly across jurisdictions, 
+often featuring multiple hierarchical levels (national, regional, municipal), 
+where the set of applicable legal acts depends on specific territories. 
+This challenge is particularly acute in Russia due to its federal state structure.
+
+According to data from the Ministry of Justice of the Russian Federation \footnote{https://minjust.gov.ru/uploaded/files/monitoring-msu-202115.docx}, 
+as of January 1, 2021, there were 20,184 distinct municipal entities in Russia. 
+Consequently, achieving comprehensive coverage of only publicly available Russian legal framework
+would require maintaining at least 20,184 unique continuously-retrained models.
+
+
+
+
+\section{Juridical RAG}

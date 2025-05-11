@@ -5,6 +5,139 @@
   year = {1958}
 }
 
+@inproceedings{brouard2008legislative,
+  title={Legislative Productivity in Comparative Perspective: An Introduction to the Comparative Agendas Project},
+  author={Brouard, Sylvain and Baumgartner, Frank and Wilkerson, John and Bevan, Shaun and Breeman, Gerard and Breunig, Christian and Chaques, Laura and Green-Pedersen, Christopher and Jennings, Will and John, Peter and others},
+  booktitle={ECPR Joint Sessions},
+  year={2008}
+}
+
+@article{kullPatternsDatasetShift,
+  title = {Patterns of Dataset Shift},
+  author = {Kull, Meelis and Flach, Peter},
+  abstract = {Dataset shift is a frequent cause of failure of a predictor. A model which performs well in several contexts can give bad predictions in other contexts where the data are shifted compared to the training context. Earlier work has revealed many different causes of shift systematised by Storkey [11] and three important types of effects of shift on probability distributions systematised by Moreno-Torres et al. [8]: covariate shift (distribution shift in attributes), prior probability shift (shift in labels) and concept shift (shift in the relationship between attributes and labels). However, many causes lead to effects not covered by these three types, and hence are called `other types of shift' by Moreno-Torres et al. [8]. We propose a formal notation for the effects of shift using graphical models. We identify 12 patterns of shift (6 of them novel), which cover the effects of all 6 causes described by Storkey [11]. Furthermore, these patterns can be combined to describe effects of multiple or more complex reasons of shift. We see three avenues of work benefitting from our formalism. First, reviewing shift-adaptive methods regarding their applicability range could be done in our notation. Second, identifying patterns of shift in a practical task might aid in finding an existing method to solve the task. Finally, our novel patterns and pattern combinations suggest niches for new shift-adaptive methods.},
+  langid = {english},
+  file = {C:\Users\Bulkin\Zotero\storage\8P4LK3T2\Kull и Flach - Patterns of dataset shift.pdf}
+}
+
+@inproceedings{chenghaozhuYourLLMOutdated2025,
+  title = {Is {{Your LLM Outdated}}? {{A Deep Look}} at {{Temporal Generalization}}},
+  shorttitle = {Is {{Your LLM Outdated}}?},
+  booktitle = {Proceedings of the 2025 {{Conference}} of the {{Nations}} of the {{Americas Chapter}} of the {{Association}} for {{Computational Linguistics}}: {{Human Language Technologies}} ({{Volume}} 1: {{Long Papers}})},
+  author = {ChenghaoZhu, ChenghaoZhu and Chen, Nuo and Gao, Yufei and Zhang, Yunyi and Tiwari, Prayag and Wang, Benyou},
+  editor = {Chiruzzo, Luis and Ritter, Alan and Wang, Lu},
+  year = {2025},
+  month = apr,
+  pages = {7433--7457},
+  publisher = {Association for Computational Linguistics},
+  address = {Albuquerque, New Mexico},
+  urldate = {2025-05-11},
+  abstract = {The rapid advancement of Large Language Models (LLMs) has led to the development of benchmarks that consider temporal dynamics, however, there remains a gap in understanding how well these models can generalize across temporal contexts due to the inherent dynamic nature of language and information. This paper introduces the concept of temporal generalization in LLMs, including bias in past and future generalizations. Then we introduce FreshBench, a new evaluation framework that employs fresh text and event prediction for assessing LLMs' temporal adaptability, ensuring the evaluation process free from data leakage and subjective bias. The experiment shows significant temporal biases and a decline in performance over time.},
+  isbn = {979-8-89176-189-6},
+  file = {C:\Users\Bulkin\Zotero\storage\EFTDJP4M\ChenghaoZhu и др. - 2025 - Is Your LLM Outdated A Deep Look at Temporal Generalization.pdf}
+}
+
+@misc{kalajdzievskiScalingLawsForgetting2024,
+  title = {Scaling {{Laws}} for {{Forgetting When Fine-Tuning Large Language Models}}},
+  author = {Kalajdzievski, Damjan},
+  year = {2024},
+  month = jan,
+  number = {arXiv:2401.05605},
+  eprint = {2401.05605},
+  primaryclass = {cs},
+  publisher = {arXiv},
+  doi = {10.48550/arXiv.2401.05605},
+  urldate = {2025-05-11},
+  abstract = {We study and quantify the problem of forgetting when fine-tuning pre-trained large language models (LLMs) on a downstream task. We find that parameter-efficient fine-tuning (PEFT) strategies, such as Low-Rank Adapters (LoRA), still suffer from catastrophic forgetting. In particular, we identify a strong inverse linear relationship between the fine-tuning performance and the amount of forgetting when fine-tuning LLMs with LoRA. We further obtain precise scaling laws that show forgetting increases as a shifted power law in the number of parameters fine-tuned and the number of update steps. We also examine the impact of forgetting on knowledge, reasoning, and the safety guardrails trained into Llama 2 7B chat. Our study suggests that forgetting cannot be avoided through early stopping or by varying the number of parameters fine-tuned. We believe this opens up an important safety-critical direction for future research to evaluate and develop fine-tuning schemes which mitigate forgetting},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Computation and Language,Computer Science - Machine Learning},
+  file = {C\:\\Users\\Bulkin\\Zotero\\storage\\XSBNAVNG\\Kalajdzievski - 2024 - Scaling Laws for Forgetting When Fine-Tuning Large Language Models.pdf;C\:\\Users\\Bulkin\\Zotero\\storage\\BEGSS8ZP\\2401.html}
+}
+
+@inproceedings{zhaiInvestigatingCatastrophicForgetting2024,
+  title = {Investigating the {{Catastrophic Forgetting}} in {{Multimodal Large Language Model Fine-Tuning}}},
+  booktitle = {Conference on {{Parsimony}} and {{Learning}}},
+  author = {Zhai, Yuexiang and Tong, Shengbang and Li, Xiao and Cai, Mu and Qu, Qing and Lee, Yong Jae and Ma, Yi},
+  year = {2024},
+  month = jan,
+  pages = {202--227},
+  publisher = {PMLR},
+  issn = {2640-3498},
+  urldate = {2025-05-11},
+  abstract = {Following the success of GPT4, there has been a surge in interest in multimodal large language model (MLLM) research. This line of research focuses on developing general-purpose LLMs through fine-tuning pre-trained LLMs and vision models. However, catastrophic forgetting, a notorious phenomenon where the fine-tuned model fails to retain similar performance compared to the pre-trained model, still remains an inherited problem in multimodal LLMs (MLLM). In this paper, we introduce EMT: Evaluating MulTimodality for evaluating the catastrophic forgetting in MLLMs, by treating each MLLM as an image classifier. We first apply EMT to evaluate several open-source fine-tuned MLLMs and we discover that almost all evaluated MLLMs fail to retain the same performance levels as their vision encoders on standard image classification tasks. Moreover, we continue fine-tuning LLaVA, an MLLM and utilize EMT to assess performance throughout the fine-tuning. Interestingly, our results suggest that early-stage fine-tuning on an image dataset improves performance across other image datasets, by enhancing the alignment of text and language features. However, as fine-tuning proceeds, the MLLMs begin to hallucinate, resulting in a significant loss of generalizability, even when the image encoder remains frozen. Our results suggest that MLLMs have yet to demonstrate performance on par with their vision models on standard image classification tasks and the current MLLM fine-tuning procedure still has room for improvement.},
+  langid = {english},
+  file = {C:\Users\Bulkin\Zotero\storage\WHE596VC\Zhai и др. - 2024 - Investigating the Catastrophic Forgetting in Multimodal Large Language Model Fine-Tuning.pdf}
+}
+
+@article{robinsCatastrophicForgettingRehearsal1995,
+  title = {Catastrophic {{Forgetting}}, {{Rehearsal}} and {{Pseudorehearsal}}},
+  author = {ROBINS, ANTHONY},
+  year = {1995},
+  month = jun,
+  journal = {Connection Science},
+  volume = {7},
+  number = {2},
+  pages = {123--146},
+  publisher = {Taylor & Francis},
+  issn = {0954-0091},
+  doi = {10.1080/09540099550039318},
+  urldate = {2025-05-11},
+}
+
+@misc{xiaUnderstandingPerformanceEstimating2024,
+  title = {Understanding the {{Performance}} and {{Estimating}} the {{Cost}} of {{LLM Fine-Tuning}}},
+  author = {Xia, Yuchen and Kim, Jiho and Chen, Yuhan and Ye, Haojie and Kundu, Souvik and Hao, Cong and Talati, Nishil},
+  year = {2024},
+  month = aug,
+  number = {arXiv:2408.04693},
+  eprint = {2408.04693},
+  primaryclass = {cs},
+  publisher = {arXiv},
+  doi = {10.48550/arXiv.2408.04693},
+  urldate = {2025-05-11},
+  abstract = {Due to the cost-prohibitive nature of training Large Language Models (LLMs), fine-tuning has emerged as an attractive alternative for specializing LLMs for specific tasks using limited compute resources in a cost-effective manner. In this paper, we characterize sparse Mixture of Experts (MoE) based LLM fine-tuning to understand their accuracy and runtime performance on a single GPU. Our evaluation provides unique insights into the training efficacy of sparse and dense versions of MoE models, as well as their runtime characteristics, including maximum batch size, execution time breakdown, end-to-end throughput, GPU hardware utilization, and load distribution. Our study identifies the optimization of the MoE layer as crucial for further improving the performance of LLM fine-tuning. Using our profiling results, we also develop and validate an analytical model to estimate the cost of LLM fine-tuning on the cloud. This model, based on parameters of the model and GPU architecture, estimates LLM throughput and the cost of training, aiding practitioners in industry and academia to budget the cost of fine-tuning a specific model.},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Artificial Intelligence,Computer Science - Computation and Language,Computer Science - Machine Learning},
+  file = {C\:\\Users\\Bulkin\\Zotero\\storage\\9VF3TSZF\\Xia и др. - 2024 - Understanding the Performance and Estimating the Cost of LLM Fine-Tuning.pdf;C\:\\Users\\Bulkin\\Zotero\\storage\\9MNNNJH7\\2408.html}
+}
+
+@misc{jiangMixtralExperts2024,
+  title = {Mixtral of {{Experts}}},
+  author = {Jiang, Albert Q. and Sablayrolles, Alexandre and Roux, Antoine and Mensch, Arthur and Savary, Blanche and Bamford, Chris and Chaplot, Devendra Singh and de las Casas, Diego and Hanna, Emma Bou and Bressand, Florian and Lengyel, Gianna and Bour, Guillaume and Lample, Guillaume and Lavaud, L{\'e}lio Renard and Saulnier, Lucile and Lachaux, Marie-Anne and Stock, Pierre and Subramanian, Sandeep and Yang, Sophia and Antoniak, Szymon and Scao, Teven Le and Gervet, Th{\'e}ophile and Lavril, Thibaut and Wang, Thomas and Lacroix, Timoth{\'e}e and Sayed, William El},
+  year = {2024},
+  month = jan,
+  number = {arXiv:2401.04088},
+  eprint = {2401.04088},
+  primaryclass = {cs},
+  publisher = {arXiv},
+  doi = {10.48550/arXiv.2401.04088},
+  urldate = {2025-05-11},
+  abstract = {We introduce Mixtral 8x7B, a Sparse Mixture of Experts (SMoE) language model. Mixtral has the same architecture as Mistral 7B, with the difference that each layer is composed of 8 feedforward blocks (i.e. experts). For every token, at each layer, a router network selects two experts to process the current state and combine their outputs. Even though each token only sees two experts, the selected experts can be different at each timestep. As a result, each token has access to 47B parameters, but only uses 13B active parameters during inference. Mixtral was trained with a context size of 32k tokens and it outperforms or matches Llama 2 70B and GPT-3.5 across all evaluated benchmarks. In particular, Mixtral vastly outperforms Llama 2 70B on mathematics, code generation, and multilingual benchmarks. We also provide a model fine-tuned to follow instructions, Mixtral 8x7B - Instruct, that surpasses GPT-3.5 Turbo, Claude-2.1, Gemini Pro, and Llama 2 70B - chat model on human benchmarks. Both the base and instruct models are released under the Apache 2.0 license.},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Computation and Language,Computer Science - Machine Learning},
+  file = {C\:\\Users\\Bulkin\\Zotero\\storage\\466BLNKK\\Jiang и др. - 2024 - Mixtral of Experts.pdf;C\:\\Users\\Bulkin\\Zotero\\storage\\KFT38E4U\\2401.html}
+}
+
+@misc{cobbeTrainingVerifiersSolve2021,
+  title = {Training {{Verifiers}} to {{Solve Math Word Problems}}},
+  author = {Cobbe, Karl and Kosaraju, Vineet and Bavarian, Mohammad and Chen, Mark and Jun, Heewoo and Kaiser, Lukasz and Plappert, Matthias and Tworek, Jerry and Hilton, Jacob and Nakano, Reiichiro and Hesse, Christopher and Schulman, John},
+  year = {2021},
+  month = nov,
+  number = {arXiv:2110.14168},
+  eprint = {2110.14168},
+  primaryclass = {cs},
+  publisher = {arXiv},
+  doi = {10.48550/arXiv.2110.14168},
+  urldate = {2025-05-11},
+  abstract = {State-of-the-art language models can match human performance on many tasks, but they still struggle to robustly perform multi-step mathematical reasoning. To diagnose the failures of current models and support research, we introduce GSM8K, a dataset of 8.5K high quality linguistically diverse grade school math word problems. We find that even the largest transformer models fail to achieve high test performance, despite the conceptual simplicity of this problem distribution. To increase performance, we propose training verifiers to judge the correctness of model completions. At test time, we generate many candidate solutions and select the one ranked highest by the verifier. We demonstrate that verification significantly improves performance on GSM8K, and we provide strong empirical evidence that verification scales more effectively with increased data than a finetuning baseline.},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Computation and Language,Computer Science - Machine Learning},
+  file = {C\:\\Users\\Bulkin\\Zotero\\storage\\K2LED2PA\\Cobbe и др. - 2021 - Training Verifiers to Solve Math Word Problems.pdf;C\:\\Users\\Bulkin\\Zotero\\storage\\ZB5ULPKL\\2110.html}
+}
+
+
+
+
 @inproceedings{weaverTranslation1952,
   title = {Translation},
   booktitle = {Proceedings of the {{Conference}} on {{Mechanical Translation}}},
