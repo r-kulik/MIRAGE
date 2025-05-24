@@ -140,16 +140,6 @@ labor costs for specialists conducting the fine-tuning.
 
 While a comprehensive cost assessment for maintaining model relevance falls beyond this work's scope, we note that given the aforementioned need for daily fine-tuning, these expenses may reach prohibitive levels for practical deployment.
 
-\section{RAG Approach}
-Retrieval-Augmented Generation (RAG), introduced in 2020 \cite{lewisRetrievalAugmentedGenerationKnowledgeIntensive2020}, combines LLMs with reliable information retrieval systems (see Section 2). \cite{mageshHallucinationFreeAssessingReliability2024a} demonstrates RAG can reduce legal QA hallucinations to near-zero with proper context retrieval.
-
-While RAG-based legal QA systems are rapidly developing (detailed in Section 2), existing research focuses on Western (primarily US and Australian) legal systems. Though Russian applications exist (e.g., \cite{kolaScienceCenter}), none address legal domains. Our work applies and evaluates RAG in Russian legal contexts, providing foundational insights for future research.
-The idea of RAG is novel and simple at the same time: it combines the power of LLMs with the reliability of information retrieval systems.
-Its architecture consists of two main componentents: a retriever and a generator.
-The retriever is responsible for searching and retrieving relevant documents from a large corpus, while the generator uses these documents to produce coherent and contextually relevant responses.
-The retriever can be based on various techniques, such as dense retrieval, sparse retrieval, or a combination of both.
-The generator is typically a pre-trained language model, such as BART or T5, which is fine-tuned on the task of generating text based on the retrieved documents.
-
 \subsection{Diversity and Hierarchy of Legal Systems}
 
 Legal systems vary significantly across jurisdictions, 
@@ -161,6 +151,56 @@ According to data from the Ministry of Justice of the Russian Federation \footno
 as of January 1, 2021, there were 20,184 distinct municipal entities in Russia. 
 Consequently, achieving comprehensive coverage of only publicly available Russian legal framework
 would require maintaining at least 20,184 unique continuously-retrained models.
+
+\section{RAG Approach}
+In 2020, Patrick Lewis et al. introduced a new approach for question answering in
+ knowledge-intensive domains called Retrieval Augmented Generation 
+ \cite{lewisRetrievalAugmentedGenerationKnowledgeIntensive2020}, 
+ as they say a ``model which combine pre-trained parametric and 
+ non-parametric memory for language generation"".
+
+According to their framework:\footnote{
+    Actually, it is only the definition of RAG-sequence model. There is also a RAG-token approach which
+    we are leaving out of the scope in this work
+}
+\label{eq:rag_equation}
+$$
+p(y|x) \approx \sum_{z \in r^k(p_\eta(\cdot | x))} p_\eta(z|x) \prod_{i = 1}^{N}p_\theta(y_i | x, z, y_{1:i - 1})
+$$
+where:
+
+\space \space $x$ is an input sequence (user question)
+
+\space \space $y$ is an output sequence (model answer)
+
+\space \space $z$ is a document, potentially relevant for answering $x$
+
+\space \space $N$ is an amount of tokens in $y$
+
+\space \space $\theta$ are weights of generation model
+
+\space \space $\eta$ is a retriever
+
+\space \space $r^k(p_\eta(\cdot | x))$ is a set of $k$ most relevant documents according to $\eta$
+
+\space \space $y_i$ - i-th token of the output sequence
+
+\space \space $y_{1:i - 1}$ sequence of output tokens leading i-th token
+
+
+
+
+\subsection{Vanishing pure LLM disadvanteges}
+ \cite{mageshHallucinationFreeAssessingReliability2024a} demonstrates RAG can reduce legal QA hallucinations to near-zero with proper context retrieval.
+
+While RAG-based legal QA systems are rapidly developing (detailed in Section 2), existing research focuses on Western (primarily US and Australian) legal systems. Though Russian applications exist (e.g., \cite{kolaScienceCenter}), none address legal domains. Our work applies and evaluates RAG in Russian legal contexts, providing foundational insights for future research.
+The idea of RAG is novel and simple at the same time: it combines the power of LLMs with the reliability of information retrieval systems.
+Its architecture consists of two main componentents: a retriever and a generator.
+The retriever is responsible for searching and retrieving relevant documents from a large corpus, while the generator uses these documents to produce coherent and contextually relevant responses.
+The retriever can be based on various techniques, such as dense retrieval, sparse retrieval, or a combination of both.
+The generator is typically a pre-trained language model, such as BART or T5, which is fine-tuned on the task of generating text based on the retrieved documents.
+
+    
 
 
 
