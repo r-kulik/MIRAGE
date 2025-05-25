@@ -27,14 +27,16 @@ class WhooshChunkStorage(ChunkStorage):
         scoring_function: Literal["BM25", "BM25F", "TF-IDF"],
         normalizer: Optional[TextNormalizer] | bool | Callable[[str], str] = True,
         K1: Optional[float] = None,
-        B: Optional[float] = None
+        B: Optional[float] = None,
     ):
         super().__init__(scoring_function)
         self.scoring_function = scoring_function
         self.K1 = K1
         self.B = B
         if type(normalizer) == bool and normalizer:
-            normalizer = TextNormalizer(stop_word_remove=True, word_generalization="stem")
+            normalizer = TextNormalizer(
+                stop_word_remove=True, word_generalization="stem"
+            )
         self.normalizer = normalizer
 
         self._setup_index()
@@ -49,7 +51,7 @@ class WhooshChunkStorage(ChunkStorage):
             id=fields.ID(stored=True, unique=True),
             text=fields.STORED,  # Original text
             normalized_text=fields.TEXT(stored=True),  # Normalized for search
-            raw_document_index=fields.STORED
+            raw_document_index=fields.STORED,
         )
         self.storage = RamStorage()
         self.ix = self.storage.create_index(schema)
@@ -71,72 +73,76 @@ class WhooshChunkStorage(ChunkStorage):
 
     def get_indexes(self) -> List[str]:
         with self.ix.searcher() as searcher:
-            return [doc['id'] for doc in searcher.all_stored_fields()]
+            return [doc["id"] for doc in searcher.all_stored_fields()]
 
     def get_raw_index_of_document(self, index: str) -> str:
         with self.ix.searcher() as searcher:
             doc = searcher.document(id=index)
             if not doc:
                 raise KeyError(f"Chunk index {index} not found")
-            return doc['raw_document_index']
+            return doc["raw_document_index"]
 
     def __getitem__(self, index: str) -> str:
         with self.ix.searcher() as searcher:
             doc = searcher.document(id=index)
             if not doc:
                 raise KeyError(f"Chunk index {index} not found")
-            return doc['text']
+            return doc["text"]
 
     def get_normalized_text(self, index: str) -> str:
         with self.ix.searcher() as searcher:
             doc = searcher.document(id=index)
             if not doc:
                 raise KeyError(f"Chunk index {index} not found")
-            return doc['normalized_text']
+            return doc["normalized_text"]
 
     def add_chunk(self, text: str, raw_document_index: str) -> str:
         chunk_id = str(uuid.uuid4())
         with self.ix.searcher() as searcher:
             if searcher.document(id=chunk_id):
                 raise self.ChunkIndexIsAlreadyInStorageException()
-        
+
         normalized_text = self.__normalize(text)  # Assume __normalize is implemented
         writer = self.ix.writer()
         writer.add_document(
             id=chunk_id,
             text=text,
             normalized_text=normalized_text,
-            raw_document_index=raw_document_index
+            raw_document_index=raw_document_index,
         )
         writer.commit()
         return chunk_id
 
     def clear(self) -> None:
         writer = self.ix.writer()
-        writer.delete_by_query(qparser.QueryParser(fieldname="normalized_text", schema=self.ix.schema).parse("*"))
+        writer.delete_by_query(
+            qparser.QueryParser(
+                fieldname="normalized_text", schema=self.ix.schema
+            ).parse("*")
+        )
         writer.commit()
 
     def __iter__(self) -> Generator[tuple[str, str], None, None]:
         with self.ix.searcher() as searcher:
             for doc in searcher.all_stored_fields():
-                yield (doc['id'], doc['text'])
+                yield (doc["id"], doc["text"])
 
     def query(self, query: str) -> List[QueryResult]:
         query = self.__normalize(query)
         with self.ix.searcher(weighting=self._get_weighting()) as searcher:
-            parser = qparser.QueryParser("normalized_text", self.ix.schema, group=syntax.OrGroup)
+            parser = qparser.QueryParser(
+                "normalized_text", self.ix.schema, group=syntax.OrGroup
+            )
             q = parser.parse(query)
             results = searcher.search(q)
             return [
-                QueryResult(
-                    score=hit.score,
-                    chunk_storage_key=hit['id'],
-                    vector=None
-                ) for hit in results]
-        
+                QueryResult(score=hit.score, chunk_storage_key=hit["id"], vector=None)
+                for hit in results
+            ]
+
     def save(self, path: str) -> None:
         """Сохраняет индекс и настройки в zip-файл с расширением .whoosh."""
-        if not path.endswith('.whoosh'):
+        if not path.endswith(".whoosh"):
             raise ValueError("Файл должен иметь расширение .whoosh")
 
         # Создаем временную директорию
@@ -156,13 +162,17 @@ class WhooshChunkStorage(ChunkStorage):
                 "scoring_function": self.scoring_function,
                 "K1": self.K1,
                 "B": self.B,
-                "normalizer": bool(self.normalizer)  # Сохраняем только факт использования нормализатора
+                "normalizer": bool(
+                    self.normalizer
+                ),  # Сохраняем только факт использования нормализатора
             }
-            with open(os.path.join(tmpdirname, "metadata.json"), "w", encoding="utf-8") as f:
+            with open(
+                os.path.join(tmpdirname, "metadata.json"), "w", encoding="utf-8"
+            ) as f:
                 json.dump(metadata, f)
 
             # Упаковываем директорию в zip-архив с расширением .whoosh
-            with zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED) as zf:
+            with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as zf:
                 for root, dirs, files in os.walk(tmpdirname):
                     for file in files:
                         filepath = os.path.join(root, file)
@@ -180,7 +190,7 @@ class WhooshChunkStorage(ChunkStorage):
 
         # распакуем в «temporary directory» — контекстный менеджер сам позаботится об удалении
         with tempfile.TemporaryDirectory() as tmpdir:
-            with zipfile.ZipFile(path, 'r') as zf:
+            with zipfile.ZipFile(path, "r") as zf:
                 zf.extractall(tmpdir)
 
             # прочитаем метаданные
@@ -191,25 +201,24 @@ class WhooshChunkStorage(ChunkStorage):
                 meta = json.load(mf)
 
             scoring_function = meta["scoring_function"]
-            K1               = meta.get("K1")
-            B                = meta.get("B")
-            norm_flag        = meta.get("normalizer", True)
+            K1 = meta.get("K1")
+            B = meta.get("B")
+            norm_flag = meta.get("normalizer", True)
 
             # создаём экземпляр с нужными параметрами
             instance = cls(
-                scoring_function=scoring_function,
-                normalizer=norm_flag,
-                K1=K1,
-                B=B
+                scoring_function=scoring_function, normalizer=norm_flag, K1=K1, B=B
             )
 
             # открываем файловое хранилище и сразу копируем его в память
             file_storage = FileStorage(tmpdir)
-            ram_storage  = copy_to_ram(file_storage)  # копирует все файлы в RamStorage :contentReference[oaicite:0]{index=0}
+            ram_storage = copy_to_ram(
+                file_storage
+            )  # копирует все файлы в RamStorage :contentReference[oaicite:0]{index=0}
 
             # создаём индекс поверх RamStorage
             instance.storage = ram_storage
-            instance.ix      = ram_storage.open_index()
+            instance.ix = ram_storage.open_index()
 
             # к этому моменту ни один дескриптор к файлам на диске не держится,
             # и TemporaryDirectory при выходе спокойно удалит tmpdir

@@ -22,9 +22,10 @@ class ChunkStorage(ABC):
     ChunkStorage.ChunkIndexIsAlreadyInStorageException
         Raises when a text chunk which is already persented in the storage is trying to be added
     """
-        
+
     class ChunkIndexIsAlreadyInStorageException(Exception):
-        def __str__(self): return "You are trying to add in storage a chunk which index is already presented in a storage"
+        def __str__(self):
+            return "You are trying to add in storage a chunk which index is already presented in a storage"
 
     def __init__(self, scoring_function: Literal["BM25", "BM25F", "TF-IDF"]):
         """In initialization, the ChunkStorage is empty, and no assumptions about inner structure of the storage is not done.
@@ -43,11 +44,11 @@ class ChunkStorage(ABC):
         list[str]
             List of available indexes
         """
-        pass 
+        pass
 
     @abstractmethod
     def get_raw_index_of_document(self, index: str) -> str:
-        """Each chunk is attached to the document. 
+        """Each chunk is attached to the document.
         This function allows to get the index of the source document the text chunk was created from
 
         Parameters
@@ -76,7 +77,7 @@ class ChunkStorage(ABC):
         str
             the text from the chunk
         """
-    
+
     @abstractmethod
     def add_chunk(self, text: str, raw_document_index: str) -> str:
         """Adding the chunk of text in the ChunkStorage with the link to the document index
@@ -94,13 +95,12 @@ class ChunkStorage(ABC):
             Index of the text chunk that is added
         """
         pass
-    
+
     @abstractmethod
     def clear(self) -> None:
-        """Сlearing the whole storage, by deleting all the chunks
-        """
+        """Сlearing the whole storage, by deleting all the chunks"""
         pass
-    
+
     def __iter__(self) -> Generator[tuple[str], None, None]:
         """
         Returns generator of the following:
@@ -109,10 +109,8 @@ class ChunkStorage(ABC):
                 type(chunk_index) == str # True
                 type(chunk_text) == str # True
         ```
-        """     
+        """
         pass
-
-    
 
     @abstractmethod
     def query(self, query: str) -> list[QueryResult]:
@@ -132,8 +130,7 @@ class ChunkStorage(ABC):
         """
         pass
 
-    def get_texts_for_search_results(self, search_results: List[QueryResult]) -> List[str]:
-        return [
-            self.__getitem__(result.chunk_storage_key)
-            for result in search_results
-        ]
+    def get_texts_for_search_results(
+        self, search_results: List[QueryResult]
+    ) -> List[str]:
+        return [self.__getitem__(result.chunk_storage_key) for result in search_results]

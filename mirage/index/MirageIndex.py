@@ -1,4 +1,3 @@
-
 import importlib
 import json
 import os
@@ -17,10 +16,17 @@ from loguru import logger
 
 logger.disable(__name__)
 
+
 class MirageIndex(ABC):
 
-    def __init__(self, raw_storage: Optional[RawStorage], 
-                 chunk_storage, chunking_algorithm, vector_index, visualize=False):
+    def __init__(
+        self,
+        raw_storage: Optional[RawStorage],
+        chunk_storage,
+        chunking_algorithm,
+        vector_index,
+        visualize=False,
+    ):
         super().__init__()
         self.raw_storage: RawStorage = raw_storage
         self.chunk_storage: ChunkStorage = chunk_storage
@@ -33,22 +39,28 @@ class MirageIndex(ABC):
 
         logger.info(f"Saving Mirage index to {filename_to_save}...")
 
-        with zipfile.ZipFile(filename_to_save, 'w', zipfile.ZIP_DEFLATED) as zipf:
+        with zipfile.ZipFile(filename_to_save, "w", zipfile.ZIP_DEFLATED) as zipf:
             # Сохранение RawStorage
             raw_storage_filename = "raw_storage.mirage_storage"
-            self.raw_storage.save(raw_storage_filename)  # предполагаем, что метод save в RawStorage уже есть
+            self.raw_storage.save(
+                raw_storage_filename
+            )  # предполагаем, что метод save в RawStorage уже есть
             zipf.write(raw_storage_filename)
             os.remove(raw_storage_filename)
 
             # Сохранение ChunkStorage
             chunk_storage_filename = "chunk_storage.whoosh"
-            self.chunk_storage.save(chunk_storage_filename)  # предполагаем, что метод save в ChunkStorage есть
+            self.chunk_storage.save(
+                chunk_storage_filename
+            )  # предполагаем, что метод save в ChunkStorage есть
             zipf.write(chunk_storage_filename)
             os.remove(chunk_storage_filename)
 
             # Сохранение VectorIndex
             vector_index_filename = "vector_index.faiss"
-            self.vector_index.save(vector_index_filename)  # предполагаем, что метод save в FaissIndex есть
+            self.vector_index.save(
+                vector_index_filename
+            )  # предполагаем, что метод save в FaissIndex есть
             zipf.write(vector_index_filename)
             os.remove(vector_index_filename)
 
@@ -73,7 +85,7 @@ class MirageIndex(ABC):
                 "visualize": self.visualize,
                 "raw_storage_file": raw_storage_filename,
                 "chunk_storage_file": chunk_storage_filename,
-                "vector_index_file": vector_index_filename
+                "vector_index_file": vector_index_filename,
             }
             zipf.writestr("metadata.json", json.dumps(metadata, indent=4))
 
@@ -85,7 +97,7 @@ class MirageIndex(ABC):
 
         logger.info(f"Loading Mirage index from {filename}...")
 
-        with zipfile.ZipFile(filename, 'r') as zipf:
+        with zipfile.ZipFile(filename, "r") as zipf:
             # Извлечение метаданных
             with zipf.open("metadata.json") as metadata_file:
                 metadata = json.loads(metadata_file.read())
@@ -93,29 +105,49 @@ class MirageIndex(ABC):
             # Загрузка RawStorage
             raw_storage_filename = metadata["raw_storage_file"]
             zipf.extract(raw_storage_filename)
-            raw_storage_module = importlib.import_module(metadata["raw_storage"]["module"])
-            raw_storage_class = getattr(raw_storage_module, metadata["raw_storage"]["class"])
-            raw_storage = raw_storage_class.load(raw_storage_filename)  # предполагаем, что метод load в RawStorage работает
+            raw_storage_module = importlib.import_module(
+                metadata["raw_storage"]["module"]
+            )
+            raw_storage_class = getattr(
+                raw_storage_module, metadata["raw_storage"]["class"]
+            )
+            raw_storage = raw_storage_class.load(
+                raw_storage_filename
+            )  # предполагаем, что метод load в RawStorage работает
             os.remove(raw_storage_filename)
 
             # Загрузка ChunkStorage
             chunk_storage_filename = metadata["chunk_storage_file"]
             zipf.extract(chunk_storage_filename)
-            chunk_storage_module = importlib.import_module(metadata["chunk_storage"]["module"])
-            chunk_storage_class = getattr(chunk_storage_module, metadata["chunk_storage"]["class"])
-            chunk_storage = chunk_storage_class.load(chunk_storage_filename)  # предполагаем, что метод load в ChunkStorage работает
+            chunk_storage_module = importlib.import_module(
+                metadata["chunk_storage"]["module"]
+            )
+            chunk_storage_class = getattr(
+                chunk_storage_module, metadata["chunk_storage"]["class"]
+            )
+            chunk_storage = chunk_storage_class.load(
+                chunk_storage_filename
+            )  # предполагаем, что метод load в ChunkStorage работает
             os.remove(chunk_storage_filename)
 
             # Загрузка VectorIndex
             vector_index_filename = metadata["vector_index_file"]
             zipf.extract(vector_index_filename)
-            vector_index_module = importlib.import_module(metadata["vector_index"]["module"])
-            vector_index_class = getattr(vector_index_module, metadata["vector_index"]["class"])
-            vector_index = vector_index_class.load(vector_index_filename)  # предполагаем, что метод load в FaissIndex работает
+            vector_index_module = importlib.import_module(
+                metadata["vector_index"]["module"]
+            )
+            vector_index_class = getattr(
+                vector_index_module, metadata["vector_index"]["class"]
+            )
+            vector_index = vector_index_class.load(
+                vector_index_filename
+            )  # предполагаем, что метод load в FaissIndex работает
             os.remove(vector_index_filename)
 
             # Восстановление алгоритма чанкинга (если есть)
-            chunking_algorithm = None  # Это будет зависеть от вашей логики загрузки алгоритмов
+            chunking_algorithm = (
+                None  # Это будет зависеть от вашей логики загрузки алгоритмов
+            )
 
             # Создание объекта MirageIndex
             index = MirageIndex(
@@ -123,7 +155,7 @@ class MirageIndex(ABC):
                 chunk_storage=chunk_storage,
                 chunking_algorithm=chunking_algorithm,  # Нужно добавить загрузку алгоритма чанкинга
                 vector_index=vector_index,
-                visualize=metadata["visualize"]
+                visualize=metadata["visualize"],
             )
 
             logger.info(f"Mirage index loaded from {filename}.")

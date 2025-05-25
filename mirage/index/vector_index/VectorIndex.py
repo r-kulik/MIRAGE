@@ -3,10 +3,11 @@ import numpy as np
 from typing import Generator, Self
 from ..QueryResult import QueryResult
 
-    
+
 class VectorKeyPair:
-    def __init__(self, vector: np.ndarray, chunk_storage_key: str) -> Self: 
-        self.vector = vector; self.chunk_storage_key = chunk_storage_key
+    def __init__(self, vector: np.ndarray, chunk_storage_key: str) -> Self:
+        self.vector = vector
+        self.chunk_storage_key = chunk_storage_key
 
     def __iter__(self):
         """
@@ -19,14 +20,15 @@ class VectorKeyPair:
         """
         yield self.vector
         yield self.chunk_storage_key
-    
-    def __str__(self) -> str: return f"VectorKeyPair(vector={self.vector}; chunk_storage_key={self.chunk_storage_key})"
+
+    def __str__(self) -> str:
+        return f"VectorKeyPair(vector={self.vector}; chunk_storage_key={self.chunk_storage_key})"
 
 
 class VectorIndex(ABC):
     """
     Base anstract class that provides interfaces for vector storages of chunks
-    
+
     Attributes:
         dim: int - dimensionality of the vector space of index
     """
@@ -40,13 +42,13 @@ class VectorIndex(ABC):
     def __iter__(self) -> Generator[VectorKeyPair, None, None]:
         "This function shall return pairs of (vector: ndarray, chunk_storage_key: str)"
         raise NotImplementedError
-    
+
     @abstractmethod
     def __contains__(self, vector: np.ndarray) -> bool:
         """
         This function implements
         ```py
-        vector in VectorIndex 
+        vector in VectorIndex
         ```
         functionality
         """
@@ -62,26 +64,28 @@ class VectorIndex(ABC):
             chunk_storage_index: int - id of the chink that belongs to this vector
         """
         raise NotImplementedError
-    
+
     @abstractmethod
     def query(self, query_vector: np.ndarray, top_k: int = 1) -> list[QueryResult]:
         """
         Function for quiering the vector index. Rerutns top_k vectors closest (according to the structure of index) to the quiery_vector
         """
         raise NotImplementedError
-    
 
     class VectorIsNotPresentedInTheIndexException(Exception):
-        '''
+        """
         This exception occurs when where are manipulations supposed to be executed on a vector that is not presented in the index
-        '''
+        """
+
         def __init__(self, vector):
             super().__init__(
                 f"You are trying to delete or edit vector {vector} that is not presented in the index"
             )
 
     @abstractmethod
-    def attach_chunk_storage_key_to_vector(self, vector: np.ndarray, chunk_storage_key: str) -> None:
+    def attach_chunk_storage_key_to_vector(
+        self, vector: np.ndarray, chunk_storage_key: str
+    ) -> None:
         """
         This function allows to redefine the chunk belonging to vector. It is needed to restore the index from the file, and attach chiks to vectors after the hierarchy is restored
         ```py
@@ -89,7 +93,7 @@ class VectorIndex(ABC):
         >>> index = VectorIndex()
 
         >>> index.add(
-                vector=np.array([1]), 
+                vector=np.array([1]),
                 chunk_storage_key='a'
             )
 
@@ -106,10 +110,7 @@ class VectorIndex(ABC):
         ```
         """
         raise NotImplementedError
-    
+
     @abstractmethod
     def train(self) -> None:
         pass
-
-
-    

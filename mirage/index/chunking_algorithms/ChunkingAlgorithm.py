@@ -1,12 +1,11 @@
-
 from ..raw_storages.RawStorage import RawStorage
 from ..chunk_storages.ChunkStorage import ChunkStorage
 from abc import ABC, abstractmethod
 
 import tqdm
 import logging
-logger = logging.getLogger(__name__)
 
+logger = logging.getLogger(__name__)
 
 
 class ChunkingAlgorithm(ABC):
@@ -34,17 +33,18 @@ class ChunkingAlgorithm(ABC):
         """
         pass
 
-
     def execute(self) -> None:
-        # self.chunk_storage.clear() 
+        # self.chunk_storage.clear()
         logger.info("Chunking of documents")
         raw_document_indexes = self.raw_storage.get_indexes()
         parsed_indexes = set(
-            self.chunk_storage.get_raw_index_of_document(index) for index in  self.chunk_storage.get_indexes()
+            self.chunk_storage.get_raw_index_of_document(index)
+            for index in self.chunk_storage.get_indexes()
         )
-        return sum([
-            self.chunk_a_document(raw_document_index)
-            for raw_document_index in 
-            raw_document_indexes if not raw_document_index in parsed_indexes
-        ])
-    
+        return sum(
+            [
+                self.chunk_a_document(raw_document_index)
+                for raw_document_index in raw_document_indexes
+                if not raw_document_index in parsed_indexes
+            ]
+        )

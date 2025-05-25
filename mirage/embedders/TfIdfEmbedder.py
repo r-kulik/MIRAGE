@@ -4,7 +4,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from ..index.chunk_storages.ChunkStorage import ChunkStorage
 
 
-
 class TfIdfEmbedder(Embedder):
     """
     Class that implements the TF-IDF vectorization of the text
@@ -16,11 +15,13 @@ class TfIdfEmbedder(Embedder):
 
     """
 
-    def __init__(self, normalizer = None):
+    def __init__(self, normalizer=None):
         super().__init__(normalizer)
         self.vectorizer = TfidfVectorizer()
         self.is_fitted = False  # in the moment of initialization TfIdfEmbedder need to be trained on a corpora
-        self._dim = -1  # dimensionality of the vectorizator is not known before training
+        self._dim = (
+            -1
+        )  # dimensionality of the vectorizator is not known before training
 
     def fit(self, chunks: ChunkStorage):
         """Training the TF-IDF Embedder on the corpora stored in the presented ChunkStorage
@@ -30,14 +31,12 @@ class TfIdfEmbedder(Embedder):
         chunks : `ChunkStorage`
             ChunkStorage object to take the chunks with the text from
         """
-        train_sentences = [
-            self._normalize(chunk_text) for _, chunk_text in chunks
-        ]
+        train_sentences = [self._normalize(chunk_text) for _, chunk_text in chunks]
         self.vectorizer.fit(train_sentences)
         self.vocabulary = self.vectorizer.vocabulary_
         self._dim = len(self.vocabulary)
         self.is_fitted = True
-        
+
     def embed(self, text: str) -> ndarray:
         """Function that converts text to a vector using Tf-Idf vectorization algorithm
 

@@ -9,11 +9,10 @@ from typing import Dict, Optional
 import logging
 
 
-
 class BowEmbedder(Embedder):
     """
     A vectorizator that uses Bag of Words method to create a text vector
-    
+
     """
 
     def __init__(self, normalizer: Optional[TextNormalizer] = None):
@@ -25,7 +24,9 @@ class BowEmbedder(Embedder):
         """
         super().__init__(normalizer)
         # print(self._dim)
-        self.vectorizer = CountVectorizer()  # Используем CountVectorizer для создания BoW
+        self.vectorizer = (
+            CountVectorizer()
+        )  # Используем CountVectorizer для создания BoW
         self.vocabulary = None  # Словарь уникальных слов
         self.is_fitted = False  # Флаг, указывающий, была ли модель обучена
 
@@ -37,15 +38,17 @@ class BowEmbedder(Embedder):
             chunks (ChunkStorage): Хранилище чанков, из которых извлекаются тексты для обучения.
         """
         # Извлекаем все тексты из чанков
-        texts = [chunk for _, chunk in chunks]  
+        texts = [chunk for _, chunk in chunks]
         # Нормализация текстов
         normalized_texts = [self._normalize(text) for text in texts]
-        
+
         # Создание словаря
         self.vectorizer.fit(normalized_texts)
         self.vocabulary = self.vectorizer.vocabulary_  # Сохраняем словарь
 
-        self._dim = len(self.vocabulary) # setting the dimensionality of an embedder equal to the size of vocabulary
+        self._dim = len(
+            self.vocabulary
+        )  # setting the dimensionality of an embedder equal to the size of vocabulary
         self.is_fitted = True  # Устанавливаем флаг, что модель обучена
 
     def embed(self, text: str) -> np.ndarray:
@@ -60,11 +63,12 @@ class BowEmbedder(Embedder):
         """
         if not self.is_fitted:
             raise EmbedderIsNotTrainedException
-        
-        normalized_text = self._normalize(text)  # Нормализация текста
-        vector = self.vectorizer.transform([normalized_text]).toarray()[0]  # Преобразование в вектор
-        return vector
 
+        normalized_text = self._normalize(text)  # Нормализация текста
+        vector = self.vectorizer.transform([normalized_text]).toarray()[
+            0
+        ]  # Преобразование в вектор
+        return vector
 
     '''   
 

@@ -180,3 +180,5 @@ groq_keys.py
 cuad_*
 /indexes
 /indexes
+*restored/*
+experiments/*restored/*

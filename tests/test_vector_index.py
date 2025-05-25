@@ -6,10 +6,12 @@ from mirage import L2RAMVectorIndex
 # Константа для списка реализаций VectorIndex
 VECTOR_INDEX_IMPLEMENTATIONS = [L2RAMVectorIndex]
 
+
 # Фикстура для временного файла
 @pytest.fixture
 def temp_file():
     return "test_vector_index.json"
+
 
 # Параметризация для всех реализаций VectorIndex
 @pytest.mark.parametrize("vector_index_class", VECTOR_INDEX_IMPLEMENTATIONS)
@@ -17,12 +19,14 @@ def test_vector_index_initialization(vector_index_class):
     index = vector_index_class(dimensionality=3)
     assert index.dim == 3
 
+
 @pytest.mark.parametrize("vector_index_class", VECTOR_INDEX_IMPLEMENTATIONS)
 def test_add(vector_index_class):
     index = vector_index_class(dimensionality=3)
     vector = np.array([1, 2, 3])
     index.add(vector, "chunk1")
     assert vector in index
+
 
 @pytest.mark.parametrize("vector_index_class", VECTOR_INDEX_IMPLEMENTATIONS)
 def test_contains(vector_index_class):
@@ -32,6 +36,7 @@ def test_contains(vector_index_class):
     assert vector in index
     assert np.array([4, 5, 6]) not in index
 
+
 @pytest.mark.parametrize("vector_index_class", VECTOR_INDEX_IMPLEMENTATIONS)
 def test_iter(vector_index_class):
     index = vector_index_class(dimensionality=3)
@@ -40,9 +45,10 @@ def test_iter(vector_index_class):
     index.add(vector1, "chunk1")
     index.add(vector2, "chunk2")
     vectors = [vkp.vector for vkp in index]
-    
+
     assert any(np.array_equal(vector2, arr) for arr in vectors)
-    assert  any(np.array_equal(vector2, arr) for arr in vectors)
+    assert any(np.array_equal(vector2, arr) for arr in vectors)
+
 
 @pytest.mark.parametrize("vector_index_class", VECTOR_INDEX_IMPLEMENTATIONS)
 def test_query(vector_index_class):
@@ -55,6 +61,7 @@ def test_query(vector_index_class):
     assert len(results) == 2
     assert results[0].vector.tolist() == [1, 2, 3]
     assert results[0].chunk_storage_key == "chunk1"
+
 
 @pytest.mark.parametrize("vector_index_class", VECTOR_INDEX_IMPLEMENTATIONS)
 def test_attach_chunk_storage_key_to_vector(vector_index_class):

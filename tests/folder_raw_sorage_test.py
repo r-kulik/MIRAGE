@@ -4,6 +4,7 @@ from docx import Document
 from fpdf import FPDF
 from mirage import FolderRawStorage
 
+
 # Фикстура для создания тестовых файлов
 @pytest.fixture(scope="module")
 def test_files_dir(tmpdir_factory):
@@ -32,18 +33,24 @@ def test_files_dir(tmpdir_factory):
     # Возвращаем путь к папке с тестовыми файлами
     return test_files_dir
 
+
 # Тесты
 def test_folder_raw_storage_initialization(test_files_dir):
     storage = FolderRawStorage(str(test_files_dir))
-    assert len(storage.get_indexes()) == 3  # Ожидаем 3 файла: test.txt, test.pdf, test.docx
+    assert (
+        len(storage.get_indexes()) == 3
+    )  # Ожидаем 3 файла: test.txt, test.pdf, test.docx
+
 
 def test_folder_raw_storage_read_txt(test_files_dir):
     storage = FolderRawStorage(str(test_files_dir))
     assert storage["test.txt"] == "This is a test text file."
 
+
 def test_folder_raw_storage_read_docx(test_files_dir):
     storage = FolderRawStorage(str(test_files_dir))
     assert storage["test.docx"] == "This is a test Word document."
+
 
 def test_folder_raw_storage_read_pdf(test_files_dir):
     storage = FolderRawStorage(str(test_files_dir))

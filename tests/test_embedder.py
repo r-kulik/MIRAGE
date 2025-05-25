@@ -2,10 +2,16 @@ import pytest
 import numpy as np
 from mirage import ChunkStorage, RAMChunkStorage
 from mirage import L2RAMVectorIndex
-from mirage import BowEmbedder, TfIdfEmbedder, EmbedderIsNotTrainedException, HuggingFaceEmbedder
+from mirage import (
+    BowEmbedder,
+    TfIdfEmbedder,
+    EmbedderIsNotTrainedException,
+    HuggingFaceEmbedder,
+)
 
 # Константа для списка реализаций Embedder
 EMBEDDER_IMPLEMENTATIONS = [TfIdfEmbedder, BowEmbedder]
+
 
 # Фикстура для ChunkStorage
 @pytest.fixture
@@ -16,12 +22,12 @@ def chunk_storage():
             self._storage = {
                 "chunk1": "This is a test document.",
                 "chunk2": "Another document for testing purposes.",
-                "chunk3": "Yet another document."
+                "chunk3": "Yet another document.",
             }
 
         def __iter__(self):
             return iter(self._storage.items())
-        
+
         def add_chunk(self, text, raw_index_of_document):
             pass
 
@@ -29,6 +35,7 @@ def chunk_storage():
             return list(self._storage.keys())
 
     return FakeChunkStorage()
+
 
 # Фикстура для VectorIndex
 @pytest.fixture
@@ -43,12 +50,14 @@ def vector_index():
 
     return FakeVectorIndex()
 
+
 # Параметризация для всех реализаций Embedder
 @pytest.mark.parametrize("embedder_class", EMBEDDER_IMPLEMENTATIONS)
 def test_embedder_initialization(embedder_class):
     embedder = embedder_class()
     assert embedder.is_fitted == False
     assert embedder.get_dimensionality() == -1
+
 
 @pytest.mark.parametrize("embedder_class", EMBEDDER_IMPLEMENTATIONS)
 def test_fit(embedder_class, chunk_storage):
@@ -57,6 +66,7 @@ def test_fit(embedder_class, chunk_storage):
     assert embedder.is_fitted == True
     assert embedder.get_dimensionality() > 0
 
+
 @pytest.mark.parametrize("embedder_class", EMBEDDER_IMPLEMENTATIONS)
 def test_embed(embedder_class, chunk_storage):
     embedder = embedder_class()
@@ -64,6 +74,7 @@ def test_embed(embedder_class, chunk_storage):
     vector = embedder.embed("This is a test document.")
     assert isinstance(vector, np.ndarray)
     assert len(vector) == embedder.get_dimensionality()
+
 
 @pytest.mark.parametrize("embedder_class", EMBEDDER_IMPLEMENTATIONS)
 def test_process_chunks(embedder_class, chunk_storage):
@@ -76,6 +87,7 @@ def test_process_chunks(embedder_class, chunk_storage):
         assert isinstance(vector, np.ndarray)
         assert len(vector) == embedder.get_dimensionality()
 
+
 @pytest.mark.parametrize("embedder_class", EMBEDDER_IMPLEMENTATIONS)
 def test_convert_chunks_to_vector_index(embedder_class, chunk_storage, vector_index):
     embedder = embedder_class()
@@ -86,6 +98,7 @@ def test_convert_chunks_to_vector_index(embedder_class, chunk_storage, vector_in
         assert isinstance(vector, np.ndarray)
         assert len(vector) == embedder.get_dimensionality()
 
+
 @pytest.mark.parametrize("embedder_class", EMBEDDER_IMPLEMENTATIONS)
 def test_embedder_not_trained_exception(embedder_class):
     embedder = embedder_class()
@@ -94,4 +107,6 @@ def test_embedder_not_trained_exception(embedder_class):
     with pytest.raises(EmbedderIsNotTrainedException):
         embedder.process_chunks(RAMChunkStorage())
     with pytest.raises(EmbedderIsNotTrainedException):
-        embedder.convert_chunks_to_vector_index(RAMChunkStorage(), L2RAMVectorIndex(dimensionality=-1))
+        embedder.convert_chunks_to_vector_index(
+            RAMChunkStorage(), L2RAMVectorIndex(dimensionality=-1)
+        )

@@ -15,10 +15,15 @@ class LinearCombinationReranker(Reranker):
         * BM25(d, q) - score of document after fulltext_search of query
         * sim(d, q) - cosine similarity between document vector and query vector
     """
+
     fulltext_score_weight: float
     vector_score_weight: float
 
-    def __init__(self, fulltext_score_weight: float, vector_score_weight: float,):
+    def __init__(
+        self,
+        fulltext_score_weight: float,
+        vector_score_weight: float,
+    ):
         """Creation of linear combination reranker
 
         Parameters
@@ -40,28 +45,27 @@ class LinearCombinationReranker(Reranker):
         # adding all vector search results to the dictionary
         for query_result in vector_search_results:
             if query_result.chunk_storage_key in results_dict:
-                raise ValueError('You are trying to add a duplicate chunk thorugh a vector search')
-            results_dict[query_result.chunk_storage_key] = query_result.score * self.vector_score_weight
+                raise ValueError(
+                    "You are trying to add a duplicate chunk thorugh a vector search"
+                )
+            results_dict[query_result.chunk_storage_key] = (
+                query_result.score * self.vector_score_weight
+            )
         # -------------------------------------------
         # iterating thorugh results from the fulltext search
         # creating new entries if necessary, or adding fulltext relevance
         # to the existing entires in the results_dict
         for query_result in fulltext_search_results:
-            
-            results_dict[query_result.chunk_storage_key] = results_dict.get(
-                query_result.chunk_storage_key,
-                0
-            ) + query_result.score * self.fulltext_score_weight
+
+            results_dict[query_result.chunk_storage_key] = (
+                results_dict.get(query_result.chunk_storage_key, 0)
+                + query_result.score * self.fulltext_score_weight
+            )
         # -------------------------------------------
         # sorting items in the dict to present them in the descending order of relevance
         return [
-            QueryResult(
-                score=combined_score,
-                chunk_storage_key=chunk_storage_key
-            )
+            QueryResult(score=combined_score, chunk_storage_key=chunk_storage_key)
             for chunk_storage_key, combined_score in sorted(
-                results_dict.items(),
-                key=lambda x: x[1],
-                reverse=True
+                results_dict.items(), key=lambda x: x[1], reverse=True
             )
-        ]    
+        ]

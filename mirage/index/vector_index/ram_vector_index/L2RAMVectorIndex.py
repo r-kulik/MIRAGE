@@ -3,7 +3,7 @@ from ..VectorIndex import QueryResult, VectorKeyPair, VectorIndex
 from typing import Self, Generator
 import numpy as np
 
-# TODO: Если почесать репу, то можно представить вектора в индексе как одну большую матрицу, и при вычислении расстояния 
+# TODO: Если почесать репу, то можно представить вектора в индексе как одну большую матрицу, и при вычислении расстояния
 #       от вектора запроса до всех остальных векторов в индексе использовать матричные операции
 #       которые вроде как должны быть быстрее цикла for по векторам. Явялется ли это нарушением измерения baseline?
 
@@ -13,7 +13,7 @@ class L2RAMVectorIndex(RAMVectorIndex):
 
     Parameters
     ----------
-    RAMVectorIndex 
+    RAMVectorIndex
         Parent class
     """
 
@@ -26,20 +26,17 @@ class L2RAMVectorIndex(RAMVectorIndex):
         self.vector_pairs = []
         for vector in vectors:
             self.vector_pairs.append(
-                VectorKeyPair(
-                    vector=vector,
-                    chunk_storage_key=None
-                )
+                VectorKeyPair(vector=vector, chunk_storage_key=None)
             )
 
     def __contains__(self, vector: np.ndarray) -> bool:
         """
-        Performs 
+        Performs
         ```py
         vector in L2RAMVectorIndex()
-        ``` 
+        ```
         functionality
-        
+
         Args:
             vector: numpy.ndarray - a vector we are trying to find in the index
 
@@ -50,15 +47,15 @@ class L2RAMVectorIndex(RAMVectorIndex):
             if all(vector_key_pair.vector == vector):
                 return True
         return False
-    
+
     def __iter__(self) -> Generator[VectorKeyPair, None, None]:
         """
-        Performs 
+        Performs
         ```py
         for vector, key in L2RAmVectorIndexObject:
             type(vector) == np.ndarray # True
             type(key) == str # True
-            
+
         ```
         or
         ```
@@ -67,9 +64,7 @@ class L2RAMVectorIndex(RAMVectorIndex):
 
         ```
         """
-        return (
-            vkp for vkp in self.vector_pairs
-        )
+        return (vkp for vkp in self.vector_pairs)
 
     def add(self, vector: np.ndarray, chunk_storage_key: str) -> None:
         """
@@ -84,22 +79,19 @@ class L2RAMVectorIndex(RAMVectorIndex):
                 f"Vector shape = {vector.shape} does not equal to the dimensionality of VectorIndex {self.dim}"
             )
         self.vector_pairs.append(
-            VectorKeyPair(
-                vector=vector,
-                chunk_storage_key=chunk_storage_key
-            )
+            VectorKeyPair(vector=vector, chunk_storage_key=chunk_storage_key)
         )
 
-    
-    def attach_chunk_storage_key_to_vector(self, vector: np.ndarray, chunk_storage_key: str) -> None:
+    def attach_chunk_storage_key_to_vector(
+        self, vector: np.ndarray, chunk_storage_key: str
+    ) -> None:
         for vkp in self.vector_pairs:
-            if all(vkp.vector ==  vector):
+            if all(vkp.vector == vector):
                 vkp.chunk_storage_key = chunk_storage_key
                 break
         else:
-            raise VectorIndex.VectorIsNotPresentedInTheIndexException(vector)   
+            raise VectorIndex.VectorIsNotPresentedInTheIndexException(vector)
 
-    
     def remove(self, vector: np.ndarray):
         for i in range(len(self.vector_pairs)):
             if all(self.vector_pairs[i].vector == vector):
@@ -107,26 +99,22 @@ class L2RAMVectorIndex(RAMVectorIndex):
                 break
         else:
             raise VectorIndex.VectorIsNotPresentedInTheIndexException(vector)
-    
 
-    def query(self, query_vector: np.ndarray, top_k = 5) -> list[QueryResult]:
+    def query(self, query_vector: np.ndarray, top_k=5) -> list[QueryResult]:
         return sorted(
             [
                 QueryResult(
                     # distance = np.sqrt(np.sum((query_vector - vkp.vector) ** 2)),
-                    score = np.dot(query_vector, vkp.vector) / (np.linalg.norm(query_vector) * np.linalg.norm(vkp.vector)),
+                    score=np.dot(query_vector, vkp.vector)
+                    / (np.linalg.norm(query_vector) * np.linalg.norm(vkp.vector)),
                     vector=vkp.vector,
-                    chunk_storage_key=vkp.chunk_storage_key
+                    chunk_storage_key=vkp.chunk_storage_key,
                 )
                 for vkp in self.vector_pairs
             ],
-            key=lambda x: -1 * x.score
-        )[  :min(len(self.vector_pairs),  top_k)]
-    
+            key=lambda x: -1 * x.score,
+        )[: min(len(self.vector_pairs), top_k)]
 
     def train(self):
-        """Training of and index if it is needed otherwise does nothing
-        """
+        """Training of and index if it is needed otherwise does nothing"""
         pass
-    
-    

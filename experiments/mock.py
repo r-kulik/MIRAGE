@@ -1,6 +1,4 @@
 from mirage.MIRAGE import BaseMirage
 
 
-rag_engine = BaseMirage(
-    
-)
+rag_engine = BaseMirage()
